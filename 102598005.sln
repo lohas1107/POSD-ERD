@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "102598005_ERD_UnitTesting", "102598005_ERD_UnitTesting\102598005_ERD_UnitTesting.vcxproj", "{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "102598005_ERD", "102598005_ERD\102598005_ERD.vcxproj", "{FB46AB63-87A3-4369-A39B-820700852B5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}.Debug|Win32.Build.0 = Debug|Win32
+		{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}.Release|Win32.ActiveCfg = Release|Win32
+		{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}.Release|Win32.Build.0 = Release|Win32
+		{FB46AB63-87A3-4369-A39B-820700852B5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB46AB63-87A3-4369-A39B-820700852B5B}.Debug|Win32.Build.0 = Debug|Win32
+		{FB46AB63-87A3-4369-A39B-820700852B5B}.Release|Win32.ActiveCfg = Release|Win32
+		{FB46AB63-87A3-4369-A39B-820700852B5B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

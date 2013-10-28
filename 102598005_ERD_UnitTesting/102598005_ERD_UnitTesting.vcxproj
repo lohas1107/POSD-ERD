@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\102598005_ERD\AddComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\AttributeNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\Command.cpp" />
+    <ClCompile Include="..\102598005_ERD\CommandManager.cpp" />
+    <ClCompile Include="..\102598005_ERD\ComponentFactory.cpp" />
+    <ClCompile Include="..\102598005_ERD\ConnectComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\Connector.cpp" />
+    <ClCompile Include="..\102598005_ERD\DeleteComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
+    <ClCompile Include="..\102598005_ERD\ERModel.cpp" />
+    <ClCompile Include="..\102598005_ERD\Node.cpp" />
+    <ClCompile Include="..\102598005_ERD\Parser.cpp" />
+    <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
+    <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\TextUI.cpp" />
+    <ClCompile Include="AddComponentCommandTest.cpp" />
+    <ClCompile Include="AttributeNodeTest.cpp" />
+    <ClCompile Include="CommandManagerTest.cpp" />
+    <ClCompile Include="CommonUsageTest.cpp" />
+    <ClCompile Include="ComponentFactoryTest.cpp" />
+    <ClCompile Include="ConnectComponentCommandTest.cpp" />
+    <ClCompile Include="ConnectorTest.cpp" />
+    <ClCompile Include="DeleteComponentCommandTest.cpp" />
+    <ClCompile Include="EntityNodeTest.cpp" />
+    <ClCompile Include="ERModelTest.cpp" />
+    <ClCompile Include="IsPrimaryExistTest.cpp" />
+    <ClCompile Include="LoadFileNotExistTest.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParserTest.cpp" />
+    <ClCompile Include="PresentationModelTest.cpp" />
+    <ClCompile Include="RedoConnectComponentTest.cpp" />
+    <ClCompile Include="RelationNodeTest.cpp" />
+    <ClCompile Include="UndoDeleteComponentTest.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>My102598005_ERD_UnitTesting</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\gtest\include;../102598005_ERD</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>C:\gtest\lib\gtestd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>false</OptimizeReferences>
+      <Profile>true</Profile>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
