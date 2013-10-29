@@ -28,6 +28,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
     <ClInclude Include="GeneratedFiles\ui_myclass.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="PresentationModel.h" />
