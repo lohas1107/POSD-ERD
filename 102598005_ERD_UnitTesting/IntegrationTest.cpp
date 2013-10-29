@@ -3,7 +3,7 @@
 #include "ERModel.h"
 #include "PresentationModel.h"
 
-class CommonUsageTest : public ::testing::Test
+class IntegrationTest : public ::testing::Test
 {
 protected:
 	virtual void SetUp()
@@ -45,6 +45,7 @@ protected:
 	virtual void TearDown()
 	{
 		_inputFile.close();
+		remove(_filePath.c_str());
 		_rmdir("testdata");
 	}
 	string _filePath;
@@ -53,8 +54,67 @@ protected:
 	PresentationModel _presentation;
 };
 
+// 整合測試讀取不存在的檔案
+TEST_F(IntegrationTest, testLoadFileNotExist)
+{
+	EXPECT_FALSE(_model.loadFile("testdata/file_not_exist.erd"));
+}
+
+// 整合測試是否為 primary key
+TEST_F(IntegrationTest, testIsPrimaryExist)
+{
+	EXPECT_TRUE(_model.loadFile(_filePath));
+	string table = _model.getTable();
+	EXPECT_EQ(3, table.find("Engineer |  PK(Emp_ID, Name)"));
+	EXPECT_EQ(53, table.find("PC |  PK(PC_ID)"));
+	EXPECT_EQ(4294967295, table.find("PC |  PK(Purchase_Date)"));
+}
+
+// 整合測試回復刪除元件
+TEST_F(IntegrationTest, testUndoDeleteComponent)
+{
+	EXPECT_TRUE(_presentation.loadFile(_filePath));
+	_presentation.addNodeCommand("E", "Test");
+	EXPECT_EQ(16, _model.getComponentSize());
+	EXPECT_EQ(15, _model.getNodeID());
+	EXPECT_EQ(entity, _model.getNodeType(15).first);
+	EXPECT_EQ("Test", _model.getNodeText(15));
+	_presentation.deleteComponentCommand(15);
+	EXPECT_EQ(15, _model.getComponentSize());
+	EXPECT_FALSE(_presentation.isIDExsit(15));
+	_presentation.undo();
+	EXPECT_EQ(16, _model.getComponentSize());
+	EXPECT_EQ(entity, _model.getNodeType(15).first);
+	EXPECT_EQ("Test", _model.getNodeText(15));
+}
+
+// 整合測是重複做連結元件命令
+TEST_F(IntegrationTest, testRedoConnectComponent)
+{
+	EXPECT_TRUE(_presentation.loadFile(_filePath));
+	_presentation.addNodeCommand("E", "Test");
+	EXPECT_EQ(16, _model.getComponentSize());
+	EXPECT_EQ(15, _model.getNodeID());
+	EXPECT_EQ(entity, _model.getNodeType(15).first);
+	EXPECT_EQ("Test", _model.getNodeText(15));
+	_presentation.addNodeCommand("A", "Test Attr");
+	EXPECT_EQ(17, _model.getComponentSize());
+	EXPECT_EQ(16, _model.getNodeID());
+	EXPECT_EQ(attribute, _model.getNodeType(16).first);
+	EXPECT_EQ("Test Attr", _model.getNodeText(16));
+	_presentation.connectNodeCommand(15, 16, "");
+	EXPECT_EQ(15, _model._components[17]->getConnection()[0]->getID());
+	EXPECT_EQ(16, _model._components[17]->getConnection()[1]->getID());
+	_presentation.undo();
+	EXPECT_EQ(0, _model._components[15]->getConnection().size());
+	EXPECT_EQ(0, _model._components[16]->getConnection().size());
+	_presentation.redo();
+	EXPECT_EQ(15, _model._components[17]->getConnection()[0]->getID());
+	EXPECT_EQ(16, _model._components[17]->getConnection()[1]->getID());
+}
+
 // 整合測試命令使用
-TEST_F(CommonUsageTest, testCommonUsage)
+TEST_F(IntegrationTest, testCommonUsage)
 {
 	EXPECT_TRUE(_presentation.loadFile(_filePath));
 	_presentation.addNodeCommand("E", "Work Diary");
@@ -121,6 +181,5 @@ TEST_F(CommonUsageTest, testCommonUsage)
 	_presentation.redo();
 	table = _presentation.getTable();
 	EXPECT_EQ(4294967295, table.find("Work Diary"));
-
 	EXPECT_EQ(3, table.find("Engineer |  PK(Emp_ID, Name)"));
 }

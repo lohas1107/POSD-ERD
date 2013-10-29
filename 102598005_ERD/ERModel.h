@@ -34,10 +34,10 @@ class ERModel
 	FRIEND_TEST(ERModelTest, savePrimaryKey);
 	friend class PresentationModelTest;
 	FRIEND_TEST(PresentationModelTest, deleteComponentCommand);
-	FRIEND_TEST(PresentationModelTest, setPrimaryKey);
-	friend class RedoConnectComponentTest;
-	FRIEND_TEST(RedoConnectComponentTest, testRedoConnectComponent);
-	FRIEND_TEST(CommonUsageTest, testCommonUsage);
+	FRIEND_TEST(PresentationModelTest, setPrimaryKey);;
+	friend class IntegrationTest;
+	FRIEND_TEST(IntegrationTest, testRedoConnectComponent);
+	FRIEND_TEST(IntegrationTest, testCommonUsage);
 
 public:
 	ERModel();
