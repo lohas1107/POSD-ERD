@@ -276,18 +276,21 @@ TEST_F(PresentationModelTest, saveFile)
 	EXPECT_FALSE(_presentation.saveFile("C:\\"));
 	_mkdir("test");
 	EXPECT_TRUE(_presentation.saveFile("test/file.erd"));
+	remove("test/file.erd");
 	_rmdir("test");
 }
 
 // 測試建立資料夾
 TEST_F(PresentationModelTest, makeDirectory)
 {
-	string filePath = ".\\test\\test\\test\\file.erd";
+	string filePath = ".\\test\\test\\file.erd";
 	_presentation.makeDirectory(filePath);
 	ofstream file(filePath);
 	EXPECT_TRUE(file.is_open());
 	file.close();
-	_rmdir(".\\test");
+	remove("test/test/file.erd");
+	_rmdir("test/test");
+	_rmdir("test");
 }
 
 // 測試回上一步
