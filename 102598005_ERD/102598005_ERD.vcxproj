@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GeneratedFiles\Debug\moc_GUI.cpp" />
     <ClCompile Include="AddComponentCommand.cpp" />
     <ClCompile Include="AttributeNode.cpp" />
     <ClCompile Include="Command.cpp" />
@@ -23,6 +22,12 @@
     <ClCompile Include="EntityNode.cpp" />
     <ClCompile Include="ERComponent.cpp" />
     <ClCompile Include="ERModel.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_GUI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GUI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />

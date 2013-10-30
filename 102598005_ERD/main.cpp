@@ -21,7 +21,6 @@ int main(int argc, char* argv[])
 	}
 	else if (argc > 1 && argv[1] == TEXT_MODE)
 	{
-
 		TextUI textUI(presentationModel);
 		textUI.displayMenu();
 		system("pause");
