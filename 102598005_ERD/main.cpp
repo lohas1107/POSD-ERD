@@ -9,23 +9,24 @@ const string TEXT_MODE = "textmode";
 
 int main(int argc, char* argv[])
 {
+	ERModel* erModel = new ERModel();
+	PresentationModel* presentationModel = new PresentationModel(erModel);
+
 	if (argc == 1 || argv[1] == GUI_MODE)
 	{
 		QApplication application(argc, argv);
-		GUI gui;
+		GUI gui(presentationModel);
 		gui.show();
-
 		return application.exec();
 	}
 	else if (argc > 1 && argv[1] == TEXT_MODE)
 	{
-		ERModel* erModel = new ERModel();
-		PresentationModel* presentationModel = new PresentationModel(erModel);
+
 		TextUI textUI(presentationModel);
 		textUI.displayMenu();
-		delete erModel;
-		delete presentationModel;
-
 		system("pause");
 	}
+
+	delete erModel;
+	delete presentationModel;
 }
