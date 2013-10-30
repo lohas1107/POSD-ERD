@@ -4,8 +4,9 @@
 #include "PresentationModel.h"
 #include <QMainWindow>
 #include <QObject>
-#include <QMenu>
 #include <QAction>
+#include <QMenu>
+#include <QToolBar>
 
 class GUI : public QMainWindow
 {
@@ -19,10 +20,14 @@ private slots:
 	void openFile();
 
 private:
+	void createActions();
 	void createMenus();
+	void createToolBars();
 	PresentationModel* _presentationModel;
+	QAction* _fileAction;
+	QAction* _exitAction;
 	QMenu* _fileMenu;
-
+	QToolBar* _toolBar;
 };
 
 #endif
