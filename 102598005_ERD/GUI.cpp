@@ -1,9 +1,6 @@
 #include "GUI.h"
 #include <QMenuBar>
 #include <QFileDialog>
-#include "..\src\gui\graphicsview\qgraphicsscene.h"
-#include "..\src\gui\graphicsview\qgraphicsitem.h"
-#include "..\src\gui\graphicsview\qgraphicsview.h"
 
 GUI::GUI(PresentationModel* presentationModel)
 {
@@ -12,6 +9,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	createActions();
 	createMenus();
 	createToolBars();
+	createCanvas();
 }
 
 GUI::~GUI()
@@ -20,6 +18,10 @@ GUI::~GUI()
 	delete _exitAction;
 	delete _fileMenu;
 	delete _toolBar;
+	delete _scene;
+	delete _view;
+	delete _layout;
+	delete _widget;
 }
 
 void GUI::createActions()
@@ -52,4 +54,16 @@ void GUI::createToolBars()
 	_toolBar = addToolBar("Edit");
 	_toolBar->addAction(_fileAction);
 	_toolBar->addAction(_exitAction);
+}
+
+void GUI::createCanvas()
+{
+	_scene = new QGraphicsScene();
+	_scene->setSceneRect(QRectF(0, 0, 1024, 768));
+	_view = new QGraphicsView(_scene);
+	_layout = new QHBoxLayout();
+	_widget = new QWidget();
+	_layout->addWidget(_view);
+	_widget->setLayout(_layout);
+	setCentralWidget(_widget);
 }
