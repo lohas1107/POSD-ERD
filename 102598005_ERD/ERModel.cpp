@@ -225,6 +225,12 @@ string ERModel::getNodeText(int id)
 	return _components[findIndex(id)]->getText();
 }
 
+// 取得所有元件
+vector<ERComponent*> ERModel::getComponents()
+{
+	return _components;
+}
+
 // 取得component size
 int ERModel::getComponentSize()
 {
@@ -537,4 +543,41 @@ string ERModel::savePrimaryKey()
 		}
 	}
 	return primaryKey;
+}
+
+// 排座標
+void ERModel::composePosition()
+{
+	ERPoint position;
+
+	position.x = 300;
+	position.y = 0;
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		if (_components[i]->isType(attribute))
+		{
+			position.y += 50;
+			_components[i]->setPosition(position);
+		}
+	}
+	position.x = 500;
+	position.y = 0;
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		if (_components[i]->isType(entity))
+		{
+			position.y += 100;
+			_components[i]->setPosition(position);
+		}
+	}
+	position.x = 700;
+	position.y = 50;
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		if (_components[i]->isType(relation))
+		{
+			position.y += 100;
+			_components[i]->setPosition(position);
+		}
+	}
 }

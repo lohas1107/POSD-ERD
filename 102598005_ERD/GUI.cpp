@@ -26,6 +26,7 @@ GUI::~GUI()
 	delete _widget;
 }
 
+// 
 void GUI::createActions()
 {
 	_fileAction = new QAction(QIcon("Resources/open.png"), "Open...", this);
@@ -37,6 +38,7 @@ void GUI::createActions()
 	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
 }
 
+// 
 void GUI::createMenus()
 {
 	_fileMenu = menuBar()->addMenu("File");
@@ -44,6 +46,7 @@ void GUI::createMenus()
 	_fileMenu->addAction(_exitAction);
 }
 
+// 
 void GUI::createToolBars()
 {
 	_toolBar = addToolBar("Edit");
@@ -67,5 +70,15 @@ void GUI::openFile()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
-	//...
+	_presentationModel->composePosition();
+	drawDiagram();
+	_scene->update();
+}
+
+void GUI::drawDiagram()
+{
+	vector<ERComponent*> components = _presentationModel->getComponents();
+	_graphicsManager.draw(_scene, components);
+	_view->show();
+	//_scene->addItem(_graphicsManager.createGraphicsItem(entity));
 }

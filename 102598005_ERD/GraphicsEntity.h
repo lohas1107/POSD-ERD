@@ -11,6 +11,7 @@ public:
 	GraphicsEntity();
 	~GraphicsEntity();
 	void doCreateItem();
+	void doAdjustSize(QFontMetrics fontMetrics);
 };
 
 #endif

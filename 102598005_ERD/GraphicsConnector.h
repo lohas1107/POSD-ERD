@@ -11,6 +11,7 @@ public:
 	~GraphicsConnector();
 	void doCreateItem();
 	void doAdjustSize(QFontMetrics fontMetrics);
+	void setLine(QLineF line);
 };
 
 #endif

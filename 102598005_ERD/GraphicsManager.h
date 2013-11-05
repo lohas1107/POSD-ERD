@@ -10,7 +10,9 @@ public:
 	GraphicsManager();
 	~GraphicsManager();
 	GraphicsItem* createGraphicsItem(Type type);
-	void draw();
+	//void addGraphicsItem(GraphicsItem* item);
+	void draw(QGraphicsScene* scene, vector<ERComponent*> components);
+	void composeDiagram();
 
 private:
 	vector<GraphicsItem*> _graphicsItems;

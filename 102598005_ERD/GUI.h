@@ -20,6 +20,7 @@ class GUI : public QMainWindow
 public:
 	GUI(PresentationModel* presentationModel);
 	~GUI();
+	void drawDiagram();
 
 private slots:
 	void openFile();

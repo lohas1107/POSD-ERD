@@ -73,6 +73,12 @@ string PresentationModel::getComponentLine(Type type)
 	return _erModel->getComponentLine(type);
 }
 
+// 取得所有元件
+vector<ERComponent*> PresentationModel::getComponents()
+{
+	return _erModel->getComponents();
+}
+
 // 刪除元件
 void PresentationModel::deleteComponentCommand(int id)
 {
@@ -257,4 +263,10 @@ void PresentationModel::redo()
 bool PresentationModel::canRedo()
 {
 	return _commandManager.canRedo();
+}
+
+// 座標排版
+void PresentationModel::composePosition()
+{
+	_erModel->composePosition();
 }

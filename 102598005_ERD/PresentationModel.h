@@ -21,6 +21,7 @@ public:
 	string getNodeType(int id);
 	string getNodeText(int id);
 	string getComponentLine(Type type);
+	vector<ERComponent*> getComponents();
 	void connectNodeCommand(int firstNodeID, int secondNodeID, string cardinality);
 	int getComponentSize();
 	bool isIDExsit(int id);
@@ -46,7 +47,7 @@ public:
 	bool canUndo();
 	void redo();
 	bool canRedo();
-
+	void composePosition();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

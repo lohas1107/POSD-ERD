@@ -34,9 +34,15 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 void GraphicsItem::doAdjustSize(QFontMetrics fontMetrics)
 {
 	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(_text) + 30, fontMetrics.height() + 30);
+	//int width = fontMetrics.width(_text) + 30;
+	//int height = fontMetrics.height() + 30;
+
+	//QPolygonF _polygon;
+	//_polygon << QPointF(-width/2, height/2) << QPointF(width/2, height/2) << QPointF(width/2, -height/2) << QPointF(-width/2, -height/2) << QPointF(-width/2, height/2);
+	//((QGraphicsPolygonItem*)_item)->setPolygon(_polygon);
 }
 
-void GraphicsItem::setText(QString text)
+void GraphicsItem::setText(string text)
 {
-	_text = text;
+	_text = QString::fromStdString(text);
 }

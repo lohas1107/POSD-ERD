@@ -17,8 +17,8 @@ public:
 	virtual void doAdjustSize(QFontMetrics fontMetrics);
 	QRectF boundingRect() const;
 	QPainterPath shape() const;
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-	void setText(QString text);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+	void setText(string text);
 
 protected:
 	QGraphicsItem* _item;

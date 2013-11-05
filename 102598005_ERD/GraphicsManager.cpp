@@ -3,6 +3,7 @@
 #include "GraphicsAttribute.h"
 #include "GraphicsRelation.h"
 #include "GraphicsConnector.h"
+#include "GraphicsItem.h"
 
 GraphicsManager::GraphicsManager()
 {
@@ -40,7 +41,38 @@ GraphicsItem* GraphicsManager::createGraphicsItem(Type type)
 	return NULL;
 }
 
-void GraphicsManager::draw()
+//void GraphicsManager::addGraphicsItem(GraphicsItem* item)
+//{
+//	_graphicsItems.push_back(item);
+//}
+
+void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> components)
+{
+	GraphicsItem* item;
+
+	for (unsigned i = 0; i < components.size(); i++)
+	{
+		item = createGraphicsItem(components[i]->getType().first);
+		item->setText(components[i]->getText());
+		//_graphicsItems.push_back(item);
+		//item->setPos(QPointF(components[i]->getPosition().x, components[i]->getPosition().y));
+		if (components[i]->getType().first != connection)
+		{
+			item->setPos(QPointF(components[i]->getPosition().x, components[i]->getPosition().y));
+		} 
+		else
+		{
+			vector<ERComponent*> connections = components[i]->getConnection();
+			QLineF line(connections[0]->getPosition().x, connections[0]->getPosition().y, connections[1]->getPosition().x, connections[1]->getPosition().y);
+			((GraphicsConnector*)item)->setLine(line);
+		}
+
+		scene->addItem(item);
+	}
+	//scene->update();
+}
+
+void GraphicsManager::composeDiagram()
 {
 
 }

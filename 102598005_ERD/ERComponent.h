@@ -15,6 +15,12 @@ enum Type {
 	all
 };
 
+struct ERPoint
+{
+	float x;
+	float y;
+};
+
 class ERComponent
 {
 public:
@@ -23,9 +29,11 @@ public:
 	int getID();
 	pair<Type, string> getType();
 	string getText();
+	ERPoint getPosition();
 	vector<ERComponent*> getConnection();
 	void setID(int id);
 	void setText(string text);
+	void setPosition(ERPoint position);
 	void setConnection(vector<ERComponent*> connections);
 	bool isType(Type type);
 	virtual void connectTo(ERComponent* component);
@@ -38,6 +46,7 @@ protected:
 	int _id;
 	pair<Type, string> _type;
 	string _text;
+	ERPoint _position;
 	vector<ERComponent*> _connections;
 };
 

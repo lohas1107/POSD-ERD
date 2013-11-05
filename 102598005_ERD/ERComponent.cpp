@@ -10,6 +10,8 @@ ERComponent::ERComponent(pair<Type, string> type)
 	_id = 0;
 	_type = type;
 	_text = STRING_EMPTY;
+	_position.x = 0;
+	_position.y = 0;
 }
 
 ERComponent::~ERComponent()
@@ -44,6 +46,18 @@ string ERComponent::getText()
 vector<ERComponent*> ERComponent::getConnection()
 {
 	return _connections;
+}
+
+// 取得位置
+ERPoint ERComponent::getPosition()
+{
+	return _position;
+}
+
+// 設定位置
+void ERComponent::setPosition(ERPoint position)
+{
+	_position = position;
 }
 
 // 設定 text

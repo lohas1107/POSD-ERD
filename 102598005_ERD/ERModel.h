@@ -59,6 +59,7 @@ public:
 	int getNodeID();
 	pair<Type, string> getNodeType(int id);
 	string getNodeText(int id);
+	vector<ERComponent*> getComponents();
 	int getComponentSize();
 	string getComponentLine(Type type);
 	bool isIDExsit(int id);
@@ -83,7 +84,7 @@ public:
 	string saveComponent();
 	string saveConnection();
 	string savePrimaryKey();
-
+	void composePosition();
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

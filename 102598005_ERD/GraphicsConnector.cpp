@@ -16,5 +16,10 @@ void GraphicsConnector::doCreateItem()
 
 void GraphicsConnector::doAdjustSize(QFontMetrics fontMetrics)
 {
-	((QGraphicsLineItem*)_item)->setLine(0, 0, fontMetrics.width(_text) + 30, fontMetrics.height() + 30);
+	//((QGraphicsLineItem*)_item)->setLine(0, 0, fontMetrics.width(_text) + 30, fontMetrics.height());
+}
+
+void GraphicsConnector::setLine(QLineF line)
+{
+	((QGraphicsLineItem*)_item)->setLine(line);
 }
