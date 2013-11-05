@@ -2,6 +2,7 @@
 #define  _GUI_H_
 
 #include "PresentationModel.h"
+#include "GraphicsManager.h"
 #include <QMainWindow>
 #include <QObject>
 #include <QAction>
@@ -29,6 +30,7 @@ private:
 	void createToolBars();
 	void createCanvas();
 	PresentationModel* _presentationModel;
+	GraphicsManager _graphicsManager;
 	QAction* _fileAction;
 	QAction* _exitAction;
 	QMenu* _fileMenu;

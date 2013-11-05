@@ -28,6 +28,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_GUI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GraphicsAttribute.cpp" />
+    <ClCompile Include="GraphicsConnector.cpp" />
+    <ClCompile Include="GraphicsEntity.cpp" />
+    <ClCompile Include="GraphicsItem.cpp" />
+    <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="GraphicsRelation.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -58,6 +64,12 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui"</Command>
     </CustomBuild>
+    <ClInclude Include="GraphicsAttribute.h" />
+    <ClInclude Include="GraphicsConnector.h" />
+    <ClInclude Include="GraphicsEntity.h" />
+    <ClInclude Include="GraphicsItem.h" />
+    <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="GraphicsRelation.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="PresentationModel.h" />

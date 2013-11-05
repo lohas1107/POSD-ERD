@@ -1,6 +1,8 @@
 #include "GUI.h"
 #include <QMenuBar>
 #include <QFileDialog>
+#include "GraphicsItem.h"
+#include "GraphicsEntity.h"
 
 GUI::GUI(PresentationModel* presentationModel)
 {
@@ -42,13 +44,6 @@ void GUI::createMenus()
 	_fileMenu->addAction(_exitAction);
 }
 
-void GUI::openFile()
-{
-	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
-	_presentationModel->loadFile(fileName.toStdString());
-	//...
-}
-
 void GUI::createToolBars()
 {
 	_toolBar = addToolBar("Edit");
@@ -66,4 +61,11 @@ void GUI::createCanvas()
 	_layout->addWidget(_view);
 	_widget->setLayout(_layout);
 	setCentralWidget(_widget);
+}
+
+void GUI::openFile()
+{
+	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
+	_presentationModel->loadFile(fileName.toStdString());
+	//...
 }
