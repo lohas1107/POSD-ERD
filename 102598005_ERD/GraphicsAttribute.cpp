@@ -48,11 +48,14 @@ void GraphicsAttribute::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	painter->setFont(font);
 	QFontMetrics fontMetrics(painter->font());
 	doAdjustSize(fontMetrics);
-	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
-	painter->drawEllipse(_item->boundingRect());
-
 	if (_isSelected)
 	{
+		painter->setPen(Qt::green);
 		painter->drawRect(_item->boundingRect());
 	}
+	painter->setPen(Qt::black);
+	painter->setBrush(Qt::white);
+	painter->drawEllipse(_item->boundingRect());
+	painter->setBrush(Qt::black);
+	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
 }

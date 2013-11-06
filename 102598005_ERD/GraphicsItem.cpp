@@ -35,8 +35,18 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 {
 	QFontMetrics fontMetrics(painter->font());
 	doAdjustSize(fontMetrics);
+
+	painter->setPen(Qt::black);
+	painter->setBrush(Qt::white);
+	painter->drawPath(_item->shape());
+	painter->setBrush(Qt::black);
 	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
-	_item->paint(painter, option, widget);
+	if (_isSelected)
+	{
+		painter->setPen(Qt::green);
+		painter->setBrush(Qt::transparent);
+		painter->drawRect(_item->boundingRect());
+	}
 }
 
 // 圖形大小調整

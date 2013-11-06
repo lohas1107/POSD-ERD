@@ -67,6 +67,7 @@ void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> component
 			vector<ERComponent*> connections = components[i]->getConnection();
 			QLineF line(connections[0]->getPosition().x, connections[0]->getPosition().y, connections[1]->getPosition().x, connections[1]->getPosition().y);
 			((GraphicsConnector*)item)->setLine(line);
+			item->setZValue(-1);
 		}
 		scene->addItem(item);
 	}
