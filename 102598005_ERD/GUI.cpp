@@ -4,6 +4,9 @@
 #include "GraphicsItem.h"
 #include "GraphicsEntity.h"
 
+const int WIDTH = 1024;
+const int HEIGHT = 768;
+
 GUI::GUI(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
@@ -26,7 +29,7 @@ GUI::~GUI()
 	delete _widget;
 }
 
-// 
+// 產生動作
 void GUI::createActions()
 {
 	_fileAction = new QAction(QIcon("Resources/open.png"), "Open...", this);
@@ -38,7 +41,7 @@ void GUI::createActions()
 	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
 }
 
-// 
+// 產生選單
 void GUI::createMenus()
 {
 	_fileMenu = menuBar()->addMenu("File");
@@ -46,7 +49,7 @@ void GUI::createMenus()
 	_fileMenu->addAction(_exitAction);
 }
 
-// 
+// 產生工具列
 void GUI::createToolBars()
 {
 	_toolBar = addToolBar("Edit");
@@ -54,10 +57,11 @@ void GUI::createToolBars()
 	_toolBar->addAction(_exitAction);
 }
 
+// 產生畫布
 void GUI::createCanvas()
 {
 	_scene = new QGraphicsScene();
-	_scene->setSceneRect(QRectF(0, 0, 1024, 768));
+	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	_view = new QGraphicsView(_scene);
 	_layout = new QHBoxLayout();
 	_widget = new QWidget();
@@ -66,19 +70,20 @@ void GUI::createCanvas()
 	setCentralWidget(_widget);
 }
 
+// 開啟檔案
 void GUI::openFile()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
 	_presentationModel->composePosition();
 	drawDiagram();
-	_scene->update();
 }
 
+// 畫ERD
 void GUI::drawDiagram()
 {
 	vector<ERComponent*> components = _presentationModel->getComponents();
+	_scene->clear();
 	_graphicsManager.draw(_scene, components);
-	_view->show();
-	//_scene->addItem(_graphicsManager.createGraphicsItem(entity));
+	_scene->update();
 }

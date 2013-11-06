@@ -85,6 +85,7 @@ public:
 	string saveConnection();
 	string savePrimaryKey();
 	void composePosition();
+
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

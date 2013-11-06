@@ -1,9 +1,12 @@
 #include "GraphicsItem.h"
 #include <QPainter>
 
+const string STRING_EMPTY = "";
+const int OFFSET = 30;
+
 GraphicsItem::GraphicsItem()
 {
-	_text = "";
+	_text = QString::fromStdString(STRING_EMPTY);
 	setFlag(QGraphicsItem::ItemIsMovable, true);
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
 	setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
@@ -13,16 +16,20 @@ GraphicsItem::~GraphicsItem()
 {
 }
 
+
+// 回傳圖形邊界
 QRectF GraphicsItem::boundingRect() const
 {
 	return _item->boundingRect();
 }
 
+// 回傳形狀
 QPainterPath GraphicsItem::shape() const
 {
 	return _item->shape();
 }
 
+// 畫圖和字
 void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	QFontMetrics fontMetrics(painter->font());
@@ -31,17 +38,13 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	_item->paint(painter, option, widget);
 }
 
+// 圖形大小調整
 void GraphicsItem::doAdjustSize(QFontMetrics fontMetrics)
 {
-	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(_text) + 30, fontMetrics.height() + 30);
-	//int width = fontMetrics.width(_text) + 30;
-	//int height = fontMetrics.height() + 30;
-
-	//QPolygonF _polygon;
-	//_polygon << QPointF(-width/2, height/2) << QPointF(width/2, height/2) << QPointF(width/2, -height/2) << QPointF(-width/2, -height/2) << QPointF(-width/2, height/2);
-	//((QGraphicsPolygonItem*)_item)->setPolygon(_polygon);
+	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(_text) + OFFSET, fontMetrics.height() + OFFSET);
 }
 
+// 設定文字
 void GraphicsItem::setText(string text)
 {
 	_text = QString::fromStdString(text);

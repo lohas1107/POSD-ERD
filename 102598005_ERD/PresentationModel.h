@@ -48,6 +48,7 @@ public:
 	void redo();
 	bool canRedo();
 	void composePosition();
+
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

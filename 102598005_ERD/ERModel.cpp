@@ -10,6 +10,15 @@ const int COMMA_SPACE_AMOUNT = 2;
 const int PAIR_AMOUNT = 2;
 const string STRING_SPACE = " ";
 const string NEXT_LINE = "\n";
+const int ATTRIBUTE_X = 300;
+const int ATTRIBUTE_OFFSET = 50;
+const int ENTITY_X = 500;
+const int ENTITY_Y = -10;
+const int ENTITY_OFFSET = 100;
+const int RELATION_X = 700;
+const int ERELATION_Y = 50;
+const int RELATION_OFFSET = 100;
+
 
 ERModel::ERModel()
 {
@@ -550,33 +559,33 @@ void ERModel::composePosition()
 {
 	ERPoint position;
 
-	position.x = 300;
+	position.x = ATTRIBUTE_X;
 	position.y = 0;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isType(attribute))
 		{
-			position.y += 50;
+			position.y += ATTRIBUTE_OFFSET;
 			_components[i]->setPosition(position);
 		}
 	}
-	position.x = 500;
-	position.y = 0;
+	position.x = ENTITY_X;
+	position.y = ENTITY_Y;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isType(entity))
 		{
-			position.y += 100;
+			position.y += ENTITY_OFFSET;
 			_components[i]->setPosition(position);
 		}
 	}
-	position.x = 700;
-	position.y = 50;
+	position.x = RELATION_X;
+	position.y = ERELATION_Y;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isType(relation))
 		{
-			position.y += 100;
+			position.y += RELATION_OFFSET;
 			_components[i]->setPosition(position);
 		}
 	}

@@ -9,10 +9,9 @@ class GraphicsManager
 public:
 	GraphicsManager();
 	~GraphicsManager();
+	void clearItem();
 	GraphicsItem* createGraphicsItem(Type type);
-	//void addGraphicsItem(GraphicsItem* item);
 	void draw(QGraphicsScene* scene, vector<ERComponent*> components);
-	void composeDiagram();
 
 private:
 	vector<GraphicsItem*> _graphicsItems;

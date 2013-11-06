@@ -10,9 +10,11 @@ class GraphicsAttribute : public GraphicsItem
 public:
 	GraphicsAttribute();
 	~GraphicsAttribute();
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void doCreateItem();
-	void doAdjustSize(QFontMetrics fontMetrics);
+	void setPrimaryKey(bool flag);
+
+private:
+	bool _isPrimaryKey;
 };
 
 #endif
