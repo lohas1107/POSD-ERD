@@ -7,6 +7,7 @@ const int OFFSET = 30;
 GraphicsItem::GraphicsItem()
 {
 	_text = QString::fromStdString(STRING_EMPTY);
+	_isSelected = false;
 	setFlag(QGraphicsItem::ItemIsMovable, true);
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
 	setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
@@ -48,4 +49,29 @@ void GraphicsItem::doAdjustSize(QFontMetrics fontMetrics)
 void GraphicsItem::setText(string text)
 {
 	_text = QString::fromStdString(text);
+}
+
+// 設定點選狀態改變
+QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+	if (change == QGraphicsItem::ItemSelectedChange)
+	{
+		if (value == true)
+		{
+			if (_isSelected)
+			{
+				_isSelected = false;
+			}
+			else
+			{
+				_isSelected = true;
+			}
+		}
+		else
+		{
+			_isSelected = false;
+		}
+	}
+
+	return QGraphicsItem::itemChange(change, value);
 }

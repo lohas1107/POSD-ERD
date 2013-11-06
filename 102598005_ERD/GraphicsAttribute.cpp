@@ -2,6 +2,8 @@
 #include <QGraphicsEllipseItem>
 #include "..\src\gui\styles\qstyle.h"
 
+const int OFFSET = 30;
+
 GraphicsAttribute::GraphicsAttribute()
 {
 	doCreateItem();
@@ -15,13 +17,24 @@ GraphicsAttribute::~GraphicsAttribute()
 // 產生橢圓形
 void GraphicsAttribute::doCreateItem()
 {
-	_item = new QGraphicsEllipseItem();
+	_item = new QGraphicsPolygonItem();
 }
 
 // 設定 primary key
 void GraphicsAttribute::setPrimaryKey(bool flag)
 {
 	_isPrimaryKey = flag;
+}
+
+// 根據文字內容調整大小
+void GraphicsAttribute::doAdjustSize(QFontMetrics fontMetrics)
+{
+	int width = fontMetrics.width(_text) + OFFSET;
+	int height = fontMetrics.height() + OFFSET;
+
+	QPolygonF _polygon;
+	_polygon << QPointF(-width/2, height/2) << QPointF(width/2, height/2) << QPointF(width/2, -height/2) << QPointF(-width/2, -height/2) << QPointF(-width/2, height/2);
+	((QGraphicsPolygonItem*)_item)->setPolygon(_polygon);
 }
 
 // 畫圖和字
@@ -36,5 +49,10 @@ void GraphicsAttribute::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	QFontMetrics fontMetrics(painter->font());
 	doAdjustSize(fontMetrics);
 	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
-	_item->paint(painter, option, widget);
+	painter->drawEllipse(_item->boundingRect());
+
+	if (_isSelected)
+	{
+		painter->drawRect(_item->boundingRect());
+	}
 }

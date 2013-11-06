@@ -19,10 +19,12 @@ public:
 	QPainterPath shape() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void setText(string text);
+	QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 protected:
 	QGraphicsItem* _item;
 	QString _text;
+	bool _isSelected;
 };
 
 #endif

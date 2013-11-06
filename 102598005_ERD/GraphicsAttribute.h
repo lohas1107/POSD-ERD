@@ -11,6 +11,7 @@ public:
 	GraphicsAttribute();
 	~GraphicsAttribute();
 	void doCreateItem();
+	void doAdjustSize(QFontMetrics fontMetrics);
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void setPrimaryKey(bool flag);
 
