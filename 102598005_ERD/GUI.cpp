@@ -85,5 +85,5 @@ void GUI::drawDiagram()
 	vector<ERComponent*> components = _presentationModel->getComponents();
 	_scene->clear();
 	_graphicsManager.draw(_scene, components);
-	_scene->update();
+	_scene->update(0, 0, _scene->width(), _scene->height());
 }

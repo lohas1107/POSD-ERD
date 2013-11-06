@@ -11,6 +11,7 @@ public:
 	GraphicsAttribute();
 	~GraphicsAttribute();
 	void doCreateItem();
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void setPrimaryKey(bool flag);
 
 private:
