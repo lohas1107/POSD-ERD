@@ -219,6 +219,7 @@ bool PresentationModel::saveFile(string filePath)
 	if (!file.is_open())
 	{
 		return false;
+		//return "Cannot save file!!";
 	}
 
 	file << _erModel->saveComponent();

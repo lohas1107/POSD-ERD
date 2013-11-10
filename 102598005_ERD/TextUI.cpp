@@ -3,35 +3,21 @@
 #include "Parser.h"
 
 const string ONE = "1";
-const string ONE_COMMAND = "1. Load ER diagram file";
 const string TWO = "2";
-const string TWO_COMMAND = "2. Save ER diagram file";
 const string THREE = "3";
-const string THREE_COMMAND = "3. Add a node";
 const string FOUR = "4";
-const string FOUR_COMMAND = "4. Connect two nodes";
 const string FIVE = "5";
-const string FIVE_COMMAND = "5. Display the current diagram";
 const string SIX = "6";
-const string SIX_COMMAND = "6. Set a primary key";
 const string SEVEN = "7";
-const string SEVEN_COMMAND = "7. Display the table";
 const string EIGHT = "8";
-const string EIGHT_COMMAND = "8. Delete a component";
 const string NINE = "9";
-const string NINE_COMMAND = "9. Undo";
 const string TEN = "10";
-const string TEN_COMMAND = "10.Redo";
 const string ELEVEN = "11";
-const string ELEVEN_COMMAND = "11.Exit";
-const string GOODBYE = "Goodbye!";
 const int NODE_NAME_SPACE = 80;
 const string STRING_EMPTY = "";
 const char NEXT_LINE = '\n';
-const string CARDINALITY_ONE = "1";
-const string CARDINALITY_N = "N";
 
-TextUI::TextUI(PresentationModel* presentationModel)
+TextUI::TextUI(PresentationModel* presentationModel)/* : QObject(NULL)*/
 {
 	_presentationModel = presentationModel;
 }
@@ -43,17 +29,17 @@ TextUI::~TextUI()
 // 顯示選單
 void TextUI::displayMenu()
 {
-	cout << ONE_COMMAND << endl;
-	cout << TWO_COMMAND << endl;
-	cout << THREE_COMMAND << endl;
-	cout << FOUR_COMMAND << endl;
-	cout << FIVE_COMMAND << endl;
-	cout << SIX_COMMAND << endl;
-	cout << SEVEN_COMMAND << endl;
-	cout << EIGHT_COMMAND << endl;
-	cout << NINE_COMMAND << endl;
-	cout << TEN_COMMAND << endl;
-	cout << ELEVEN_COMMAND << endl;
+	cout << "1. Load ER diagram file" << endl;
+	cout << "2. Save ER diagram file" << endl;
+	cout << "3. Add a node" << endl;
+	cout << "4. Connect two nodes" << endl;
+	cout << "5. Display the current diagram" << endl;
+	cout << "6. Set a primary key" << endl;
+	cout << "7. Display the table" << endl;
+	cout << "8. Delete a component" << endl;
+	cout << "9. Undo" << endl;
+	cout << "10.Redo" << endl;
+	cout << "11.Exit" << endl;
 	processCommand();
 }
 
@@ -62,7 +48,6 @@ void TextUI::processCommand()
 {
 	string command;
 	cin >> command;
-
 
 	if (command == ONE)
 	{
@@ -107,10 +92,9 @@ void TextUI::processCommand()
 	else if (command == ELEVEN)
 	{
 		remindSaveFile();
-		cout << GOODBYE << endl;
+		cout << "Goodbye!" << endl;
 		return;
 	}
-
 	displayMenu();
 }
 

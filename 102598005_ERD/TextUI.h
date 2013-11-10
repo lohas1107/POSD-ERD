@@ -2,9 +2,12 @@
 #define _TEXTUI_H_
 
 #include "PresentationModel.h"
+#include <QObject>
 
-class TextUI 
+class TextUI : public QObject
 {
+	Q_OBJECT
+
 public:
 	TextUI(PresentationModel* presentationModel);
 	~TextUI();

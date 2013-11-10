@@ -4,12 +4,15 @@
 #include "ERModel.h"
 #include "CommandManager.h"
 #include <vector>
+#include <QObject>
 
-class PresentationModel
+class PresentationModel : public QObject
 {
-	friend class PresentationModelTest;
-	FRIEND_TEST(PresentationModelTest, addNodeCommand);
-	FRIEND_TEST(PresentationModelTest, canUndo);
+	Q_OBJECT
+
+//signals:
+
+//public slots:
 
 public:
 	PresentationModel();

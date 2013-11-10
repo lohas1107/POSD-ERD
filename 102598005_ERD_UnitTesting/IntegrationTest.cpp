@@ -39,7 +39,7 @@ protected:
 		outputFile << "4 5" << endl;
 		outputFile.close();
 		_inputFile.open(_filePath);
-		_presentation = PresentationModel(&_model);
+		_presentation = new PresentationModel(&_model);
 	}
 
 	virtual void TearDown()
@@ -51,7 +51,7 @@ protected:
 	string _filePath;
 	ifstream _inputFile;
 	ERModel _model;
-	PresentationModel _presentation;
+	PresentationModel* _presentation;
 };
 
 // 整合測試讀取不存在的檔案
@@ -73,16 +73,16 @@ TEST_F(IntegrationTest, testIsPrimaryExist)
 // 整合測試回復刪除元件
 TEST_F(IntegrationTest, testUndoDeleteComponent)
 {
-	EXPECT_TRUE(_presentation.loadFile(_filePath));
-	_presentation.addNodeCommand("E", "Test");
+	EXPECT_TRUE(_presentation->loadFile(_filePath));
+	_presentation->addNodeCommand("E", "Test");
 	EXPECT_EQ(16, _model.getComponentSize());
 	EXPECT_EQ(15, _model.getNodeID());
 	EXPECT_EQ(entity, _model.getNodeType(15).first);
 	EXPECT_EQ("Test", _model.getNodeText(15));
-	_presentation.deleteComponentCommand(15);
+	_presentation->deleteComponentCommand(15);
 	EXPECT_EQ(15, _model.getComponentSize());
-	EXPECT_FALSE(_presentation.isIDExsit(15));
-	_presentation.undo();
+	EXPECT_FALSE(_presentation->isIDExsit(15));
+	_presentation->undo();
 	EXPECT_EQ(16, _model.getComponentSize());
 	EXPECT_EQ(entity, _model.getNodeType(15).first);
 	EXPECT_EQ("Test", _model.getNodeText(15));
@@ -91,24 +91,24 @@ TEST_F(IntegrationTest, testUndoDeleteComponent)
 // 整合測是重複做連結元件命令
 TEST_F(IntegrationTest, testRedoConnectComponent)
 {
-	EXPECT_TRUE(_presentation.loadFile(_filePath));
-	_presentation.addNodeCommand("E", "Test");
+	EXPECT_TRUE(_presentation->loadFile(_filePath));
+	_presentation->addNodeCommand("E", "Test");
 	EXPECT_EQ(16, _model.getComponentSize());
 	EXPECT_EQ(15, _model.getNodeID());
 	EXPECT_EQ(entity, _model.getNodeType(15).first);
 	EXPECT_EQ("Test", _model.getNodeText(15));
-	_presentation.addNodeCommand("A", "Test Attr");
+	_presentation->addNodeCommand("A", "Test Attr");
 	EXPECT_EQ(17, _model.getComponentSize());
 	EXPECT_EQ(16, _model.getNodeID());
 	EXPECT_EQ(attribute, _model.getNodeType(16).first);
 	EXPECT_EQ("Test Attr", _model.getNodeText(16));
-	_presentation.connectNodeCommand(15, 16, "");
+	_presentation->connectNodeCommand(15, 16, "");
 	EXPECT_EQ(15, _model._components[17]->getConnection()[0]->getID());
 	EXPECT_EQ(16, _model._components[17]->getConnection()[1]->getID());
-	_presentation.undo();
+	_presentation->undo();
 	EXPECT_EQ(0, _model._components[15]->getConnection().size());
 	EXPECT_EQ(0, _model._components[16]->getConnection().size());
-	_presentation.redo();
+	_presentation->redo();
 	EXPECT_EQ(15, _model._components[17]->getConnection()[0]->getID());
 	EXPECT_EQ(16, _model._components[17]->getConnection()[1]->getID());
 }
@@ -116,70 +116,70 @@ TEST_F(IntegrationTest, testRedoConnectComponent)
 // 整合測試命令使用
 TEST_F(IntegrationTest, testCommonUsage)
 {
-	EXPECT_TRUE(_presentation.loadFile(_filePath));
-	_presentation.addNodeCommand("E", "Work Diary");
+	EXPECT_TRUE(_presentation->loadFile(_filePath));
+	_presentation->addNodeCommand("E", "Work Diary");
 	EXPECT_EQ(16, _model.getComponentSize());
 	EXPECT_EQ(15, _model.getNodeID());
 	EXPECT_EQ(entity, _model.getNodeType(15).first);
 	EXPECT_EQ("Work Diary", _model.getNodeText(15));
-	_presentation.addNodeCommand("R", "Write");
+	_presentation->addNodeCommand("R", "Write");
 	EXPECT_EQ(17, _model.getComponentSize());
 	EXPECT_EQ(16, _model.getNodeID());
 	EXPECT_EQ(relation, _model.getNodeType(16).first);
 	EXPECT_EQ("Write", _model.getNodeText(16));
-	_presentation.connectNodeCommand(0, 16, "1");
+	_presentation->connectNodeCommand(0, 16, "1");
 	EXPECT_EQ(0, _model._components[17]->getConnection()[0]->getID());
 	EXPECT_EQ(16, _model._components[17]->getConnection()[1]->getID());
-	_presentation.connectNodeCommand(15, 16, "");
+	_presentation->connectNodeCommand(15, 16, "");
 	EXPECT_EQ(15, _model._components[18]->getConnection()[0]->getID());
 	EXPECT_EQ(16, _model._components[18]->getConnection()[1]->getID());
-	_presentation.addNodeCommand("A", "Content");
+	_presentation->addNodeCommand("A", "Content");
 	EXPECT_EQ(20, _model.getComponentSize());
 	EXPECT_EQ(19, _model.getNodeID());
 	EXPECT_EQ(attribute, _model.getNodeType(19).first);
 	EXPECT_EQ("Content", _model.getNodeText(19));
-	_presentation.addNodeCommand("A", "WD_ID");
+	_presentation->addNodeCommand("A", "WD_ID");
 	EXPECT_EQ(21, _model.getComponentSize());
 	EXPECT_EQ(20, _model.getNodeID());
 	EXPECT_EQ(attribute, _model.getNodeType(20).first);
 	EXPECT_EQ("WD_ID", _model.getNodeText(20));
-	_presentation.addNodeCommand("A", "WD_date");
+	_presentation->addNodeCommand("A", "WD_date");
 	EXPECT_EQ(22, _model.getComponentSize());
 	EXPECT_EQ(21, _model.getNodeID());
 	EXPECT_EQ(attribute, _model.getNodeType(21).first);
 	EXPECT_EQ("WD_date", _model.getNodeText(21));
-	_presentation.connectNodeCommand(15, 19, "");
+	_presentation->connectNodeCommand(15, 19, "");
 	EXPECT_EQ(15, _model._components[22]->getConnection()[0]->getID());
 	EXPECT_EQ(19, _model._components[22]->getConnection()[1]->getID());
-	_presentation.connectNodeCommand(15, 20, "");
+	_presentation->connectNodeCommand(15, 20, "");
 	EXPECT_EQ(15, _model._components[23]->getConnection()[0]->getID());
 	EXPECT_EQ(20, _model._components[23]->getConnection()[1]->getID());
-	_presentation.connectNodeCommand(15, 21, "");
+	_presentation->connectNodeCommand(15, 21, "");
 	EXPECT_EQ(15, _model._components[24]->getConnection()[0]->getID());
 	EXPECT_EQ(21, _model._components[24]->getConnection()[1]->getID());
 	vector<int> wdID;
 	wdID.push_back(20);
-	_presentation.setPrimaryKey(wdID);
+	_presentation->setPrimaryKey(wdID);
 	EXPECT_TRUE(((AttributeNode*)_model._components[20])->isPrimaryKey());
-	EXPECT_TRUE(_presentation.isAttribute(15, 20));
-	string table = _presentation.getTable();
+	EXPECT_TRUE(_presentation->isAttribute(15, 20));
+	string table = _presentation->getTable();
 	EXPECT_EQ(103, table.find("Work Diary"));
 	EXPECT_EQ(103, table.find("Work Diary |  PK(WD_ID)"));
-	_presentation.deleteComponentCommand(15);
-	EXPECT_FALSE(_presentation.isIDExsit(15));
+	_presentation->deleteComponentCommand(15);
+	EXPECT_FALSE(_presentation->isIDExsit(15));
 	EXPECT_EQ(1, _model._components[_model.findIndex(16)]->getConnection().size());
 	EXPECT_EQ(0, _model._components[_model.findIndex(16)]->getConnection()[0]->getID());
 	EXPECT_EQ(0, _model._components[_model.findIndex(19)]->getConnection().size());
 	EXPECT_EQ(0, _model._components[_model.findIndex(20)]->getConnection().size());
 	EXPECT_EQ(0, _model._components[_model.findIndex(21)]->getConnection().size());
-	table = _presentation.getTable();
+	table = _presentation->getTable();
 	EXPECT_EQ(4294967295, table.find("Work Diary"));
 	EXPECT_EQ(3, table.find("Engineer |  PK(Emp_ID, Name)"));
-	_presentation.undo();
-	table = _presentation.getTable();
+	_presentation->undo();
+	table = _presentation->getTable();
 	EXPECT_EQ(103, table.find("Work Diary |  PK(WD_ID)"));
-	_presentation.redo();
-	table = _presentation.getTable();
+	_presentation->redo();
+	table = _presentation->getTable();
 	EXPECT_EQ(4294967295, table.find("Work Diary"));
 	EXPECT_EQ(3, table.find("Engineer |  PK(Emp_ID, Name)"));
 }
