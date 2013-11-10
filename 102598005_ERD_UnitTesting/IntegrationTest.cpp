@@ -47,6 +47,7 @@ protected:
 		_inputFile.close();
 		remove(_filePath.c_str());
 		_rmdir("testdata");
+		delete _presentation;
 	}
 	string _filePath;
 	ifstream _inputFile;

@@ -83,7 +83,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Qt\4.8.3\bin;C:\gtest\include;../102598005_ERD;.;C:\Qt\4.8.3\include;.\GeneratedFiles\$(ConfigurationName);C:\Qt\4.8.3\include\QtCore;C:\Qt\4.8.3\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Qt\4.8.3\bin;C:\Qt\4.8.3\include;.\GeneratedFiles\$(ConfigurationName);C:\Qt\4.8.3\include\QtCore;C:\Qt\4.8.3\include\QtGui;C:\gtest\include;../102598005_ERD;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>

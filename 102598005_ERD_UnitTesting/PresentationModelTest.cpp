@@ -15,6 +15,11 @@ protected:
 		_presentation->addNodeCommand("C", "1");
 	}
 
+	virtual void TearDown()
+	{
+		delete _presentation;
+	}
+
 	// 讀取連結資料
 	void loadConnection()
 	{

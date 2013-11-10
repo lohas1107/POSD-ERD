@@ -18,10 +18,6 @@ const string SLASH = "\\";
 
 using namespace std;
 
-PresentationModel::PresentationModel()
-{
-}
-
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
