@@ -10,7 +10,9 @@ class PresentationModel : public QObject
 {
 	Q_OBJECT
 
-//signals:
+signals:
+	void outputString(string words);
+	void callDisplayDiagram();
 
 //public slots:
 

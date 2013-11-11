@@ -55,10 +55,14 @@ protected:
 // 測試檢查輸入的type
 TEST_F(PresentationModelTest, checkInputType)
 {
-	EXPECT_TRUE(_presentation->checkInputType("E"));
-	EXPECT_TRUE(_presentation->checkInputType("A"));
-	EXPECT_TRUE(_presentation->checkInputType("R"));
-	EXPECT_FALSE(_presentation->checkInputType("X"));
+	string type = "E";
+	EXPECT_TRUE(_presentation->checkInputType(type));
+	type = "A";
+	EXPECT_TRUE(_presentation->checkInputType(type));
+	type = "R";
+	EXPECT_TRUE(_presentation->checkInputType(type));
+	type = "X";
+	EXPECT_FALSE(_presentation->checkInputType(type));
 }
 
 // 測試新增元件

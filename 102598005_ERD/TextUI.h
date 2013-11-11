@@ -8,6 +8,10 @@ class TextUI : public QObject
 {
 	Q_OBJECT
 
+public slots:
+	void showString(string words);
+	void doDisplayDiagram();
+
 public:
 	TextUI(PresentationModel* presentationModel);
 	~TextUI();

@@ -20,10 +20,24 @@ const char NEXT_LINE = '\n';
 TextUI::TextUI(PresentationModel* presentationModel)/* : QObject(NULL)*/
 {
 	_presentationModel = presentationModel;
+	connect(_presentationModel, SIGNAL(outputString(string)), this, SLOT(showString(string)));
+	connect(_presentationModel, SIGNAL(callDisplayDiagram()), this, SLOT(doDisplayDiagram()));
 }
 
 TextUI::~TextUI()
 {
+}
+
+// 印出文字
+void TextUI::showString(string words)
+{
+	cout << words.c_str() << endl;
+}
+
+// 執行顯示ERD
+void TextUI::doDisplayDiagram()
+{
+	displayDiagramCommand();
 }
 
 // 顯示選單
@@ -104,13 +118,7 @@ void TextUI::loadFile()
 	string filePath;
 	cout << "Please input a file path: ";
 	cin >> filePath;
-
-	if (!_presentationModel->loadFile(filePath))
-	{
-		cout << "File not found!!" << endl;
-		return;
-	}
-	displayDiagramCommand();
+	_presentationModel->loadFile(filePath);
 }
 
 // 儲存檔案
@@ -119,12 +127,7 @@ void TextUI::saveFile()
 	string filePath;
 	cout << "Please input a file path: ";
 	cin >> filePath;
-
-	if (!_presentationModel->saveFile(filePath))
-	{
-		cout << "Cannot save file!!" << endl;
-		return;
-	}
+	_presentationModel->saveFile(filePath);
 }
 
 // 新增元件命令
@@ -141,7 +144,6 @@ void TextUI::addNodeCommand()
 		cout << "[A]Attribute [E]Entity [R]Relation" << endl;
 		cin >> nodeType;
 	}
-
 	cin.get();
 	cout << "Enter the name of this node:" << endl;
 	cin.getline(nodeName, NODE_NAME_SPACE);
