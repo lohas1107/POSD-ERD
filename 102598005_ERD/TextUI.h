@@ -18,7 +18,7 @@ public:
 	int getInputID();
 	bool isValidID(int firstNodeID, int secondNodeID);
 	string getCardinality(int firstNodeID, int secondNodeID);
-	void printConnect();
+	void printConnections();
 	void showConnections();
 	void displayDiagramCommand();
 	void setPrimaryKeyCommand();

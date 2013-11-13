@@ -70,9 +70,12 @@ TEST_F(PresentationModelTest, addNodeCommand)
 {
 	_model.clearComponent();
 	_model.initialize();
-	EXPECT_EQ(0, _presentation->addNodeCommand("E", "PC"));
-	EXPECT_EQ(1, _presentation->addNodeCommand("A", "ID"));
-	EXPECT_EQ(2, _presentation->addNodeCommand("R", "Has"));
+	_presentation->addNodeCommand("E", "PC");
+	EXPECT_EQ(0, _presentation->getNodeID());
+	_presentation->addNodeCommand("A", "ID");
+	EXPECT_EQ(1, _presentation->getNodeID());
+	_presentation->addNodeCommand("R", "Has");
+	EXPECT_EQ(2, _presentation->getNodeID());
 }
 
 // 測試取得元件id
@@ -246,12 +249,12 @@ TEST_F(PresentationModelTest, setPrimaryKey)
 }
 
 // 測試顯示資料庫欄位
-TEST_F(PresentationModelTest, displayTableCommand)
+TEST_F(PresentationModelTest, isOneToOneExist)
 {
-	EXPECT_FALSE(_presentation->displayTableCommand());
+	EXPECT_FALSE(_presentation->isOneToOneExist());
 	loadConnection();
 	addOneToOne();
-	EXPECT_TRUE(_presentation->displayTableCommand());
+	EXPECT_TRUE(_presentation->isOneToOneExist());
 }
 
 // 測試取得資料欄位

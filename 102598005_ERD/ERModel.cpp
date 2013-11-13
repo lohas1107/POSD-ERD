@@ -95,17 +95,15 @@ void ERModel::deleteLastComponent()
 // 刪除連結
 void ERModel::deleteConnection(int id)
 {
+	pair<int, int> connectionPair = ((Connector*)getComponent(id))->getConnectionPair();
+
+	getComponent(connectionPair.first)->disconnectTo(connectionPair.second);
+	getComponent(connectionPair.second)->disconnectTo(connectionPair.first);
+	getComponent(id)->disconnectTo(connectionPair.first);
+	getComponent(id)->disconnectTo(connectionPair.second);
+
 	int index = findIndex(id);
-	pair<int, int> connectionPair = ((Connector*)_components[index])->getConnectionPair();
-	int first = findIndex(connectionPair.first);
-	int second = findIndex(connectionPair.second);
-
-	_components[first]->disconnectTo(connectionPair.second);
-	_components[second]->disconnectTo(connectionPair.first);
-	_components[index]->disconnectTo(connectionPair.first);
-	_components[index]->disconnectTo(connectionPair.second);
-
-	delete _components[index];
+	delete getComponent(id);
 	_components.erase(_components.begin() + index);
 }
 
@@ -113,7 +111,7 @@ void ERModel::deleteConnection(int id)
 vector<ERComponent*> ERModel::getDeleteList(int id)
 {
 	vector<ERComponent*> deleteList;
-	deleteList.push_back(_components[findIndex(id)]);
+	deleteList.push_back(getComponent(id));
 
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
@@ -164,20 +162,16 @@ void ERModel::revertComponent(vector<pair<int, ERComponent*>> deleteList)
 // 插入連結
 void ERModel::insertConnection(int id, int firstID, int secondID)
 {
-	int index = findIndex(id);
-	int first = findIndex(firstID);
-	int second = findIndex(secondID);
-
-	_components[first]->connectTo(_components[second]);
-	_components[second]->connectTo(_components[first]);
-	_components[index]->connectTo(_components[first]);
-	_components[index]->connectTo(_components[second]);
+	getComponent(firstID)->connectTo(getComponent(secondID));
+	getComponent(secondID)->connectTo(getComponent(firstID));
+	getComponent(id)->connectTo(getComponent(firstID));
+	getComponent(id)->connectTo(getComponent(secondID));
 }
 
 // 新增連結
 void ERModel::addConnection(int firstID, int secondID, string cardinality)
 {
-	if (_components[findIndex(firstID)]->canConnectTo(_components[findIndex(secondID)]))
+	if (getComponent(firstID)->canConnectTo(getComponent(secondID)))
 	{
 		addComponent(make_pair(connection, STRING_EMPTY), cardinality);
 		insertConnection(getNodeID(), firstID, secondID);
@@ -212,8 +206,7 @@ bool ERModel::isIDExsit(int id)
 // 是否為某 type
 bool ERModel::isType(int id, Type type)
 {
-	int index = findIndex(id);
-	return _components[index]->isType(type);
+	return getComponent(id)->isType(type);
 }
 
 //取得目前新增節點的 id
@@ -225,17 +218,23 @@ int ERModel::getNodeID()
 //取得目前新增節點的 type
 pair<Type, string> ERModel::getNodeType(int id)
 {
-	return _components[findIndex(id)]->getType();
+	return getComponent(id)->getType();
 }
 
 //取得目前新增節點的 text
 string ERModel::getNodeText(int id)
 {
-	return _components[findIndex(id)]->getText();
+	return getComponent(id)->getText();
+}
+
+// 取得某id的元件
+ERComponent* ERModel::getComponent(int id)
+{
+	return _components[findIndex(id)];
 }
 
 // 取得所有元件
-vector<ERComponent*> ERModel::getComponents()
+vector<ERComponent*> ERModel::getComponentList()
 {
 	return _components;
 }
@@ -278,19 +277,19 @@ string ERModel::getConnectionLine()
 // 是否有這組連結
 bool ERModel::hasConnection(int firstNodeID, int secondNodeID)
 {
-	return ((Node*)_components[findIndex(firstNodeID)])->hasConnection(findIndex(secondNodeID));
+	return ((Node*)getComponent(firstNodeID))->hasConnection(secondNodeID);
 }
 
 // 顯示所屬的 attributes
 string ERModel::getAttributeLine(int entityID)
 {
-	return ((EntityNode*)_components[findIndex(entityID)])->getAttributeLine();
+	return ((EntityNode*)getComponent(entityID))->getAttributeLine();
 }
 
 // 是否為所屬的 attribute
 bool ERModel::isAttribute(int entityID, int attributeID)
 {
-	return ((EntityNode*)_components[findIndex(entityID)])->isAttribute(attributeID);
+	return ((EntityNode*)getComponent(entityID))->isAttribute(attributeID);
 }
 
 // 是否有任何 Entity
@@ -310,7 +309,7 @@ bool ERModel::hasEntity()
 // 是否有任何 attribute
 bool ERModel::hasAttribute(int entityID)
 {
-	return ((EntityNode*)_components[findIndex(entityID)])->hasAttribute();
+	return ((EntityNode*)getComponent(entityID))->hasAttribute();
 }
 
 // 設定為 primary key
@@ -318,14 +317,14 @@ void ERModel::setPrimaryKey(vector<int> primaryKey)
 {
 	for (unsigned i = 0; i < primaryKey.size(); i++)
 	{
-		((AttributeNode*)_components[findIndex(primaryKey[i])])->setPrimaryKey(true);
+		((AttributeNode*)getComponent(primaryKey[i]))->setPrimaryKey(true);
 	}
 }
 
 // 取得 primary key id
 vector<int> ERModel::getPrimaryKey(int entityID)
 {
-	return ((EntityNode*)_components[findIndex(entityID)])->getPrimaryKey();
+	return ((EntityNode*)getComponent(entityID))->getPrimaryKey();
 }
 
 // 取得 primary key id 字串
@@ -355,7 +354,7 @@ std::string ERModel::getPrimaryKeyText(int entityID)
 
 	for (unsigned i = 0; i < primaryKey.size(); i++)
 	{
-		primaryKeyString += COMMA_SPACE + _components[findIndex(primaryKey[i])]->getText();
+		primaryKeyString += COMMA_SPACE + getComponent(primaryKey[i])->getText();
 	}
 
 	if (primaryKey.size() > 0)
@@ -374,7 +373,7 @@ string ERModel::getTable()
 
 	for (unsigned i = 0; i < oneToOne.size(); i++)
 	{
-		((EntityNode*)_components[findIndex(oneToOne[i].second)])->setForeignKey(getPrimaryKeyText(oneToOne[i].first));
+		((EntityNode*)getComponent(oneToOne[i].second))->setForeignKey(getPrimaryKeyText(oneToOne[i].first));
 	}
 
 	for (unsigned i = 0; i < _components.size(); i++)

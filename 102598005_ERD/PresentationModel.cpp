@@ -38,11 +38,9 @@ bool PresentationModel::checkInputType(string type)
 }
 
 // 新增節點命令
-int PresentationModel::addNodeCommand(string type, string name)
+void PresentationModel::addNodeCommand(string type, string name)
 {
 	_commandManager.execute(new AddComponentCommand(_erModel, make_pair(none, type), name));
-	int id = _erModel->getNodeID();
-	return id;
 }
 
 // 取得 node id
@@ -72,7 +70,7 @@ string PresentationModel::getComponentLine(Type type)
 // 取得所有元件
 vector<ERComponent*> PresentationModel::getComponents()
 {
-	return _erModel->getComponents();
+	return _erModel->getComponentList();
 }
 
 // 刪除元件
@@ -179,8 +177,8 @@ void PresentationModel::setPrimaryKey(vector<int> primaryKey)
 	_erModel->setPrimaryKey(primaryKey);
 }
 
-// 是否顯示 table 資訊
-bool PresentationModel::displayTableCommand()
+// 是否存在1對1
+bool PresentationModel::isOneToOneExist()
 {
 	vector<pair<int, int>> oneToOne = _erModel->getOneToOne();
 

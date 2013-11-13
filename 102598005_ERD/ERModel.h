@@ -59,7 +59,8 @@ public:
 	int getNodeID();
 	pair<Type, string> getNodeType(int id);
 	string getNodeText(int id);
-	vector<ERComponent*> getComponents();
+	ERComponent* getComponent(int id);
+	vector<ERComponent*> getComponentList();
 	int getComponentSize();
 	string getComponentLine(Type type);
 	bool isIDExsit(int id);

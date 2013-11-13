@@ -8,11 +8,10 @@
 class PresentationModel
 {
 public:
-	PresentationModel();
 	PresentationModel(ERModel* erModel);
 	~PresentationModel();
 	bool checkInputType(string type);
-	int addNodeCommand(string type, string name);
+	void addNodeCommand(string type, string name);
 	int getNodeID();
 	string getNodeType(int id);
 	string getNodeText(int id);
@@ -33,7 +32,7 @@ public:
 	bool isAttribute(int entityID, int attribute);
 	string getPrimaryKey(int entityID);
 	void setPrimaryKey(vector<int> primaryKey);
-	bool displayTableCommand();
+	bool isOneToOneExist();
 	string getTable();
 	bool loadFile(string filePath);
 	bool saveFile(string filePath);

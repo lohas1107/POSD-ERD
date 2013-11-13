@@ -16,6 +16,8 @@ const string ELEVEN = "11";
 const int NODE_NAME_SPACE = 80;
 const string STRING_EMPTY = "";
 const char NEXT_LINE = '\n';
+const string INPUT_Y = "Y";
+const string INPUT_N = "N";
 
 TextUI::TextUI(PresentationModel* presentationModel)
 {
@@ -143,8 +145,8 @@ void TextUI::addNodeCommand()
 	cin.get();
 	cout << "Enter the name of this node:" << endl;
 	cin.getline(nodeName, NODE_NAME_SPACE);
-
-	int id = _presentationModel->addNodeCommand(nodeType, nodeName);
+	_presentationModel->addNodeCommand(nodeType, nodeName);
+	int id = _presentationModel->getNodeID();
 	printf("A node [%s] has been added. ID: %d, Name: \"%s\"\n", _presentationModel->getNodeType(id).c_str(), id, _presentationModel->getNodeText(id).c_str());
 	showComponents(all);
 }
@@ -183,7 +185,7 @@ void TextUI::connectNodeCommand()
 			return;
 		}
 		printf("The node '%d' has been connected to the node '%d'.\n", firstNodeID, secondNodeID);
-		printConnect();
+		printConnections();
 	} 
 }
 
@@ -238,10 +240,10 @@ int TextUI::getInputID()
 }
 
 // 顯示連結資訊
-void TextUI::printConnect()
+void TextUI::printConnections()
 {
 	int id = _presentationModel->getNodeID();
-	if (_presentationModel->getNodeText(id) != "")
+	if (_presentationModel->getNodeText(id) != STRING_EMPTY)
 	{
 		printf("Its cardinality of the relationship is '%s'.\n", _presentationModel->getNodeText(id).c_str());
 	}
@@ -270,16 +272,15 @@ void TextUI::displayDiagramCommand()
 // 設定 primary key 命令
 void TextUI::setPrimaryKeyCommand()
 {
-	int id = 0;
 	if (!(_presentationModel->hasEntity()))
 	{
 		cout << "No entities!" << endl;
 		return;
-	} 	
+	}
 	cout << "Entities:" << endl;
 	showComponents(entity);
 	cout << "Enter the ID of the entity:" << endl;	
-	id = getInputID();
+	int id = getInputID();
 	while (!_presentationModel->isType(id, entity))
 	{
 		printf("The node '%d' is not an entity. Please enter a valid one again.\n", id);
@@ -331,7 +332,7 @@ vector<int> TextUI::getAttributeID(int id)
 // 顯示資料庫欄位命令
 void TextUI::displayTableCommand()
 {
-	if (!_presentationModel->displayTableCommand())
+	if (!_presentationModel->isOneToOneExist())
 	{
 		cout << "It has no table to display." << endl;
 	}
@@ -398,12 +399,12 @@ void TextUI::remindSaveFile()
 	cout << "[Y]Yes [N]No" << endl;
 	cin >> isSaveFile;
 
-	if (isSaveFile == "Y" || isSaveFile == "y")
+	if (isSaveFile == INPUT_Y)
 	{
 		saveFile();
 	}
-	else if (isSaveFile == "N" || isSaveFile == "n")
+	else if (isSaveFile != INPUT_N)
 	{
-		return;
+		remindSaveFile();
 	}
 }
