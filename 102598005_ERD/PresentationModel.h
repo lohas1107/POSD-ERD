@@ -4,18 +4,9 @@
 #include "ERModel.h"
 #include "CommandManager.h"
 #include <vector>
-#include <QObject>
 
-class PresentationModel : public QObject
+class PresentationModel
 {
-	Q_OBJECT
-
-signals:
-	void outputString(string words);
-	void callDisplayDiagram();
-
-//public slots:
-
 public:
 	PresentationModel();
 	PresentationModel(ERModel* erModel);

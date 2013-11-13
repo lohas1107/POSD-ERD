@@ -10,14 +10,11 @@
 const string INPUT_E = "E";
 const string INPUT_A = "A";
 const string INPUT_R = "R";
-const string WRONG_NODE_TYPE_WARNING = "You entered an invalid node. Please enter a valid one again.";
 const string CARDINALITY_ONE = "1";
 const string CARDINALITY_N = "N";
 const string STRING_EMPTY = "";
 const char SLASH_CHAR = '\\';
 const string SLASH = "\\";
-const string OPEN_FILE_WARNING = "File not found!!";
-const string SAVE_FILE_WARNING = "Cannot save file!!";
 
 using namespace std;
 
@@ -206,15 +203,6 @@ string PresentationModel::getTable()
 // Åª¨úÀÉ®×
 bool PresentationModel::loadFile(string filePath)
 {
-	if (!_erModel->loadFile(filePath))
-	{
-		emit outputString(OPEN_FILE_WARNING);
-	}
-	else
-	{
-		emit callDisplayDiagram();
-	}
-
 	return _erModel->loadFile(filePath);
 }
 
@@ -226,7 +214,6 @@ bool PresentationModel::saveFile(string filePath)
 
 	if (!file.is_open())
 	{
-		emit outputString(SAVE_FILE_WARNING);
 		return false;
 	}
 

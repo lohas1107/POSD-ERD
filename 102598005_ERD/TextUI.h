@@ -2,16 +2,9 @@
 #define _TEXTUI_H_
 
 #include "PresentationModel.h"
-#include <QObject>
 
-class TextUI : public QObject
+class TextUI
 {
-	Q_OBJECT
-
-public slots:
-	void showString(string words);
-	void doDisplayDiagram();
-
 public:
 	TextUI(PresentationModel* presentationModel);
 	~TextUI();

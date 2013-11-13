@@ -105,11 +105,5 @@
     <ClCompile Include="IntegrationTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_PresentationModel.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_TextUI.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

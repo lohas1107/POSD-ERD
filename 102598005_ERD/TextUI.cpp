@@ -17,27 +17,13 @@ const int NODE_NAME_SPACE = 80;
 const string STRING_EMPTY = "";
 const char NEXT_LINE = '\n';
 
-TextUI::TextUI(PresentationModel* presentationModel)/* : QObject(NULL)*/
+TextUI::TextUI(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
-	connect(_presentationModel, SIGNAL(outputString(string)), this, SLOT(showString(string)));
-	connect(_presentationModel, SIGNAL(callDisplayDiagram()), this, SLOT(doDisplayDiagram()));
 }
 
 TextUI::~TextUI()
 {
-}
-
-// 印出文字
-void TextUI::showString(string words)
-{
-	cout << words.c_str() << endl;
-}
-
-// 執行顯示ERD
-void TextUI::doDisplayDiagram()
-{
-	displayDiagramCommand();
 }
 
 // 顯示選單
@@ -118,7 +104,13 @@ void TextUI::loadFile()
 	string filePath;
 	cout << "Please input a file path: ";
 	cin >> filePath;
-	_presentationModel->loadFile(filePath);
+
+	if (!_presentationModel->loadFile(filePath))
+	{
+		cout << "File not found!!" << endl;
+		return;
+	}
+	displayDiagramCommand();
 }
 
 // 儲存檔案
@@ -127,7 +119,11 @@ void TextUI::saveFile()
 	string filePath;
 	cout << "Please input a file path: ";
 	cin >> filePath;
-	_presentationModel->saveFile(filePath);
+
+	if (!_presentationModel->saveFile(filePath))
+	{
+		cout << "Cannot save file!!" << endl;
+	}
 }
 
 // 新增元件命令
