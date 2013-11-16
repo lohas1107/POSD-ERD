@@ -4,9 +4,8 @@ AddComponentCommand::AddComponentCommand()
 {
 }
 
-AddComponentCommand::AddComponentCommand(ERModel* model, pair<Type, string> type, string text)
+AddComponentCommand::AddComponentCommand(ERModel* model, pair<Type, string> type, string text) : Command(model)
 {
-	_model = model;
 	_type = type;
 	_text = text;
 }

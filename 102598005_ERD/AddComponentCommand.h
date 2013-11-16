@@ -14,7 +14,6 @@ public:
 	void unexecute();
 
 private:
-	ERModel* _model;
 	pair<Type, string> _type;
 	string _text;
 };

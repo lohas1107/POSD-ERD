@@ -5,7 +5,7 @@ const int OFFSET = 30;
 
 GraphicsEntity::GraphicsEntity()
 {
-	doCreateItem();
+	//doCreateItem();
 }
 
 GraphicsEntity::~GraphicsEntity()
@@ -13,10 +13,10 @@ GraphicsEntity::~GraphicsEntity()
 }
 
 // 產生矩形
-void GraphicsEntity::doCreateItem()
-{
-	_item = new QGraphicsPolygonItem();
-}
+//void GraphicsEntity::doCreateItem()
+//{
+//	//_item = new QGraphicsPolygonItem();
+//}
 
 // 根據文字內容調整大小
 void GraphicsEntity::doAdjustSize(QFontMetrics fontMetrics)

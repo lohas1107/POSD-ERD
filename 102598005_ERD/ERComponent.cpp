@@ -10,8 +10,6 @@ ERComponent::ERComponent(pair<Type, string> type)
 	_id = 0;
 	_type = type;
 	_text = STRING_EMPTY;
-	_position.x = 0;
-	_position.y = 0;
 }
 
 ERComponent::~ERComponent()
@@ -36,16 +34,52 @@ pair<Type, string> ERComponent::getType()
 	return _type;
 }
 
+// 是否為某 type
+bool ERComponent::isType(Type type)
+{
+	if (_type.first == type)
+	{
+		return true;
+	}
+	return false;
+}
+
 // 取得 text
 string ERComponent::getText()
 {
 	return _text;
 }
 
+// 設定 text
+void ERComponent::setText(string text)
+{
+	_text = text;
+}
+
 // 取得連結資訊
 vector<ERComponent*> ERComponent::getConnection()
 {
 	return _connections;
+}
+
+// 設定連結
+void ERComponent::setConnection(vector<ERComponent*> connections)
+{
+	_connections = connections;
+}
+
+// 是否有連結到此 id
+bool ERComponent::hasConnection(int id)
+{
+	for (unsigned i = 0; i < _connections.size(); i++)
+	{
+		if (_connections[i]->getID() == id)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 // 取得位置
@@ -58,28 +92,6 @@ ERPoint ERComponent::getPosition()
 void ERComponent::setPosition(ERPoint position)
 {
 	_position = position;
-}
-
-// 設定 text
-void ERComponent::setText(string text)
-{
-	_text = text;
-}
-
-// 設定連結
-void ERComponent::setConnection(vector<ERComponent*> connections)
-{
-	_connections = connections;
-}
-
-// 是否為某 type
-bool ERComponent::isType(Type type)
-{
-	if (_type.first == type)
-	{
-		return true;
-	}
-	return false;
 }
 
 // 連接 component

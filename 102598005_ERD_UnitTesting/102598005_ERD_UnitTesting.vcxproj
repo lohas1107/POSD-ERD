@@ -22,6 +22,7 @@
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
     <ClCompile Include="..\102598005_ERD\ERModel.cpp" />
+    <ClCompile Include="..\102598005_ERD\ERPoint.cpp" />
     <ClCompile Include="..\102598005_ERD\Node.cpp" />
     <ClCompile Include="..\102598005_ERD\Parser.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />

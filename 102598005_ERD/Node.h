@@ -12,8 +12,8 @@ class Node : public ERComponent
 public:
 	Node(pair<Type, string> type);
 	~Node();
-	virtual bool canConnectTo(ERComponent* component) = 0;
-	bool hasConnection(int id);
+	//virtual bool canConnectTo(ERComponent* component) = 0;
+	//bool hasConnection(int id);
 };
 
 #endif

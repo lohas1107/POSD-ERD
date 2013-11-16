@@ -13,7 +13,7 @@ class GraphicsItem : public QGraphicsItem
 public:
 	GraphicsItem();
 	virtual ~GraphicsItem();
-	virtual void doCreateItem() = 0;
+	//virtual void doCreateItem() = 0;
 	virtual void doAdjustSize(QFontMetrics fontMetrics);
 	QRectF boundingRect() const;
 	QPainterPath shape() const;

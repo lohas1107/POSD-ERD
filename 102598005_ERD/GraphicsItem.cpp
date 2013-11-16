@@ -6,6 +6,7 @@ const int OFFSET = 30;
 
 GraphicsItem::GraphicsItem()
 {
+	_item = new QGraphicsPolygonItem();
 	_text = QString::fromStdString(STRING_EMPTY);
 	_isSelected = false;
 	setFlag(QGraphicsItem::ItemIsMovable, true);

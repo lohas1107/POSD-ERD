@@ -4,9 +4,8 @@ ConnectComponentCommand::ConnectComponentCommand()
 {
 }
 
-ConnectComponentCommand::ConnectComponentCommand(ERModel* model, int firstNodeID, int secondNodeID, string cardinality)
+ConnectComponentCommand::ConnectComponentCommand(ERModel* model, int firstNodeID, int secondNodeID, string cardinality) : Command(model)
 {
-	_model = model;
 	_firstID = firstNodeID;
 	_secondID = secondNodeID;
 	_cardinality = cardinality;

@@ -22,6 +22,7 @@
     <ClCompile Include="EntityNode.cpp" />
     <ClCompile Include="ERComponent.cpp" />
     <ClCompile Include="ERModel.cpp" />
+    <ClCompile Include="ERPoint.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_GUI.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -64,6 +65,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui"</Command>
     </CustomBuild>
+    <ClInclude Include="ERPoint.h" />
     <ClInclude Include="GraphicsAttribute.h" />
     <ClInclude Include="GraphicsConnector.h" />
     <ClInclude Include="GraphicsEntity.h" />

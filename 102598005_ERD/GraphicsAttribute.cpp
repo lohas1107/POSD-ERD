@@ -6,7 +6,7 @@ const int OFFSET = 30;
 
 GraphicsAttribute::GraphicsAttribute()
 {
-	doCreateItem();
+	//doCreateItem();
 	_isPrimaryKey = false;	
 }
 
@@ -15,10 +15,10 @@ GraphicsAttribute::~GraphicsAttribute()
 }
 
 // 產生橢圓形
-void GraphicsAttribute::doCreateItem()
-{
-	_item = new QGraphicsPolygonItem();
-}
+//void GraphicsAttribute::doCreateItem()
+//{
+//	_item = new QGraphicsPolygonItem();
+//}
 
 // 設定 primary key
 void GraphicsAttribute::setPrimaryKey(bool flag)

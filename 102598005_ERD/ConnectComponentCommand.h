@@ -14,7 +14,6 @@ public:
 	void unexecute();
 
 private:
-	ERModel* _model;
 	int _firstID;
 	int _secondID;
 	string _cardinality;

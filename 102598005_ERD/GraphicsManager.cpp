@@ -57,7 +57,7 @@ void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> component
 	{
 		item = createGraphicsItem(components[i]->getType().first);
 		item->setText(components[i]->getText());
-		item->setPos(QPointF(components[i]->getPosition().x, components[i]->getPosition().y));
+		item->setPos(QPointF(components[i]->getPosition().getX(), components[i]->getPosition().getY()));
 		if (components[i]->getType().first == attribute)
 		{
 			((GraphicsAttribute*)item)->setPrimaryKey(((AttributeNode*)components[i])->isPrimaryKey());
@@ -65,7 +65,7 @@ void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> component
 		else if (components[i]->getType().first == connection)
 		{
 			vector<ERComponent*> connections = components[i]->getConnection();
-			QLineF line(connections[0]->getPosition().x, connections[0]->getPosition().y, connections[1]->getPosition().x, connections[1]->getPosition().y);
+			QLineF line(connections[0]->getPosition().getX(), connections[0]->getPosition().getY(), connections[1]->getPosition().getX(), connections[1]->getPosition().getY());
 			((GraphicsConnector*)item)->setLine(line);
 			item->setZValue(-1);
 		}

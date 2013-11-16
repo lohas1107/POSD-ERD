@@ -5,7 +5,7 @@ const float SCALE = 0.8;
 
 GraphicsRelation::GraphicsRelation()
 {
-	doCreateItem();
+	//doCreateItem();
 }
 
 GraphicsRelation::~GraphicsRelation()
@@ -13,10 +13,10 @@ GraphicsRelation::~GraphicsRelation()
 }
 
 // 產生圖形
-void GraphicsRelation::doCreateItem()
-{
-	_item = new QGraphicsPolygonItem();
-}
+//void GraphicsRelation::doCreateItem()
+//{
+//	//_item = new QGraphicsPolygonItem();
+//}
 
 // 根據文字內容調整大小
 void GraphicsRelation::doAdjustSize(QFontMetrics fontMetrics)

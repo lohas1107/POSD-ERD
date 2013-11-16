@@ -133,6 +133,9 @@
     <ClCompile Include="RelationNode.cpp">
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="ERPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ERModel.h">
@@ -194,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="RelationNode.h">
       <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ERPoint.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

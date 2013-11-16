@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "ERPoint.h"
 
 using namespace std;
 
@@ -15,27 +16,22 @@ enum Type {
 	all
 };
 
-struct ERPoint
-{
-	float x;
-	float y;
-};
-
 class ERComponent
 {
 public:
 	ERComponent(pair<Type, string> type);
 	virtual ~ERComponent();
 	int getID();
-	pair<Type, string> getType();
-	string getText();
-	ERPoint getPosition();
-	vector<ERComponent*> getConnection();
 	void setID(int id);
-	void setText(string text);
-	void setPosition(ERPoint position);
-	void setConnection(vector<ERComponent*> connections);
+	pair<Type, string> getType();
 	bool isType(Type type);
+	string getText();
+	void setText(string text);
+	vector<ERComponent*> getConnection();
+	void setConnection(vector<ERComponent*> connections);
+	bool hasConnection(int id);
+	ERPoint getPosition();
+	void setPosition(ERPoint position);
 	virtual void connectTo(ERComponent* component);
 	virtual bool canConnectTo(ERComponent* component) = 0;
 	void disconnectTo(int id);

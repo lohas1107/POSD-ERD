@@ -14,7 +14,6 @@ public:
 	void unexecute();
 
 private:
-	ERModel* _model;
 	int _id;
 	vector<pair<int, ERComponent*>> _deleteList;
 };

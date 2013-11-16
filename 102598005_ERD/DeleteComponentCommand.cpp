@@ -1,8 +1,7 @@
 #include "DeleteComponentCommand.h"
 
-DeleteComponentCommand::DeleteComponentCommand(ERModel* model, int id)
+DeleteComponentCommand::DeleteComponentCommand(ERModel* model, int id) : Command(model)
 {
-	_model = model;
 	_id = id;
 
 	vector<ERComponent*> deleteList = _model->getDeleteList(_id);

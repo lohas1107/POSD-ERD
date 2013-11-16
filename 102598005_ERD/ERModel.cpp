@@ -10,14 +10,14 @@ const int COMMA_SPACE_AMOUNT = 2;
 const int PAIR_AMOUNT = 2;
 const string STRING_SPACE = " ";
 const string NEXT_LINE = "\n";
-const int ATTRIBUTE_X = 300;
-const int ATTRIBUTE_OFFSET = 50;
-const int ENTITY_X = 500;
-const int ENTITY_Y = -10;
-const int ENTITY_OFFSET = 100;
-const int RELATION_X = 700;
-const int ERELATION_Y = 50;
-const int RELATION_OFFSET = 100;
+const float ATTRIBUTE_X = 300;
+const float ATTRIBUTE_OFFSET = 50;
+const float ENTITY_X = 500;
+const float ENTITY_Y = -10;
+const float ENTITY_OFFSET = 100;
+const float RELATION_X = 700;
+const float ERELATION_Y = 50;
+const float RELATION_OFFSET = 100;
 
 
 ERModel::ERModel()
@@ -277,7 +277,7 @@ string ERModel::getConnectionLine()
 // 是否有這組連結
 bool ERModel::hasConnection(int firstNodeID, int secondNodeID)
 {
-	return ((Node*)getComponent(firstNodeID))->hasConnection(secondNodeID);
+	return getComponent(firstNodeID)->hasConnection(secondNodeID);
 }
 
 // 顯示所屬的 attributes
@@ -556,36 +556,26 @@ string ERModel::savePrimaryKey()
 // 排座標
 void ERModel::composePosition()
 {
-	ERPoint position;
+	ERPoint attributePosition(ATTRIBUTE_X, 0);
+	ERPoint entityPosition(ENTITY_X, ENTITY_Y);
+	ERPoint relationPosition(RELATION_X, ERELATION_Y);
 
-	position.x = ATTRIBUTE_X;
-	position.y = 0;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isType(attribute))
 		{
-			position.y += ATTRIBUTE_OFFSET;
-			_components[i]->setPosition(position);
+			attributePosition.setPoint(ATTRIBUTE_X, attributePosition.getY() + ATTRIBUTE_OFFSET);
+			_components[i]->setPosition(attributePosition);
 		}
-	}
-	position.x = ENTITY_X;
-	position.y = ENTITY_Y;
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		if (_components[i]->isType(entity))
+		else if (_components[i]->isType(entity))
 		{
-			position.y += ENTITY_OFFSET;
-			_components[i]->setPosition(position);
+			entityPosition.setPoint(ENTITY_X, entityPosition.getY() + ENTITY_OFFSET);
+			_components[i]->setPosition(entityPosition);
 		}
-	}
-	position.x = RELATION_X;
-	position.y = ERELATION_Y;
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		if (_components[i]->isType(relation))
+		else if (_components[i]->isType(relation))
 		{
-			position.y += RELATION_OFFSET;
-			_components[i]->setPosition(position);
+			relationPosition.setPoint(RELATION_X, relationPosition.getY() + RELATION_OFFSET);
+			_components[i]->setPosition(relationPosition);
 		}
 	}
 }
