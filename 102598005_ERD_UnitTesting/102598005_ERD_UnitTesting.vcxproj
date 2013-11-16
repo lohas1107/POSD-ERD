@@ -12,12 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\102598005_ERD\AddComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\AddNodeState.cpp" />
     <ClCompile Include="..\102598005_ERD\AttributeNode.cpp" />
     <ClCompile Include="..\102598005_ERD\Command.cpp" />
     <ClCompile Include="..\102598005_ERD\CommandManager.cpp" />
     <ClCompile Include="..\102598005_ERD\ComponentFactory.cpp" />
     <ClCompile Include="..\102598005_ERD\ConnectComponentCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\Connector.cpp" />
+    <ClCompile Include="..\102598005_ERD\ConnectState.cpp" />
     <ClCompile Include="..\102598005_ERD\DeleteComponentCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
@@ -25,8 +27,10 @@
     <ClCompile Include="..\102598005_ERD\ERPoint.cpp" />
     <ClCompile Include="..\102598005_ERD\Node.cpp" />
     <ClCompile Include="..\102598005_ERD\Parser.cpp" />
+    <ClCompile Include="..\102598005_ERD\PointerState.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
     <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\State.cpp" />
     <ClCompile Include="..\102598005_ERD\TextUI.cpp" />
     <ClCompile Include="AddComponentCommandTest.cpp" />
     <ClCompile Include="AttributeNodeTest.cpp" />

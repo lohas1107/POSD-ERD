@@ -12,12 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddComponentCommand.cpp" />
+    <ClCompile Include="AddNodeState.cpp" />
     <ClCompile Include="AttributeNode.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandManager.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ConnectComponentCommand.cpp" />
     <ClCompile Include="Connector.cpp" />
+    <ClCompile Include="ConnectState.cpp" />
     <ClCompile Include="DeleteComponentCommand.cpp" />
     <ClCompile Include="EntityNode.cpp" />
     <ClCompile Include="ERComponent.cpp" />
@@ -39,22 +41,28 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="PointerState.cpp" />
     <ClCompile Include="PresentationModel.cpp" />
     <ClCompile Include="RelationNode.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TextUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddComponentCommand.h" />
+    <ClInclude Include="AddNodeState.h" />
     <ClInclude Include="AttributeNode.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandManager.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ConnectComponentCommand.h" />
     <ClInclude Include="Connector.h" />
+    <ClInclude Include="ConnectState.h" />
     <ClInclude Include="DeleteComponentCommand.h" />
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
+    <ClInclude Include="PointerState.h" />
+    <ClInclude Include="State.h" />
     <CustomBuild Include="GUI.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing GUI.h...</Message>
@@ -109,8 +117,13 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cursor.png" />
+    <None Include="Resources\ellipse.png" />
     <None Include="Resources\exit.png" />
+    <None Include="Resources\line.png" />
     <None Include="Resources\open.png" />
+    <None Include="Resources\rectangle.png" />
+    <None Include="Resources\rhombus.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB46AB63-87A3-4369-A39B-820700852B5B}</ProjectGuid>

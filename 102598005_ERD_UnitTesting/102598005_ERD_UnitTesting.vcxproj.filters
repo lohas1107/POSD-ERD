@@ -108,5 +108,17 @@
     <ClCompile Include="..\102598005_ERD\ERPoint.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\102598005_ERD\AddNodeState.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\ConnectState.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\PointerState.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\State.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

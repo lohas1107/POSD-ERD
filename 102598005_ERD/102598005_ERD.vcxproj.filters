@@ -133,8 +133,20 @@
     <ClCompile Include="RelationNode.cpp">
       <Filter>Source Files\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="AddNodeState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
     <ClCompile Include="ERPoint.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="PointerState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,8 +210,20 @@
     <ClInclude Include="RelationNode.h">
       <Filter>Header Files\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="AddNodeState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
     <ClInclude Include="ERPoint.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +231,21 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\open.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\rectangle.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\rhombus.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cursor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\ellipse.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\line.png">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

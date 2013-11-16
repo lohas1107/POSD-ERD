@@ -24,6 +24,7 @@ public:
 
 private slots:
 	void openFile();
+	void clickPointerEvent();
 
 private:
 	void createActions();
@@ -34,8 +35,15 @@ private:
 	GraphicsManager _graphicsManager;
 	QAction* _fileAction;
 	QAction* _exitAction;
+	QAction* _pointerAction;
+	QAction* _connectAction;
+	QAction* _attributeAction;
+	QAction* _entityAction;
+	QAction* _relationAction;
 	QMenu* _fileMenu;
-	QToolBar* _toolBar;
+	QMenu* _addMenu;
+	QToolBar* _fileToolBar;
+	QToolBar* _editToolBar;
 	QGraphicsScene* _scene;
 	QGraphicsView* _view;
 	QHBoxLayout* _layout;

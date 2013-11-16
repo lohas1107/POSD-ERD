@@ -4,7 +4,9 @@
 #include "ERModel.h"
 #include "CommandManager.h"
 #include <vector>
+#include "State.h"
 
+class State;
 class PresentationModel
 {
 public:
@@ -43,10 +45,13 @@ public:
 	void redo();
 	bool canRedo();
 	void composePosition();
+	void changeState(State* state);
+	void clickPointerEvent();
 
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;
+	State* _currentState;
 };
 
 #endif

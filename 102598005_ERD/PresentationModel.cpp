@@ -6,6 +6,8 @@
 #include <fstream>
 #include <string>
 #include <direct.h>
+#include "State.h"
+#include "PointerState.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -21,10 +23,12 @@ using namespace std;
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
+	_currentState = new PointerState(this);
 }
 
 PresentationModel::~PresentationModel()
 {
+	delete _currentState;
 }
 
 // ÀË¬d¿é¤Jªº type
@@ -263,4 +267,17 @@ bool PresentationModel::canRedo()
 void PresentationModel::composePosition()
 {
 	_erModel->composePosition();
+}
+
+// ¤Á´«ª¬ºA
+void PresentationModel::changeState(State* state)
+{
+	State* toDelete = _currentState;
+	_currentState = state;
+	delete toDelete;
+}
+
+void PresentationModel::clickPointerEvent()
+{
+	changeState(new PointerState(this));
 }
