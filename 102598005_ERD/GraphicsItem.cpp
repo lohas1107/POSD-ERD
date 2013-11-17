@@ -1,6 +1,7 @@
 #include "GraphicsItem.h"
 #include <QPainter>
 #include "..\src\gui\graphicsview\qgraphicssceneevent.h"
+#include <QDebug>
 
 const string STRING_EMPTY = "";
 const int OFFSET = 30;

@@ -13,6 +13,7 @@
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <QScrollArea>
+#include "GraphicsScene.h"
 
 class GUI : public QMainWindow
 {
@@ -58,7 +59,7 @@ private:
 	QMenu* _addMenu;
 	QToolBar* _fileToolBar;
 	QToolBar* _editToolBar;
-	//QGraphicsScene* _scene;
+	QGraphicsScene* _scene;
 	QGraphicsView* _view;
 	QHBoxLayout* _layout;
 	QWidget* _widget;

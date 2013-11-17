@@ -37,6 +37,7 @@
     <ClCompile Include="GraphicsItem.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="GraphicsRelation.cpp" />
+    <ClCompile Include="GraphicsScene.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
+    <ClInclude Include="GraphicsScene.h" />
     <ClInclude Include="PointerState.h" />
     <ClInclude Include="State.h" />
     <CustomBuild Include="GUI.h">

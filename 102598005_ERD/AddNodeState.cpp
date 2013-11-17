@@ -25,13 +25,9 @@ void AddNodeState::mousePressEvent(QPointF position)
 
 void AddNodeState::mouseMoveEvent(QPointF position)
 {
-
 }
 
 void AddNodeState::mouseReleaseEvent(QPointF position)
 {
-
-	qDebug() << "release";
-
 
 }

@@ -4,6 +4,7 @@
 #include "GraphicsItem.h"
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
+#include "GraphicsScene.h"
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -11,7 +12,7 @@ const int HEIGHT = 768;
 GUI::GUI(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
-	_graphicsManager = new GraphicsManager(_presentationModel);
+	_graphicsManager = new GraphicsManager();
 	setWindowTitle("Entity Relation Diagramming Tool");	
 	createActions();
 	createActionGroup();
@@ -34,7 +35,7 @@ GUI::~GUI()
 	delete _addMenu;
 	delete _fileToolBar;
 	delete _editToolBar;
-	//delete _scene;
+	delete _scene;
 	delete _view;
 	delete _layout;
 	delete _widget;
@@ -111,14 +112,13 @@ void GUI::createToolBars()
 // ²£¥Íµe¥¬
 void GUI::createCanvas()
 {
-	//_scene = new QGraphicsScene();
-	//_scene = new GraphicsManager(_presentationModel);
-	//_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
-	//_view = new QGraphicsView(_scene);
-	_graphicsManager->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
-	_view = new QGraphicsView(_graphicsManager);
-	//_view->setMouseTracking(true);
-	//_view->installEventFilter(this);
+	_scene = new GraphicsScene(_presentationModel);
+	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
+	_view = new QGraphicsView(_scene);
+
+	//_graphicsManager->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
+	//_view = new QGraphicsView(_graphicsManager);
+
 	_layout = new QHBoxLayout();
 	_widget = new QWidget();
 	_layout->addWidget(_view);
@@ -140,37 +140,32 @@ void GUI::drawDiagram()
 {
 	vector<ERComponent*> components = _presentationModel->getComponents();
 	_graphicsManager->clearItem();
-	_graphicsManager->clear();
-	_graphicsManager->draw(_graphicsManager, components);
-	_graphicsManager->update(0, 0, _graphicsManager->width(), _graphicsManager->height());
+	_scene->clear();
+	_graphicsManager->draw(_scene, components);
+	_scene->update(0, 0, _scene->width(), _scene->height());
 }
 
 void GUI::clickPointerEvent()
 {
-	//_pointerAction->setChecked(true);
 	_presentationModel->clickPointerEvent();
 }
 
 void GUI::clickConnectEvent()
 {
-	//_connectAction->setChecked(true);
 	_presentationModel->clickConnectEvent();
 }
 
 void GUI::clickAttributeEvent()
 {
-	//_attributeAction->setChecked(true);
 	_presentationModel->clickAttributeEvent();
 }
 
 void GUI::clickEntityEvent()
 {
-	//_entityAction->setChecked(true);
 	_presentationModel->clickEntityEvent();
 }
 
 void GUI::clickRelationEvent()
 {
-	//_relationAction->setChecked(true);
 	_presentationModel->clickRelationEvent();
 }
