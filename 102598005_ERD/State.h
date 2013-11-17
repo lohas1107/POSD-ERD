@@ -2,6 +2,7 @@
 #define _STATE_H_
 
 #include "PresentationModel.h"
+#include <QPointF>
 
 class PresentationModel;
 class State
@@ -9,11 +10,11 @@ class State
 public:
 	State(PresentationModel* presentationModel);
 	virtual ~State();
-	virtual void mousePressEvent() = 0;
-	virtual void mouseMoveEvent() = 0;
-	virtual void mouseReleaseEvent() = 0;
+	virtual void mousePressEvent(QPointF position) = 0;
+	virtual void mouseMoveEvent(QPointF position) = 0;
+	virtual void mouseReleaseEvent(QPointF position) = 0;
 
-private:
+protected:
 	PresentationModel* _presentationModel;
 };
 

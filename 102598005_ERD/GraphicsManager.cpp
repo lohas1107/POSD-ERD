@@ -6,8 +6,9 @@
 #include "GraphicsItem.h"
 #include "AttributeNode.h"
 
-GraphicsManager::GraphicsManager()
+GraphicsManager::GraphicsManager(PresentationModel* presentationModel)
 {
+	_presentationModel = presentationModel;
 }
 
 GraphicsManager::~GraphicsManager()
@@ -70,5 +71,40 @@ void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> component
 			item->setZValue(-1);
 		}
 		scene->addItem(item);
+		_graphicsItems.push_back(item);
 	}
+}
+
+void GraphicsManager::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+
+	//for (unsigned i = 0; i < _graphicsItems.size(); i++)
+	//{
+	//	sendEvent(_graphicsItems[i], mouseEvent);
+	//}
+	_presentationModel->mousePressEvent(mouseEvent);
+
+	vector<ERComponent*> components = _presentationModel->getComponents();
+	clearItem();
+	clear();
+	draw(this, components);
+	update(0, 0, width(), height());
+
+	QGraphicsScene::mousePressEvent(mouseEvent);
+
+}
+
+void GraphicsManager::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	//
+	_presentationModel->mouseMoveEvent(mouseEvent);
+	QGraphicsScene::mouseMoveEvent(mouseEvent);
+}
+
+void GraphicsManager::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	//
+	_presentationModel->mouseReleaseEvent(mouseEvent);
+	//drawDiagram();
+	QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }

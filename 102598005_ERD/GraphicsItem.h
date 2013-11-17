@@ -20,6 +20,9 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	void setText(string text);
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+	//void mousePressEvent(QGraphicsSceneMouseEvent *event);
+	//void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+	//void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 protected:
 	QGraphicsItem* _item;

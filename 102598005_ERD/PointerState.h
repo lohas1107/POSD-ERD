@@ -8,9 +8,9 @@ class PointerState : public State
 public:
 	PointerState(PresentationModel* presentationModel);
 	~PointerState();
-	void mousePressEvent();
-	void mouseMoveEvent();
-	void mouseReleaseEvent();
+	void mousePressEvent(QPointF position);
+	void mouseMoveEvent(QPointF position);
+	void mouseReleaseEvent(QPointF position);
 };
 
 #endif

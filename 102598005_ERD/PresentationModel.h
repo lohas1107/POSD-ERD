@@ -5,6 +5,8 @@
 #include "CommandManager.h"
 #include <vector>
 #include "State.h"
+#include <QMouseEvent>
+#include <QGraphicsSceneMouseEvent>
 
 class State;
 class PresentationModel
@@ -47,6 +49,13 @@ public:
 	void composePosition();
 	void changeState(State* state);
 	void clickPointerEvent();
+	void clickConnectEvent();
+	void clickAttributeEvent();
+	void clickEntityEvent();
+	void clickRelationEvent();
+	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 
 private:
 	ERModel* _erModel;

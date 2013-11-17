@@ -1,5 +1,6 @@
 #include "GraphicsItem.h"
 #include <QPainter>
+#include "..\src\gui\graphicsview\qgraphicssceneevent.h"
 
 const string STRING_EMPTY = "";
 const int OFFSET = 30;
@@ -86,3 +87,28 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 
 	return QGraphicsItem::itemChange(change, value);
 }
+
+//void GraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+//{
+//	QGraphicsItem::mousePressEvent(event);
+//	if (_isSelected)
+//	{
+//		_isSelected = false;
+//	}
+//	else
+//	{
+//		_isSelected = true;
+//	}
+//
+//}
+//
+//void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+//{
+//	QGraphicsItem::mouseMoveEvent(event);
+//}
+//
+//void GraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+//{
+//	//_isSelected = false;
+//	QGraphicsItem::mouseReleaseEvent(event);
+//}

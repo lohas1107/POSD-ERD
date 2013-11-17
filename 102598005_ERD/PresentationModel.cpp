@@ -8,6 +8,8 @@
 #include <direct.h>
 #include "State.h"
 #include "PointerState.h"
+#include "AddNodeState.h"
+#include "ConnectState.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -280,4 +282,52 @@ void PresentationModel::changeState(State* state)
 void PresentationModel::clickPointerEvent()
 {
 	changeState(new PointerState(this));
+}
+
+void PresentationModel::clickConnectEvent()
+{
+	changeState(new ConnectState(this));
+}
+
+void PresentationModel::clickAttributeEvent()
+{
+	changeState(new AddNodeState(this));
+}
+
+void PresentationModel::clickEntityEvent()
+{
+	changeState(new AddNodeState(this));
+}
+
+void PresentationModel::clickRelationEvent()
+{
+	changeState(new AddNodeState(this));
+}
+
+void PresentationModel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	if (mouseEvent->button() != Qt::LeftButton)
+	{
+		return;
+	}
+
+	_currentState->mousePressEvent(mouseEvent->scenePos());
+}
+
+void PresentationModel::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	//if (mouseEvent->button() != Qt::LeftButton)
+	//{
+	//	return;
+	//}
+	_currentState->mouseMoveEvent(mouseEvent->scenePos());
+}
+
+void PresentationModel::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	if (mouseEvent->button() != Qt::LeftButton)
+	{
+		return;
+	}
+	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
 }
