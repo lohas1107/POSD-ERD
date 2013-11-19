@@ -272,6 +272,11 @@ void PresentationModel::composePosition()
 	_erModel->composePosition();
 }
 
+void PresentationModel::setNodePosition(int id, QPointF position)
+{
+	_erModel->setNodePosition(id, position);
+}
+
 // ¤Á´«ª¬ºA
 //void PresentationModel::changeState(State* state)
 //{

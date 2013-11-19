@@ -4,6 +4,7 @@
 #include <vector>
 #include "ERComponent.h"
 #include "ComponentFactory.h"
+#include <QPointF>
 #include "gtest/gtest_prod.h"
 
 using namespace std;
@@ -86,6 +87,7 @@ public:
 	string saveConnection();
 	string savePrimaryKey();
 	void composePosition();
+	void setNodePosition(int id, QPointF position);
 
 private:
 	vector<ERComponent*> _components;

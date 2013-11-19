@@ -556,26 +556,31 @@ string ERModel::savePrimaryKey()
 // ±Æ®y¼Ð
 void ERModel::composePosition()
 {
-	ERPoint attributePosition(ATTRIBUTE_X, 0);
-	ERPoint entityPosition(ENTITY_X, ENTITY_Y);
-	ERPoint relationPosition(RELATION_X, ERELATION_Y);
+	QPointF attributePosition(ATTRIBUTE_X, 0);
+	QPointF entityPosition(ENTITY_X, ENTITY_Y);
+	QPointF relationPosition(RELATION_X, ERELATION_Y);
 
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isType(attribute))
 		{
-			attributePosition.setPoint(ATTRIBUTE_X, attributePosition.getY() + ATTRIBUTE_OFFSET);
+			attributePosition += QPointF(0, ATTRIBUTE_OFFSET);//.setPoint(ATTRIBUTE_X, attributePosition.y() + ATTRIBUTE_OFFSET)
 			_components[i]->setPosition(attributePosition);
 		}
 		else if (_components[i]->isType(entity))
 		{
-			entityPosition.setPoint(ENTITY_X, entityPosition.getY() + ENTITY_OFFSET);
+			entityPosition += QPointF(0, ENTITY_OFFSET);//.setPoint(ENTITY_X, entityPosition.getY() + ENTITY_OFFSET);
 			_components[i]->setPosition(entityPosition);
 		}
 		else if (_components[i]->isType(relation))
 		{
-			relationPosition.setPoint(RELATION_X, relationPosition.getY() + RELATION_OFFSET);
+			relationPosition += QPointF(0, RELATION_OFFSET);//.setPoint(RELATION_X, relationPosition.getY() + RELATION_OFFSET);
 			_components[i]->setPosition(relationPosition);
 		}
 	}
+}
+
+void ERModel::setNodePosition(int id, QPointF position)
+{
+	getComponent(id)->setPosition(position);
 }

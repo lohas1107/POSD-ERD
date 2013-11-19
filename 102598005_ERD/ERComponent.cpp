@@ -83,13 +83,13 @@ bool ERComponent::hasConnection(int id)
 }
 
 // 取得位置
-ERPoint ERComponent::getPosition()
+QPointF ERComponent::getPosition()
 {
 	return _position;
 }
 
 // 設定位置
-void ERComponent::setPosition(ERPoint position)
+void ERComponent::setPosition(QPointF position)
 {
 	_position = position;
 }

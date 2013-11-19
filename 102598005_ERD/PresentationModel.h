@@ -7,6 +7,7 @@
 //#include "State.h"
 #include <QMouseEvent>
 #include <QGraphicsSceneMouseEvent>
+#include <QPointF>
 //#include <QObject>
 
 //class State;
@@ -50,6 +51,7 @@ public:
 	void redo();
 	bool canRedo();
 	void composePosition();
+	void setNodePosition(int id, QPointF position);
 	//void changeState(State* state);
 	//void clickPointerEvent();
 	//void clickConnectEvent();

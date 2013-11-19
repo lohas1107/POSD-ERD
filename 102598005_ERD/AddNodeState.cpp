@@ -35,6 +35,7 @@ void AddNodeState::mouseReleaseEvent(QPointF position)
 	if (_isOK && !text.isEmpty())
 	{
 		_presentationModel->addNodeCommand(_type.second, text.toStdString());
+		_presentationModel->setNodePosition(_presentationModel->getNodeID(), position);
 		_scene->draw();
 		_scene->updateChecked();
 	}

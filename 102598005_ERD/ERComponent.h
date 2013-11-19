@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <QPointF>
 #include "ERPoint.h"
 
 using namespace std;
@@ -30,8 +31,8 @@ public:
 	vector<ERComponent*> getConnection();
 	void setConnection(vector<ERComponent*> connections);
 	bool hasConnection(int id);
-	ERPoint getPosition();
-	void setPosition(ERPoint position);
+	QPointF getPosition();
+	void setPosition(QPointF position);
 	virtual void connectTo(ERComponent* component);
 	virtual bool canConnectTo(ERComponent* component) = 0;
 	void disconnectTo(int id);
@@ -42,7 +43,7 @@ protected:
 	int _id;
 	pair<Type, string> _type;
 	string _text;
-	ERPoint _position;
+	QPointF _position;
 	vector<ERComponent*> _connections;
 };
 
