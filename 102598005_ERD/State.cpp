@@ -1,9 +1,11 @@
 #include "State.h"
+#include "GraphicsManager.h"
 #include "PresentationModel.h"
 
-State::State(PresentationModel* presentationModel)
+State::State(GraphicsManager* scene)
 {
-	_presentationModel = presentationModel;
+	_scene = scene;
+	_presentationModel = _scene->getPresentationModel();
 }
 
 State::~State()

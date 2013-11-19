@@ -148,8 +148,11 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GraphicsManager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GraphicsManager.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +204,6 @@
     <ClInclude Include="GraphicsItem.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsManager.h">
-      <Filter>Header Files\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsRelation.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
@@ -227,9 +227,6 @@
     </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsScene.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +261,9 @@
     </CustomBuild>
     <CustomBuild Include="TextUI.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GraphicsManager.h">
+      <Filter>Header Files\GUI</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

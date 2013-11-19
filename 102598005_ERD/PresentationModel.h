@@ -4,13 +4,16 @@
 #include "ERModel.h"
 #include "CommandManager.h"
 #include <vector>
-#include "State.h"
+//#include "State.h"
 #include <QMouseEvent>
 #include <QGraphicsSceneMouseEvent>
+//#include <QObject>
 
-class State;
-class PresentationModel
+//class State;
+class PresentationModel/* : public QObject*/
 {
+	//Q_OBJECT
+
 public:
 	PresentationModel(ERModel* erModel);
 	~PresentationModel();
@@ -47,20 +50,27 @@ public:
 	void redo();
 	bool canRedo();
 	void composePosition();
-	void changeState(State* state);
-	void clickPointerEvent();
-	void clickConnectEvent();
-	void clickAttributeEvent();
-	void clickEntityEvent();
-	void clickRelationEvent();
-	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	//void changeState(State* state);
+	//void clickPointerEvent();
+	//void clickConnectEvent();
+	//void clickAttributeEvent();
+	//void clickEntityEvent();
+	//void clickRelationEvent();
+	//void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	//void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	//void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	//bool getPointerChecked();
+	//void setPointerChecked(bool flag);
+//	void updateChecked();
+//
+//signals:
+//	void updateButton();
 
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;
-	State* _currentState;
+	//State* _currentState;
+	//bool _isPointerChecked;
 };
 
 #endif

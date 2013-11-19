@@ -13,7 +13,6 @@
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <QScrollArea>
-#include "GraphicsScene.h"
 
 class GUI : public QMainWindow
 {
@@ -22,11 +21,11 @@ class GUI : public QMainWindow
 public:
 	GUI(PresentationModel* presentationModel);
 	~GUI();
-	void drawDiagram();
+	//void drawDiagram();
 
 protected:
 	//bool eventFilter(QObject *object, QEvent *event);
-	//void mousePressEvent(QMouseEvent* mouseEvent);
+	////void mousePressEvent(QMouseEvent* mouseEvent);
 	//void mouseMoveEvent(QMouseEvent* mouseEvent);
 	//void mouseReleaseEvent(QMouseEvent* mouseEvent);
 	
@@ -38,6 +37,7 @@ private slots:
 	void clickAttributeEvent();
 	void clickEntityEvent();
 	void clickRelationEvent();
+	void updatePointerButton();
 
 private:
 	void createActions();
@@ -46,7 +46,7 @@ private:
 	void createToolBars();
 	void createCanvas();
 	PresentationModel* _presentationModel;
-	GraphicsManager* _graphicsManager;
+	//GraphicsManager* _graphicsManager;
 	QActionGroup* _actionGroup;
 	QAction* _fileAction;
 	QAction* _exitAction;
@@ -59,7 +59,7 @@ private:
 	QMenu* _addMenu;
 	QToolBar* _fileToolBar;
 	QToolBar* _editToolBar;
-	QGraphicsScene* _scene;
+	GraphicsManager* _scene;
 	QGraphicsView* _view;
 	QHBoxLayout* _layout;
 	QWidget* _widget;

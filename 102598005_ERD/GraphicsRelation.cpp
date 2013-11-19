@@ -1,7 +1,7 @@
 #include "GraphicsRelation.h"
 
 const int OFFSET = 5;
-const float SCALE = 0.8;
+const double SCALE = 0.8;
 
 GraphicsRelation::GraphicsRelation()
 {

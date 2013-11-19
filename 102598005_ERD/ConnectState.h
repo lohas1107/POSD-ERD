@@ -6,7 +6,7 @@
 class ConnectState : public State
 {
 public:
-	ConnectState(PresentationModel* presentationModel);
+	ConnectState(GraphicsManager* scene);
 	~ConnectState();
 	void mousePressEvent(QPointF position);
 	void mouseMoveEvent(QPointF position);

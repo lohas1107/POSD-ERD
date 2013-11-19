@@ -5,15 +5,26 @@
 #include "GraphicsConnector.h"
 #include "GraphicsItem.h"
 #include "AttributeNode.h"
+#include "State.h"
+#include "PointerState.h"
+#include "AddNodeState.h"
+#include "ConnectState.h"
+#include "..\src\corelib\io\qdebug.h"
 
-GraphicsManager::GraphicsManager(/*PresentationModel* presentationModel*/)
+const string INPUT_E = "E";
+const string INPUT_A = "A";
+const string INPUT_R = "R";
+
+GraphicsManager::GraphicsManager(PresentationModel* presentationModel)/* : QGraphicsScene()*/
 {
-	//_presentationModel = presentationModel;
+	_presentationModel = presentationModel;
+	_currentState = new PointerState(this);
 }
 
 GraphicsManager::~GraphicsManager()
 {
 	clearItem();
+	delete _currentState;
 }
 
 // 清除圖形
@@ -51,9 +62,14 @@ GraphicsItem* GraphicsManager::createGraphicsItem(Type type)
 }
 
 // 畫圖
-void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> components)
+void GraphicsManager::draw()
 {
+	vector<ERComponent*> components = _presentationModel->getComponents();
 	GraphicsItem* item;
+
+	//clearItem();
+	clear();
+
 	for (unsigned i = 0; i < components.size(); i++)
 	{
 		item = createGraphicsItem(components[i]->getType().first);
@@ -70,41 +86,109 @@ void GraphicsManager::draw(QGraphicsScene* scene, vector<ERComponent*> component
 			((GraphicsConnector*)item)->setLine(line);
 			item->setZValue(-1);
 		}
-		scene->addItem(item);
+		addItem(item);
 		//_graphicsItems.push_back(item);
 	}
+
+	update(0, 0, width(), height());
 }
 
-//void GraphicsManager::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+// 取得 PresentationModel
+PresentationModel* GraphicsManager::getPresentationModel()
+{
+	return _presentationModel;
+}
+
+void GraphicsManager::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	if (mouseEvent->button() != Qt::LeftButton)
+	{
+		return;
+	}
+	//for (unsigned i = 0; i < _graphicsItems.size(); i++)
+	//{
+	//	sendEvent(_graphicsItems[i], mouseEvent);
+	//}
+
+
+	//vector<ERComponent*> components = _presentationModel->getComponents();
+	//clearItem();
+	//clear();
+	//draw(this, components);
+	//update(0, 0, width(), height());
+
+	QGraphicsScene::mousePressEvent(mouseEvent);
+	_currentState->mousePressEvent(mouseEvent->scenePos());
+	//_presentationModel->mousePressEvent(mouseEvent);
+
+}
+
+void GraphicsManager::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+
+	QGraphicsScene::mouseMoveEvent(mouseEvent);
+	_currentState->mouseMoveEvent(mouseEvent->scenePos());
+	//qDebug() << mouseEvent->pos();
+	//_presentationModel->mouseMoveEvent(mouseEvent);
+}
+
+void GraphicsManager::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	if (mouseEvent->button() != Qt::LeftButton)
+	{
+		return;
+	}
+
+	//drawDiagram();
+	QGraphicsScene::mouseReleaseEvent(mouseEvent);
+	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
+	//_presentationModel->mouseReleaseEvent(mouseEvent);
+	//if (_presentationModel->getPointerChecked())
+	//{
+	//	emit updateButton();
+	//	_presentationModel->setPointerChecked(false);
+	//}
+}
+
+//bool GraphicsManager::eventFilter(QObject *object, QEvent *event)
 //{
-//
-//	//for (unsigned i = 0; i < _graphicsItems.size(); i++)
-//	//{
-//	//	sendEvent(_graphicsItems[i], mouseEvent);
-//	//}
-//	_presentationModel->mousePressEvent(mouseEvent);
-//
-//	vector<ERComponent*> components = _presentationModel->getComponents();
-//	clearItem();
-//	clear();
-//	draw(this, components);
-//	update(0, 0, width(), height());
-//
-//	QGraphicsScene::mousePressEvent(mouseEvent);
-//
+//	return QGraphicsScene::eventFilter(object, event);
 //}
-//
-//void GraphicsManager::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
-//{
-//	//
-//	_presentationModel->mouseMoveEvent(mouseEvent);
-//	QGraphicsScene::mouseMoveEvent(mouseEvent);
-//}
-//
-//void GraphicsManager::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
-//{
-//	//
-//	_presentationModel->mouseReleaseEvent(mouseEvent);
-//	//drawDiagram();
-//	QGraphicsScene::mouseReleaseEvent(mouseEvent);
-//}
+
+// 切換狀態
+void GraphicsManager::changeState(State* state)
+{
+	State* toDelete = _currentState;
+	_currentState = state;
+	delete toDelete;
+}
+
+void GraphicsManager::clickPointerEvent()
+{
+	changeState(new PointerState(this));
+}
+
+void GraphicsManager::clickConnectEvent()
+{
+	changeState(new ConnectState(this));
+}
+
+void GraphicsManager::clickAttributeEvent()
+{
+	changeState(new AddNodeState(this, make_pair(attribute, INPUT_A)));
+}
+
+void GraphicsManager::clickEntityEvent()
+{
+	changeState(new AddNodeState(this, make_pair(entity, INPUT_E)));
+}
+
+void GraphicsManager::clickRelationEvent()
+{
+	changeState(new AddNodeState(this, make_pair(relation, INPUT_R)));
+}
+
+void GraphicsManager::updateChecked()
+{
+	emit updateButton();
+}

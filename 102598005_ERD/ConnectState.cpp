@@ -1,6 +1,6 @@
 #include "ConnectState.h"
 
-ConnectState::ConnectState(PresentationModel* presentationModel) : State(presentationModel)
+ConnectState::ConnectState(GraphicsManager* scene) : State(scene)
 {
 }
 

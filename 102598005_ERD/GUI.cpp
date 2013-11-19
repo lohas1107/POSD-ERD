@@ -4,7 +4,7 @@
 #include "GraphicsItem.h"
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
-#include "GraphicsScene.h"
+#include "..\src\corelib\io\qdebug.h"
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -12,13 +12,15 @@ const int HEIGHT = 768;
 GUI::GUI(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
-	_graphicsManager = new GraphicsManager();
+	//_graphicsManager = new GraphicsManager();
 	setWindowTitle("Entity Relation Diagramming Tool");	
 	createActions();
 	createActionGroup();
 	createMenus();
 	createToolBars();
 	createCanvas();
+
+	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 }
 
 GUI::~GUI()
@@ -39,7 +41,7 @@ GUI::~GUI()
 	delete _view;
 	delete _layout;
 	delete _widget;
-	delete _graphicsManager;
+	//delete _graphicsManager;
 }
 
 // 產生動作
@@ -70,7 +72,7 @@ void GUI::createActionGroup()
 	_actionGroup = new QActionGroup(this);
 	_actionGroup->setExclusive(true);
 	_pointerAction->setCheckable(true);
-	_pointerAction->setChecked(true);
+	updatePointerButton();
 	_actionGroup->addAction(_pointerAction);
 	_connectAction->setCheckable(true);
 	_actionGroup->addAction(_connectAction);
@@ -80,6 +82,11 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_entityAction);
 	_relationAction->setCheckable(true);
 	_actionGroup->addAction(_relationAction);
+}
+
+void GUI::updatePointerButton()
+{
+	_pointerAction->setChecked(true);
 }
 
 // 產生選單
@@ -112,10 +119,11 @@ void GUI::createToolBars()
 // 產生畫布
 void GUI::createCanvas()
 {
-	_scene = new GraphicsScene(_presentationModel);
+	_scene = new GraphicsManager(_presentationModel);
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
-	_view = new QGraphicsView(_scene);
 
+	_view = new QGraphicsView(_scene);
+	_view->setMouseTracking(true);
 	//_graphicsManager->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	//_view = new QGraphicsView(_graphicsManager);
 
@@ -132,40 +140,51 @@ void GUI::openFile()
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
 	_presentationModel->composePosition();
-	drawDiagram();
+	_scene->draw();
 }
 
 // 畫ERD
-void GUI::drawDiagram()
-{
-	vector<ERComponent*> components = _presentationModel->getComponents();
-	_graphicsManager->clearItem();
-	_scene->clear();
-	_graphicsManager->draw(_scene, components);
-	_scene->update(0, 0, _scene->width(), _scene->height());
-}
+//void GUI::drawDiagram()
+//{
+//	vector<ERComponent*> components = _presentationModel->getComponents();
+//	_graphicsManager->clearItem();
+//	_scene->clear();
+//	_graphicsManager->draw(_scene, components);
+//	_scene->update(0, 0, _scene->width(), _scene->height());
+//}
 
 void GUI::clickPointerEvent()
 {
-	_presentationModel->clickPointerEvent();
+	_scene->clickPointerEvent();
 }
 
 void GUI::clickConnectEvent()
 {
-	_presentationModel->clickConnectEvent();
+	_scene->clickConnectEvent();
 }
 
 void GUI::clickAttributeEvent()
 {
-	_presentationModel->clickAttributeEvent();
+	_scene->clickAttributeEvent();
 }
 
 void GUI::clickEntityEvent()
 {
-	_presentationModel->clickEntityEvent();
+	_scene->clickEntityEvent();
 }
 
 void GUI::clickRelationEvent()
 {
-	_presentationModel->clickRelationEvent();
+	_scene->clickRelationEvent();
 }
+
+//bool GUI::eventFilter(QObject *object, QEvent *event)
+//{
+//	return QMainWindow::eventFilter(object, event);
+//}
+//
+//void GUI::mouseMoveEvent(QMouseEvent* mouseEvent)
+//{
+//	QMainWindow::mouseMoveEvent(mouseEvent);
+//	qDebug() << mouseEvent->pos();
+//}

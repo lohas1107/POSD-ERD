@@ -6,7 +6,7 @@
 #include <fstream>
 #include <string>
 #include <direct.h>
-#include "State.h"
+//#include "State.h"
 #include "PointerState.h"
 #include "AddNodeState.h"
 #include "ConnectState.h"
@@ -25,12 +25,13 @@ using namespace std;
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
-	_currentState = new PointerState(this);
+	//_currentState = new PointerState(this);
+	//_isPointerChecked = false;
 }
 
 PresentationModel::~PresentationModel()
 {
-	delete _currentState;
+	//delete _currentState;
 }
 
 // ÀË¬d¿é¤Jªº type
@@ -272,62 +273,77 @@ void PresentationModel::composePosition()
 }
 
 // ¤Á´«ª¬ºA
-void PresentationModel::changeState(State* state)
-{
-	State* toDelete = _currentState;
-	_currentState = state;
-	delete toDelete;
-}
+//void PresentationModel::changeState(State* state)
+//{
+//	State* toDelete = _currentState;
+//	_currentState = state;
+//	delete toDelete;
+//}
+//
+//void PresentationModel::clickPointerEvent()
+//{
+//	changeState(new PointerState(this));
+//}
+//
+//void PresentationModel::clickConnectEvent()
+//{
+//	changeState(new ConnectState(this));
+//}
+//
+//void PresentationModel::clickAttributeEvent()
+//{
+//	changeState(new AddNodeState(this, make_pair(attribute, INPUT_A)));
+//}
+//
+//void PresentationModel::clickEntityEvent()
+//{
+//	changeState(new AddNodeState(this, make_pair(entity, INPUT_E)));
+//}
+//
+//void PresentationModel::clickRelationEvent()
+//{
+//	changeState(new AddNodeState(this, make_pair(relation, INPUT_R)));
+//}
+//
+//void PresentationModel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+//{
+//	//if (mouseEvent->button() != Qt::LeftButton)
+//	//{
+//	//	return;
+//	//}
+//
+//	_currentState->mousePressEvent(mouseEvent->scenePos());
+//}
+//
+//void PresentationModel::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+//{
+//	//if (mouseEvent->button() != Qt::LeftButton)
+//	//{
+//	//	return;
+//	//}
+//	_currentState->mouseMoveEvent(mouseEvent->scenePos());
+//}
+//
+//void PresentationModel::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+//{
+//	//if (mouseEvent->button() != Qt::LeftButton)
+//	//{
+//	//	return;
+//	//}
+//	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
+//}
 
-void PresentationModel::clickPointerEvent()
-{
-	changeState(new PointerState(this));
-}
+//void PresentationModel::updateChecked()
+//{
+//	emit updateButton();
+//}
 
-void PresentationModel::clickConnectEvent()
-{
-	changeState(new ConnectState(this));
-}
-
-void PresentationModel::clickAttributeEvent()
-{
-	changeState(new AddNodeState(this));
-}
-
-void PresentationModel::clickEntityEvent()
-{
-	changeState(new AddNodeState(this));
-}
-
-void PresentationModel::clickRelationEvent()
-{
-	changeState(new AddNodeState(this));
-}
-
-void PresentationModel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
-{
-	if (mouseEvent->button() != Qt::LeftButton)
-	{
-		return;
-	}
-
-	_currentState->mousePressEvent(mouseEvent->scenePos());
-}
-
-void PresentationModel::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
-{
-	//if (mouseEvent->button() != Qt::LeftButton)
-	//{
-	//	return;
-	//}
-	_currentState->mouseMoveEvent(mouseEvent->scenePos());
-}
-
-void PresentationModel::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
-{
-	if (mouseEvent->button() != Qt::LeftButton)
-	{
-		return;
-	}
-	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
-}
+//bool PresentationModel::getPointerChecked()
+//{
+//	return _isPointerChecked;
+//}
+//
+//void PresentationModel::setPointerChecked(bool flag)
+//{
+//	_isPointerChecked = flag;
+//}

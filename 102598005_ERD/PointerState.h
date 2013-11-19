@@ -6,7 +6,7 @@
 class PointerState : public State
 {
 public:
-	PointerState(PresentationModel* presentationModel);
+	PointerState(GraphicsManager* scene);
 	~PointerState();
 	void mousePressEvent(QPointF position);
 	void mouseMoveEvent(QPointF position);
