@@ -9,7 +9,6 @@ class GraphicsConnector : public GraphicsItem
 public:
 	GraphicsConnector();
 	~GraphicsConnector();
-	void doCreateItem();
 	void doAdjustSize(QFontMetrics fontMetrics);
 	void setLine(QLineF line);
 };

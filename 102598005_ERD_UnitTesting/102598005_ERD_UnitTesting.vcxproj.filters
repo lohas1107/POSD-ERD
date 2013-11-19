@@ -105,9 +105,6 @@
     <ClCompile Include="IntegrationTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\102598005_ERD\ERPoint.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\102598005_ERD\AddNodeState.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -118,12 +115,6 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\102598005_ERD\State.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_GraphicsManager.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\102598005_ERD\GraphicsManager.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\102598005_ERD\GraphicsAttribute.cpp">
@@ -139,6 +130,12 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\102598005_ERD\GraphicsItem.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_GraphicsScene.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\GraphicsScene.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>

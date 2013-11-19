@@ -1,12 +1,12 @@
 #include "AddNodeState.h"
 #include "PointerState.h"
-#include <QtGui/QDialog>
 #include <QInputDialog>
-#include "../src/corelib/io/qdebug.h"
-#include "GraphicsManager.h"
-#include "GraphicsItem.h"
 
-AddNodeState::AddNodeState(GraphicsManager* scene, pair<Type, string> type) : State(scene)
+const string TITLE = "Enter text";
+const string LABEL = "Please enter the text";
+const string TEXT = "";
+
+AddNodeState::AddNodeState(GraphicsScene* scene, pair<Type, string> type) : State(scene)
 {
 	_type = type;
 	_item = _scene->createGraphicsItem(_type.first);
@@ -18,19 +18,22 @@ AddNodeState::~AddNodeState()
 	delete _item;
 }
 
+// 按下滑鼠事件
 void AddNodeState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_scene->removeItem(_item);
 }
 
+// 移動滑鼠事件
 void AddNodeState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_item->setPos(mouseEvent->scenePos());
 }
 
+// 放開滑鼠事件
 void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	QString text = QInputDialog::getText(NULL, "Enter text", "Please enter the text", QLineEdit::Normal, "", &_isOK);
+	QString text = QInputDialog::getText(NULL, TITLE.c_str(), LABEL.c_str(), QLineEdit::Normal, TEXT.c_str(), &_isOK);
 
 	if (_isOK && !text.isEmpty())
 	{
@@ -39,6 +42,5 @@ void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 		_scene->draw();
 		_scene->updateChecked();
 	}
-
 	_scene->changeState(new PointerState(_scene));
 }

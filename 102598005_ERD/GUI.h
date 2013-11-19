@@ -2,7 +2,6 @@
 #define _GUI_H_
 
 #include "PresentationModel.h"
-#include "GraphicsManager.h"
 #include <QMainWindow>
 #include <QObject>
 #include <QActionGroup>
@@ -13,6 +12,7 @@
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <QScrollArea>
+#include "GraphicsScene.h"
 
 class GUI : public QMainWindow
 {
@@ -21,15 +21,7 @@ class GUI : public QMainWindow
 public:
 	GUI(PresentationModel* presentationModel);
 	~GUI();
-	//void drawDiagram();
-
-protected:
-	//bool eventFilter(QObject *object, QEvent *event);
-	////void mousePressEvent(QMouseEvent* mouseEvent);
-	//void mouseMoveEvent(QMouseEvent* mouseEvent);
-	//void mouseReleaseEvent(QMouseEvent* mouseEvent);
 	
-
 private slots:
 	void openFile();
 	void clickPointerEvent();
@@ -46,7 +38,6 @@ private:
 	void createToolBars();
 	void createCanvas();
 	PresentationModel* _presentationModel;
-	//GraphicsManager* _graphicsManager;
 	QActionGroup* _actionGroup;
 	QAction* _fileAction;
 	QAction* _exitAction;
@@ -59,7 +50,7 @@ private:
 	QMenu* _addMenu;
 	QToolBar* _fileToolBar;
 	QToolBar* _editToolBar;
-	GraphicsManager* _scene;
+	GraphicsScene* _scene;
 	QGraphicsView* _view;
 	QHBoxLayout* _layout;
 	QWidget* _widget;

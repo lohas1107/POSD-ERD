@@ -24,14 +24,13 @@
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
     <ClCompile Include="..\102598005_ERD\ERModel.cpp" />
-    <ClCompile Include="..\102598005_ERD\ERPoint.cpp" />
-    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_GraphicsManager.cpp" />
+    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_GraphicsScene.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsAttribute.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsConnector.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsEntity.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsItem.cpp" />
-    <ClCompile Include="..\102598005_ERD\GraphicsManager.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsRelation.cpp" />
+    <ClCompile Include="..\102598005_ERD\GraphicsScene.cpp" />
     <ClCompile Include="..\102598005_ERD\Node.cpp" />
     <ClCompile Include="..\102598005_ERD\Parser.cpp" />
     <ClCompile Include="..\102598005_ERD\PointerState.cpp" />

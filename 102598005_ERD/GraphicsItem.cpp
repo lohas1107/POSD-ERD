@@ -1,7 +1,5 @@
 #include "GraphicsItem.h"
 #include <QPainter>
-#include "..\src\gui\graphicsview\qgraphicssceneevent.h"
-#include <QDebug>
 
 const string STRING_EMPTY = "";
 const int OFFSET = 30;
@@ -9,7 +7,6 @@ const int OFFSET = 30;
 GraphicsItem::GraphicsItem()
 {
 	_item = new QGraphicsPolygonItem();
-	_text = QString::fromStdString(STRING_EMPTY);
 	_isSelected = false;
 	setFlag(QGraphicsItem::ItemIsMovable, true);
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -43,7 +40,7 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	painter->setBrush(Qt::white);
 	painter->drawPath(_item->shape());
 	painter->setBrush(Qt::black);
-	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
+	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(text).toString());
 	if (_isSelected)
 	{
 		painter->setPen(Qt::green);
@@ -55,13 +52,7 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 // 圖形大小調整
 void GraphicsItem::doAdjustSize(QFontMetrics fontMetrics)
 {
-	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(_text) + OFFSET, fontMetrics.height() + OFFSET);
-}
-
-// 設定文字
-void GraphicsItem::setText(string text)
-{
-	_text = QString::fromStdString(text);
+	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(data(text).toString()) + OFFSET, fontMetrics.height() + OFFSET);
 }
 
 // 設定點選狀態改變
@@ -88,28 +79,3 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 
 	return QGraphicsItem::itemChange(change, value);
 }
-
-//void GraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-//{
-//	QGraphicsItem::mousePressEvent(event);
-//	if (_isSelected)
-//	{
-//		_isSelected = false;
-//	}
-//	else
-//	{
-//		_isSelected = true;
-//	}
-//
-//}
-//
-//void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-//{
-//	QGraphicsItem::mouseMoveEvent(event);
-//}
-//
-//void GraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-//{
-//	//_isSelected = false;
-//	QGraphicsItem::mouseReleaseEvent(event);
-//}

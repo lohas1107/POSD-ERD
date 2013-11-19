@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <QPointF>
-#include "ERPoint.h"
 
 using namespace std;
 

@@ -1,24 +1,15 @@
 #include "GraphicsAttribute.h"
-#include <QGraphicsEllipseItem>
-#include "..\src\gui\styles\qstyle.h"
 
 const int OFFSET = 30;
 
 GraphicsAttribute::GraphicsAttribute()
 {
-	//doCreateItem();
 	_isPrimaryKey = false;	
 }
 
 GraphicsAttribute::~GraphicsAttribute()
 {
 }
-
-// 產生橢圓形
-//void GraphicsAttribute::doCreateItem()
-//{
-//	_item = new QGraphicsPolygonItem();
-//}
 
 // 設定 primary key
 void GraphicsAttribute::setPrimaryKey(bool flag)
@@ -29,7 +20,7 @@ void GraphicsAttribute::setPrimaryKey(bool flag)
 // 根據文字內容調整大小
 void GraphicsAttribute::doAdjustSize(QFontMetrics fontMetrics)
 {
-	int width = fontMetrics.width(_text) + OFFSET;
+	int width = fontMetrics.width(data(text).toString()) + OFFSET;
 	int height = fontMetrics.height() + OFFSET;
 
 	QPolygonF _polygon;
@@ -57,5 +48,5 @@ void GraphicsAttribute::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	painter->setBrush(Qt::white);
 	painter->drawEllipse(_item->boundingRect());
 	painter->setBrush(Qt::black);
-	painter->drawText(_item->boundingRect(), Qt::AlignCenter, _text);
+	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(text).toString());
 }

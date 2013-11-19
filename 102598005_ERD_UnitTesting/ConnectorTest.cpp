@@ -71,25 +71,6 @@ TEST_F(ConnectorTest, canConnectTo)
 	}
 }
 
-// 測試是否在連結中
-TEST_F(ConnectorTest, isInConnetion)
-{
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		EXPECT_FALSE(_connector.isInConnetion(i));
-	}
-	_connector.connectTo(_components[0]);
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		EXPECT_FALSE(_connector.isInConnetion(i));
-	}
-	_connector.connectTo(_components[1]);
-	EXPECT_TRUE(_connector.isInConnetion(1));
-	EXPECT_TRUE(_connector.isInConnetion(2));
-	EXPECT_FALSE(_connector.isInConnetion(3));
-	EXPECT_FALSE(_connector.isInConnetion(4));
-}
-
 // 測試取得連結資訊
 TEST_F(ConnectorTest, getConnectionLine)
 {

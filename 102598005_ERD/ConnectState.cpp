@@ -1,8 +1,14 @@
 #include "ConnectState.h"
 #include "GraphicsConnector.h"
-#include "..\src\gui\dialogs\qinputdialog.h"
+#include <QInputDialog>
 
-ConnectState::ConnectState(GraphicsManager* scene) : State(scene)
+const string CARDINALITY_ONE = "1";
+const string CARDINALITY_N = "N";
+const string TITLE = "Enter cardinality";
+const string LABEL = "Please select the cardinality";
+const string STRING_EMPTY = "";
+
+ConnectState::ConnectState(GraphicsScene* scene) : State(scene)
 {
 	_firstID = INT_MIN;
 	_secondID = INT_MIN;
@@ -13,6 +19,7 @@ ConnectState::~ConnectState()
 	delete _line;
 }
 
+// 按下滑鼠事件
 void ConnectState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	QPointF position = mouseEvent->scenePos();
@@ -22,10 +29,10 @@ void ConnectState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	((GraphicsConnector*)_line)->setLine(_linePosition);
 	_scene->update(0, 0, _scene->width(), _scene->height());
 
-
 	_firstID = getItemId(position);
 }
 
+// 移動滑鼠事件
 void ConnectState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_linePosition.setP2(mouseEvent->scenePos());
@@ -33,6 +40,7 @@ void ConnectState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	_scene->update(0, 0, _scene->width(), _scene->height());
 }
 
+// 放開滑鼠事件
 void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_scene->removeItem(_line);
@@ -45,40 +53,35 @@ void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	}
 }
 
+// 取得 item 的 id
 int ConnectState::getItemId(QPointF position)
 {
 	QGraphicsItem* item = _scene->itemAt(position);
 
 	if (item != NULL)
 	{
-		return item->data(0).toInt();
+		return item->data(id).toInt();
 	}
 
 	return INT_MIN;
 }
 
+// 是否為合法的連結
 bool ConnectState::isValidConnection(int firstID, int secondID)
 {
 	return _presentationModel->isIDExsit(firstID) && _presentationModel->isIDExsit(secondID) && 
 		firstID != secondID && !_presentationModel->hasConnection(firstID, secondID);
 }
 
+// 取得 cardinality
 string ConnectState::getCardinality(int firstID, int secondID)
 {
 	if (_presentationModel->needAskCardinality(firstID, secondID))
 	{
 		QStringList choice;
-		choice << "1" << "N";
-		QString item = QInputDialog::getItem(NULL, "Enter cardinality", "Please select the cardinality", choice, 0, false, &_isOK);
-		if (_isOK)
-		{
-			return item.toStdString();
-		}
-		else
-		{
-			return "1";
-		}
+		choice << CARDINALITY_ONE.c_str() << CARDINALITY_N.c_str();
+		QString item = QInputDialog::getItem(NULL, TITLE.c_str(), LABEL.c_str(), choice, 0, false, &_isOK);
+		return item.toStdString();
 	}
-
-	return "";
+	return STRING_EMPTY;
 }

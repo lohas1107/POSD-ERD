@@ -6,10 +6,6 @@
 #include <fstream>
 #include <string>
 #include <direct.h>
-//#include "State.h"
-#include "PointerState.h"
-#include "AddNodeState.h"
-#include "ConnectState.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -25,13 +21,10 @@ using namespace std;
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
-	//_currentState = new PointerState(this);
-	//_isPointerChecked = false;
 }
 
 PresentationModel::~PresentationModel()
 {
-	//delete _currentState;
 }
 
 // 檢查輸入的 type
@@ -272,83 +265,8 @@ void PresentationModel::composePosition()
 	_erModel->composePosition();
 }
 
+// 設定節點座標
 void PresentationModel::setNodePosition(int id, QPointF position)
 {
 	_erModel->setNodePosition(id, position);
 }
-
-// 切換狀態
-//void PresentationModel::changeState(State* state)
-//{
-//	State* toDelete = _currentState;
-//	_currentState = state;
-//	delete toDelete;
-//}
-//
-//void PresentationModel::clickPointerEvent()
-//{
-//	changeState(new PointerState(this));
-//}
-//
-//void PresentationModel::clickConnectEvent()
-//{
-//	changeState(new ConnectState(this));
-//}
-//
-//void PresentationModel::clickAttributeEvent()
-//{
-//	changeState(new AddNodeState(this, make_pair(attribute, INPUT_A)));
-//}
-//
-//void PresentationModel::clickEntityEvent()
-//{
-//	changeState(new AddNodeState(this, make_pair(entity, INPUT_E)));
-//}
-//
-//void PresentationModel::clickRelationEvent()
-//{
-//	changeState(new AddNodeState(this, make_pair(relation, INPUT_R)));
-//}
-//
-//void PresentationModel::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
-//{
-//	//if (mouseEvent->button() != Qt::LeftButton)
-//	//{
-//	//	return;
-//	//}
-//
-//	_currentState->mousePressEvent(mouseEvent->scenePos());
-//}
-//
-//void PresentationModel::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
-//{
-//	//if (mouseEvent->button() != Qt::LeftButton)
-//	//{
-//	//	return;
-//	//}
-//	_currentState->mouseMoveEvent(mouseEvent->scenePos());
-//}
-//
-//void PresentationModel::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
-//{
-//	//if (mouseEvent->button() != Qt::LeftButton)
-//	//{
-//	//	return;
-//	//}
-//	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
-//}
-
-//void PresentationModel::updateChecked()
-//{
-//	emit updateButton();
-//}
-
-//bool PresentationModel::getPointerChecked()
-//{
-//	return _isPointerChecked;
-//}
-//
-//void PresentationModel::setPointerChecked(bool flag)
-//{
-//	_isPointerChecked = flag;
-//}

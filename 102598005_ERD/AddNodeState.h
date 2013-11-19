@@ -6,7 +6,7 @@
 class AddNodeState : public State
 {
 public:
-	AddNodeState(GraphicsManager* scene, pair<Type, string> type);
+	AddNodeState(GraphicsScene* scene, pair<Type, string> type);
 	~AddNodeState();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);

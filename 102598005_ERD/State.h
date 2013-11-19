@@ -2,22 +2,21 @@
 #define _STATE_H_
 
 #include "PresentationModel.h"
-#include "GraphicsManager.h"
+#include "GraphicsScene.h"
 #include <QGraphicsSceneMouseEvent>
 
-//class PresentationModel;
-class GraphicsManager;
+class GraphicsScene;
 class State
 {
 public:
-	State(GraphicsManager* scene);
+	State(GraphicsScene* scene);
 	virtual ~State();
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 
 protected:
-	GraphicsManager* _scene;
+	GraphicsScene* _scene;
 	PresentationModel* _presentationModel;
 };
 

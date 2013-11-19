@@ -10,25 +10,23 @@
 #include "State.h"
 
 class State;
-class GraphicsManager : public QGraphicsScene
+class GraphicsScene : public QGraphicsScene
 {
 	Q_OBJECT
 
 public:
-	GraphicsManager(PresentationModel* presentationModel);
-	~GraphicsManager();
+	GraphicsScene(PresentationModel* presentationModel);
+	~GraphicsScene();
 	void clearItem();
 	void draw();
 	PresentationModel* getPresentationModel();
 	GraphicsItem* createGraphicsItem(Type type);
-	//void composePosition();
 	void changeState(State* state);
 	void clickPointerEvent();
 	void clickConnectEvent();
 	void clickAttributeEvent();
 	void clickEntityEvent();
 	void clickRelationEvent();
-	//bool eventFilter(QObject *object, QEvent *event);
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);

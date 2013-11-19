@@ -4,7 +4,6 @@
 #include "GraphicsItem.h"
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
-#include "..\src\corelib\io\qdebug.h"
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -12,14 +11,12 @@ const int HEIGHT = 768;
 GUI::GUI(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
-	//_graphicsManager = new GraphicsManager();
 	setWindowTitle("Entity Relation Diagramming Tool");	
 	createActions();
 	createActionGroup();
 	createMenus();
 	createToolBars();
 	createCanvas();
-
 	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 }
 
@@ -41,7 +38,6 @@ GUI::~GUI()
 	delete _view;
 	delete _layout;
 	delete _widget;
-	//delete _graphicsManager;
 }
 
 // 產生動作
@@ -53,7 +49,6 @@ void GUI::createActions()
 	_exitAction = new QAction(QIcon("Resources/exit.png"), "Exit", this);
 	_exitAction->setShortcut(Qt::CTRL + Qt::Key_X);
 	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
-
 	_pointerAction = new QAction(QIcon("Resources/cursor.png"), "Pointer", this);
 	connect(_pointerAction, SIGNAL(triggered()), this, SLOT(clickPointerEvent()));
 	_connectAction = new QAction(QIcon("Resources/line.png"), "Connect", this);
@@ -84,6 +79,7 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_relationAction);
 }
 
+// 更新選取 pointer button
 void GUI::updatePointerButton()
 {
 	_pointerAction->setChecked(true);
@@ -119,15 +115,10 @@ void GUI::createToolBars()
 // 產生畫布
 void GUI::createCanvas()
 {
-	_scene = new GraphicsManager(_presentationModel);
+	_scene = new GraphicsScene(_presentationModel);
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
-
 	_view = new QGraphicsView(_scene);
 	_scene->setParent(_view);
-	//_view->setMouseTracking(true);
-	//_graphicsManager->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
-	//_view = new QGraphicsView(_graphicsManager);
-
 	_layout = new QHBoxLayout();
 	_widget = new QWidget();
 	_layout->addWidget(_view);
@@ -144,48 +135,32 @@ void GUI::openFile()
 	_scene->draw();
 }
 
-// 畫ERD
-//void GUI::drawDiagram()
-//{
-//	vector<ERComponent*> components = _presentationModel->getComponents();
-//	_graphicsManager->clearItem();
-//	_scene->clear();
-//	_graphicsManager->draw(_scene, components);
-//	_scene->update(0, 0, _scene->width(), _scene->height());
-//}
-
+// 點擊 pointer 事件
 void GUI::clickPointerEvent()
 {
 	_scene->clickPointerEvent();
 }
 
+// 點擊 connect 事件
 void GUI::clickConnectEvent()
 {
 	_scene->clickConnectEvent();
 }
 
+// 點擊 attribute 事件
 void GUI::clickAttributeEvent()
 {
 	_scene->clickAttributeEvent();
 }
 
+// 點擊 entity 事件
 void GUI::clickEntityEvent()
 {
 	_scene->clickEntityEvent();
 }
 
+// 點擊 relation 事件
 void GUI::clickRelationEvent()
 {
 	_scene->clickRelationEvent();
 }
-
-//bool GUI::eventFilter(QObject *object, QEvent *event)
-//{
-//	return QMainWindow::eventFilter(object, event);
-//}
-//
-//void GUI::mouseMoveEvent(QMouseEvent* mouseEvent)
-//{
-//	QMainWindow::mouseMoveEvent(mouseEvent);
-//	qDebug() << mouseEvent->pos();
-//}

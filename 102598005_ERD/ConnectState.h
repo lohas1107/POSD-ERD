@@ -7,7 +7,7 @@
 class ConnectState : public State
 {
 public:
-	ConnectState(GraphicsManager* scene);
+	ConnectState(GraphicsScene* scene);
 	~ConnectState();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);

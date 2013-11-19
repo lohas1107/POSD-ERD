@@ -33,23 +33,6 @@ bool Connector::canConnectTo(ERComponent* component)
 	return false;
 }
 
-// id 是否在此連接中
-bool Connector::isInConnetion(int id)
-{
-	if (_connections.size() > 1)
-	{
-		if (_connections[0]->getID() == id || _connections[1]->getID() == id)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	} 
-	return false;
-}
-
 // 顯示連接資訊
 string Connector::getConnectionLine()
 {

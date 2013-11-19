@@ -1,8 +1,8 @@
 #include "State.h"
-#include "GraphicsManager.h"
+#include "GraphicsScene.h"
 #include "PresentationModel.h"
 
-State::State(GraphicsManager* scene)
+State::State(GraphicsScene* scene)
 {
 	_scene = scene;
 	_presentationModel = _scene->getPresentationModel();

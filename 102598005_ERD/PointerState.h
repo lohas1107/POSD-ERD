@@ -6,14 +6,12 @@
 class PointerState : public State
 {
 public:
-	PointerState(GraphicsManager* scene);
+	PointerState(GraphicsScene* scene);
 	~PointerState();
 	void sendEventToItem( QGraphicsSceneMouseEvent* mouseEvent );
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-
-
 };
 
 #endif

@@ -115,7 +115,7 @@ vector<ERComponent*> ERModel::getDeleteList(int id)
 
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
-		if (isType(_components[i]->getID(), connection) && ((Connector*)_components[i])->isInConnetion(id))
+		if (isType(_components[i]->getID(), connection) && _components[i]->hasConnection(id))
 		{
 			deleteList.push_back(_components[i]);
 		}
@@ -564,22 +564,23 @@ void ERModel::composePosition()
 	{
 		if (_components[i]->isType(attribute))
 		{
-			attributePosition += QPointF(0, ATTRIBUTE_OFFSET);//.setPoint(ATTRIBUTE_X, attributePosition.y() + ATTRIBUTE_OFFSET)
+			attributePosition += QPointF(0, ATTRIBUTE_OFFSET);
 			_components[i]->setPosition(attributePosition);
 		}
 		else if (_components[i]->isType(entity))
 		{
-			entityPosition += QPointF(0, ENTITY_OFFSET);//.setPoint(ENTITY_X, entityPosition.getY() + ENTITY_OFFSET);
+			entityPosition += QPointF(0, ENTITY_OFFSET);
 			_components[i]->setPosition(entityPosition);
 		}
 		else if (_components[i]->isType(relation))
 		{
-			relationPosition += QPointF(0, RELATION_OFFSET);//.setPoint(RELATION_X, relationPosition.getY() + RELATION_OFFSET);
+			relationPosition += QPointF(0, RELATION_OFFSET);
 			_components[i]->setPosition(relationPosition);
 		}
 	}
 }
 
+// 設定節點座標
 void ERModel::setNodePosition(int id, QPointF position)
 {
 	getComponent(id)->setPosition(position);

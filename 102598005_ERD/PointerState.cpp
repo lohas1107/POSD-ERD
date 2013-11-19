@@ -1,8 +1,6 @@
 #include "PointerState.h"
-#include <iostream>
-#include "..\src\corelib\io\qdebug.h"
 
-PointerState::PointerState(GraphicsManager* scene) : State(scene)
+PointerState::PointerState(GraphicsScene* scene) : State(scene)
 {
 }
 
@@ -10,6 +8,7 @@ PointerState::~PointerState()
 {
 }
 
+// 傳送滑鼠事件給 item
 void PointerState::sendEventToItem(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	QGraphicsItem* item = _scene->itemAt(mouseEvent->scenePos());
@@ -19,21 +18,17 @@ void PointerState::sendEventToItem(QGraphicsSceneMouseEvent* mouseEvent)
 	}
 }
 
+// 按下滑鼠事件
 void PointerState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	//sendEventToItem(mouseEvent);
-
-
 }
 
+// 移動滑鼠事件
 void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	//sendEventToItem(mouseEvent);
-
 }
 
+// 放開滑鼠事件
 void PointerState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	//sendEventToItem(mouseEvent);
-
 }

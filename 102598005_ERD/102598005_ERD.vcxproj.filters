@@ -118,9 +118,6 @@
     <ClCompile Include="GraphicsItem.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsManager.cpp">
-      <Filter>Source Files\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicsRelation.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
@@ -139,19 +136,19 @@
     <ClCompile Include="ConnectState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="ERPoint.cpp">
-      <Filter>Source Files\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="PointerState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_GraphicsManager.cpp">
+    <ClCompile Include="GraphicsScene.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GraphicsScene.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_GraphicsManager.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_GraphicsScene.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
@@ -219,9 +216,6 @@
     <ClInclude Include="ConnectState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
-    <ClInclude Include="ERPoint.h">
-      <Filter>Header Files\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="PointerState.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
@@ -262,7 +256,7 @@
     <CustomBuild Include="TextUI.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="GraphicsManager.h">
+    <CustomBuild Include="GraphicsScene.h">
       <Filter>Header Files\GUI</Filter>
     </CustomBuild>
   </ItemGroup>
