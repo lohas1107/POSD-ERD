@@ -5,6 +5,7 @@
 #include "ERComponent.h"
 #include "PresentationModel.h"
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QObject>
 #include "State.h"
 

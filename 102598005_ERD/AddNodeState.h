@@ -8,9 +8,9 @@ class AddNodeState : public State
 public:
 	AddNodeState(GraphicsManager* scene, pair<Type, string> type);
 	~AddNodeState();
-	void mousePressEvent(QPointF position);
-	void mouseMoveEvent(QPointF position);
-	void mouseReleaseEvent(QPointF position);
+	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 
 private:
 	pair<Type, string> _type;

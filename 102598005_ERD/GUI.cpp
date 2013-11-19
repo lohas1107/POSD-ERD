@@ -123,7 +123,8 @@ void GUI::createCanvas()
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 
 	_view = new QGraphicsView(_scene);
-	_view->setMouseTracking(true);
+	_scene->setParent(_view);
+	//_view->setMouseTracking(true);
 	//_graphicsManager->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	//_view = new QGraphicsView(_graphicsManager);
 

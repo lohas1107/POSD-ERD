@@ -18,24 +18,24 @@ AddNodeState::~AddNodeState()
 	delete _item;
 }
 
-void AddNodeState::mousePressEvent(QPointF position)
+void AddNodeState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_scene->removeItem(_item);
 }
 
-void AddNodeState::mouseMoveEvent(QPointF position)
+void AddNodeState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	_item->setPos(position);
+	_item->setPos(mouseEvent->scenePos());
 }
 
-void AddNodeState::mouseReleaseEvent(QPointF position)
+void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	QString text = QInputDialog::getText(NULL, "Enter text", "Please enter the text", QLineEdit::Normal, "", &_isOK);
 
 	if (_isOK && !text.isEmpty())
 	{
 		_presentationModel->addNodeCommand(_type.second, text.toStdString());
-		_presentationModel->setNodePosition(_presentationModel->getNodeID(), position);
+		_presentationModel->setNodePosition(_presentationModel->getNodeID(), mouseEvent->scenePos());
 		_scene->draw();
 		_scene->updateChecked();
 	}

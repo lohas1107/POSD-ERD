@@ -3,7 +3,7 @@
 
 #include "PresentationModel.h"
 #include "GraphicsManager.h"
-#include <QPointF>
+#include <QGraphicsSceneMouseEvent>
 
 //class PresentationModel;
 class GraphicsManager;
@@ -12,9 +12,9 @@ class State
 public:
 	State(GraphicsManager* scene);
 	virtual ~State();
-	virtual void mousePressEvent(QPointF position) = 0;
-	virtual void mouseMoveEvent(QPointF position) = 0;
-	virtual void mouseReleaseEvent(QPointF position) = 0;
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 
 protected:
 	GraphicsManager* _scene;

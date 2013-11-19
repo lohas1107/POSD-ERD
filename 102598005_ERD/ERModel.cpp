@@ -171,7 +171,7 @@ void ERModel::insertConnection(int id, int firstID, int secondID)
 // 新增連結
 void ERModel::addConnection(int firstID, int secondID, string cardinality)
 {
-	if (getComponent(firstID)->canConnectTo(getComponent(secondID)))
+	if (getComponent(firstID)->canConnectTo(getComponent(secondID)) && getComponent(secondID)->canConnectTo(getComponent(firstID)))
 	{
 		addComponent(make_pair(connection, STRING_EMPTY), cardinality);
 		insertConnection(getNodeID(), firstID, secondID);

@@ -10,21 +10,30 @@ PointerState::~PointerState()
 {
 }
 
-void PointerState::mousePressEvent(QPointF position)
+void PointerState::sendEventToItem(QGraphicsSceneMouseEvent* mouseEvent)
 {
-
-
-	qDebug() << position;
+	QGraphicsItem* item = _scene->itemAt(mouseEvent->scenePos());
+	if (item != NULL)
+	{
+		_scene->sendEvent(item, mouseEvent);
+	}
 }
 
-void PointerState::mouseMoveEvent(QPointF position)
+void PointerState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+	//sendEventToItem(mouseEvent);
 
-	qDebug() << position;
+
 }
 
-void PointerState::mouseReleaseEvent(QPointF position)
+void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+	//sendEventToItem(mouseEvent);
 
-	qDebug() << position;
+}
+
+void PointerState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+{
+	//sendEventToItem(mouseEvent);
+
 }

@@ -15,7 +15,7 @@ const string INPUT_E = "E";
 const string INPUT_A = "A";
 const string INPUT_R = "R";
 
-GraphicsManager::GraphicsManager(PresentationModel* presentationModel)/* : QGraphicsScene()*/
+GraphicsManager::GraphicsManager(PresentationModel* presentationModel)/* : QGraphicsScene(view)*/
 {
 	_presentationModel = presentationModel;
 	_currentState = new PointerState(this);
@@ -73,6 +73,7 @@ void GraphicsManager::draw()
 	for (unsigned i = 0; i < components.size(); i++)
 	{
 		item = createGraphicsItem(components[i]->getType().first);
+		item->setData(0, components[i]->getID());
 		item->setText(components[i]->getText());
 		item->setPos(QPointF(components[i]->getPosition().x(), components[i]->getPosition().y()));
 		if (components[i]->getType().first == attribute)
@@ -117,8 +118,9 @@ void GraphicsManager::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	//draw(this, components);
 	//update(0, 0, width(), height());
 
+
+	_currentState->mousePressEvent(mouseEvent);
 	QGraphicsScene::mousePressEvent(mouseEvent);
-	_currentState->mousePressEvent(mouseEvent->scenePos());
 	//_presentationModel->mousePressEvent(mouseEvent);
 
 }
@@ -126,8 +128,9 @@ void GraphicsManager::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void GraphicsManager::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 
+
+	_currentState->mouseMoveEvent(mouseEvent);
 	QGraphicsScene::mouseMoveEvent(mouseEvent);
-	_currentState->mouseMoveEvent(mouseEvent->scenePos());
 	//qDebug() << mouseEvent->pos();
 	//_presentationModel->mouseMoveEvent(mouseEvent);
 }
@@ -140,8 +143,9 @@ void GraphicsManager::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	}
 
 	//drawDiagram();
+
+	_currentState->mouseReleaseEvent(mouseEvent);
 	QGraphicsScene::mouseReleaseEvent(mouseEvent);
-	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
 	//_presentationModel->mouseReleaseEvent(mouseEvent);
 	//if (_presentationModel->getPointerChecked())
 	//{
@@ -166,26 +170,31 @@ void GraphicsManager::changeState(State* state)
 void GraphicsManager::clickPointerEvent()
 {
 	changeState(new PointerState(this));
+	((QGraphicsView*)parent())->setMouseTracking(false);
 }
 
 void GraphicsManager::clickConnectEvent()
 {
 	changeState(new ConnectState(this));
+	((QGraphicsView*)parent())->setMouseTracking(false);
 }
 
 void GraphicsManager::clickAttributeEvent()
 {
 	changeState(new AddNodeState(this, make_pair(attribute, INPUT_A)));
+	((QGraphicsView*)parent())->setMouseTracking(true);
 }
 
 void GraphicsManager::clickEntityEvent()
 {
 	changeState(new AddNodeState(this, make_pair(entity, INPUT_E)));
+	((QGraphicsView*)parent())->setMouseTracking(true);
 }
 
 void GraphicsManager::clickRelationEvent()
 {
 	changeState(new AddNodeState(this, make_pair(relation, INPUT_R)));
+	((QGraphicsView*)parent())->setMouseTracking(true);
 }
 
 void GraphicsManager::updateChecked()
