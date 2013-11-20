@@ -7,8 +7,8 @@
 using namespace std;
 
 enum Data {
-	id,
-	text
+	idData,
+	textData
 };
 
 class GraphicsItem : public QGraphicsItem

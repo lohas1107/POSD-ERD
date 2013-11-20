@@ -120,7 +120,8 @@ string PresentationModel::getCardinality(int cardinality)
 // 是否需要詢問 cardinality
 bool PresentationModel::needAskCardinality(int firstNodeID, int secondNodeID)
 {
-	return _erModel->isType(firstNodeID, relation) || _erModel->isType(secondNodeID, relation);
+	return _erModel->isType(firstNodeID, relation) && _erModel->isType(secondNodeID, entity) || 
+		_erModel->isType(secondNodeID, relation) && _erModel->isType(firstNodeID, entity);
 }
 
 // 是否產生元件成功

@@ -70,8 +70,8 @@ void GraphicsScene::draw()
 	for (unsigned i = 0; i < components.size(); i++)
 	{
 		item = createGraphicsItem(components[i]->getType().first);
-		item->setData(id, components[i]->getID());
-		item->setData(text, QString::fromStdString(components[i]->getText()));
+		item->setData(idData, components[i]->getID());
+		item->setData(textData, QString::fromStdString(components[i]->getText()));
 		item->setPos(QPointF(components[i]->getPosition().x(), components[i]->getPosition().y()));
 		if (components[i]->getType().first == attribute)
 		{

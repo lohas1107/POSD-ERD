@@ -4,7 +4,7 @@ const int OFFSET = 30;
 
 GraphicsAttribute::GraphicsAttribute()
 {
-	_isPrimaryKey = false;	
+	_isPrimaryKey = false;
 }
 
 GraphicsAttribute::~GraphicsAttribute()
@@ -20,7 +20,7 @@ void GraphicsAttribute::setPrimaryKey(bool flag)
 // 根據文字內容調整大小
 void GraphicsAttribute::doAdjustSize(QFontMetrics fontMetrics)
 {
-	int width = fontMetrics.width(data(text).toString()) + OFFSET;
+	int width = fontMetrics.width(data(textData).toString()) + OFFSET;
 	int height = fontMetrics.height() + OFFSET;
 
 	QPolygonF _polygon;
@@ -48,5 +48,5 @@ void GraphicsAttribute::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	painter->setBrush(Qt::white);
 	painter->drawEllipse(_item->boundingRect());
 	painter->setBrush(Qt::black);
-	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(text).toString());
+	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(textData).toString());
 }

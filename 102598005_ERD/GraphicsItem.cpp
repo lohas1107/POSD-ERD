@@ -40,7 +40,7 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	painter->setBrush(Qt::white);
 	painter->drawPath(_item->shape());
 	painter->setBrush(Qt::black);
-	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(text).toString());
+	painter->drawText(_item->boundingRect(), Qt::AlignCenter, data(textData).toString());
 	if (_isSelected)
 	{
 		painter->setPen(Qt::green);
@@ -52,7 +52,7 @@ void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 // 圖形大小調整
 void GraphicsItem::doAdjustSize(QFontMetrics fontMetrics)
 {
-	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(data(text).toString()) + OFFSET, fontMetrics.height() + OFFSET);
+	((QGraphicsRectItem*)_item)->setRect(_item->pos().rx(), _item->pos().ry(), fontMetrics.width(data(textData).toString()) + OFFSET, fontMetrics.height() + OFFSET);
 }
 
 // 設定點選狀態改變
@@ -76,6 +76,5 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 			_isSelected = false;
 		}
 	}
-
 	return QGraphicsItem::itemChange(change, value);
 }

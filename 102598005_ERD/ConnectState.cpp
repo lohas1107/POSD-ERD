@@ -12,6 +12,7 @@ ConnectState::ConnectState(GraphicsScene* scene) : State(scene)
 {
 	_firstID = INT_MIN;
 	_secondID = INT_MIN;
+	_line = NULL;
 }
 
 ConnectState::~ConnectState()
@@ -60,7 +61,7 @@ int ConnectState::getItemId(QPointF position)
 
 	if (item != NULL)
 	{
-		return item->data(id).toInt();
+		return item->data(idData).toInt();
 	}
 
 	return INT_MIN;

@@ -14,7 +14,7 @@ GraphicsRelation::~GraphicsRelation()
 // 根據文字內容調整大小
 void GraphicsRelation::doAdjustSize(QFontMetrics fontMetrics)
 {
-	int width = fontMetrics.width(data(text).toString()) + OFFSET;
+	int width = fontMetrics.width(data(textData).toString()) + OFFSET;
 	int height = width * SCALE;
 
 	QPolygonF _polygon;
