@@ -176,7 +176,8 @@ TEST_F(PresentationModelTest, needAskCardinality)
 {
 	EXPECT_FALSE(_presentation->needAskCardinality(0, 1));
 	EXPECT_FALSE(_presentation->needAskCardinality(3, 4));
-	EXPECT_TRUE(_presentation->needAskCardinality(1, 2));
+	EXPECT_FALSE(_presentation->needAskCardinality(1, 2));
+	EXPECT_TRUE(_presentation->needAskCardinality(0, 2));
 }
 
 // 測試取得連結資訊
