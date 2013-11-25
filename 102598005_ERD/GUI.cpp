@@ -42,6 +42,7 @@ GUI::~GUI()
 	delete _view;
 	delete _layout;
 	delete _widget;
+	delete _presentationModel;
 }
 
 // 產生動作

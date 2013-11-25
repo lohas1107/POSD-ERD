@@ -25,6 +25,7 @@ PresentationModel::PresentationModel(ERModel* erModel)
 
 PresentationModel::~PresentationModel()
 {
+	delete _erModel;
 }
 
 // ÀË¬d¿é¤Jªº type

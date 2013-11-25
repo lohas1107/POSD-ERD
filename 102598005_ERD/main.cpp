@@ -11,7 +11,6 @@ int main(int argc, char* argv[])
 {
 	ERModel* erModel = new ERModel();
 	PresentationModel* presentationModel = new PresentationModel(erModel);
-	TextUI* textUI = new TextUI(presentationModel);
 
 	if (argc == 1 || argv[1] == GUI_MODE)
 	{
@@ -22,11 +21,10 @@ int main(int argc, char* argv[])
 	}
 	else if (argc > 1 && argv[1] == TEXT_MODE)
 	{
+		TextUI* textUI = new TextUI(presentationModel);
 		textUI->displayMenu();
 		system("pause");
+		delete presentationModel;
+		delete textUI;
 	}
-
-	delete erModel;
-	delete presentationModel;
-	delete textUI;
 }
