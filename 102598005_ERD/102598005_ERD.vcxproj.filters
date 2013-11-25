@@ -59,21 +59,18 @@
     <Filter Include="Source Files\Observer">
       <UniqueIdentifier>{e5a0e4e8-3582-4fb1-9b18-25e9ad81ec94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MVC">
+      <UniqueIdentifier>{3edb1dcb-3e58-4b88-b14f-57ccb3edb7b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MVC">
+      <UniqueIdentifier>{71908958-d887-4691-8fea-d5b2807704e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ERModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PresentationModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_GUI.cpp">
@@ -157,11 +154,17 @@
     <ClCompile Include="GeneratedFiles\Release\moc_GraphicsScene.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="ERModel.cpp">
+      <Filter>Source Files\MVC</Filter>
+    </ClCompile>
+    <ClCompile Include="PresentationModel.cpp">
+      <Filter>Source Files\MVC</Filter>
+    </ClCompile>
+    <ClCompile Include="TextUI.cpp">
+      <Filter>Source Files\MVC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ERModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -228,6 +231,9 @@
     <ClInclude Include="State.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="ERModel.h">
+      <Filter>Header Files\MVC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\exit.png">
@@ -268,14 +274,14 @@
     <CustomBuild Include="GUI.h">
       <Filter>Header Files\GUI</Filter>
     </CustomBuild>
-    <CustomBuild Include="PresentationModel.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="TextUI.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="GraphicsScene.h">
       <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="PresentationModel.h">
+      <Filter>Header Files\MVC</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TextUI.h">
+      <Filter>Header Files\MVC</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>
