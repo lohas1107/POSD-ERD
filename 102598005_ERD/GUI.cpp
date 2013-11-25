@@ -22,14 +22,18 @@ GUI::GUI(PresentationModel* presentationModel)
 
 GUI::~GUI()
 {
+	delete _actionGroup;
 	delete _fileAction;
 	delete _exitAction;
-	delete _actionGroup;
+	delete _undoAction;
+	delete _redoAction;
 	delete _pointerAction;
 	delete _connectAction;
 	delete _attributeAction;
 	delete _entityAction;
 	delete _relationAction;
+	delete _keyAction;
+	delete _deleteAction;
 	delete _fileMenu;
 	delete _addMenu;
 	delete _fileToolBar;
@@ -49,6 +53,10 @@ void GUI::createActions()
 	_exitAction = new QAction(QIcon("Resources/exit.png"), "Exit", this);
 	_exitAction->setShortcut(Qt::CTRL + Qt::Key_X);
 	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
+	_undoAction = new QAction(QIcon("Resources/undo.png"), "Undo", this);
+	connect(_undoAction, SIGNAL(triggered()), this, SLOT(clickUndoEvent()));
+	_redoAction = new QAction(QIcon("Resources/redo.png"), "Redo", this);
+	connect(_redoAction, SIGNAL(triggered()), this, SLOT(clickRedoEvent()));
 	_pointerAction = new QAction(QIcon("Resources/cursor.png"), "Pointer", this);
 	connect(_pointerAction, SIGNAL(triggered()), this, SLOT(clickPointerEvent()));
 	_connectAction = new QAction(QIcon("Resources/line.png"), "Connect", this);
@@ -59,6 +67,10 @@ void GUI::createActions()
 	connect(_entityAction, SIGNAL(triggered()), this, SLOT(clickEntityEvent()));
 	_relationAction = new QAction(QIcon("Resources/rhombus.png"), "Relation", this);
 	connect(_relationAction, SIGNAL(triggered()), this, SLOT(clickRelationEvent()));
+	_keyAction = new QAction(QIcon("Resources/key.png"), "Primary key", this);
+	connect(_keyAction, SIGNAL(triggered()), this, SLOT(clickPrimaryKeyEvent()));
+	_deleteAction = new QAction(QIcon("Resources/delete.png"), "Delete", this);
+	connect(_deleteAction, SIGNAL(triggered()), this, SLOT(clickDeleteEvent()));
 }
 
 // 產生 ActionGroup
@@ -77,6 +89,10 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_entityAction);
 	_relationAction->setCheckable(true);
 	_actionGroup->addAction(_relationAction);
+	_keyAction->setCheckable(true);
+	_actionGroup->addAction(_keyAction);
+	//_deleteAction->setCheckable(true);
+	//_actionGroup->addAction(_deleteAction);
 }
 
 // 更新選取 pointer button
@@ -103,6 +119,8 @@ void GUI::createToolBars()
 	_fileToolBar = addToolBar("File");
 	_fileToolBar->addAction(_fileAction);
 	_fileToolBar->addAction(_exitAction);
+	_fileToolBar->addAction(_undoAction);
+	_fileToolBar->addAction(_redoAction);
 	_editToolBar = addToolBar("Edit");
 	_editToolBar->addAction(_pointerAction);
 	_editToolBar->addAction(_connectAction);
@@ -110,6 +128,8 @@ void GUI::createToolBars()
 	_editToolBar->addAction(_attributeAction);
 	_editToolBar->addAction(_entityAction);
 	_editToolBar->addAction(_relationAction);
+	_editToolBar->addAction(_keyAction);
+	_editToolBar->addAction(_deleteAction);
 }
 
 // 產生畫布
@@ -165,4 +185,24 @@ void GUI::clickEntityEvent()
 void GUI::clickRelationEvent()
 {
 	_scene->clickRelationEvent();
+}
+
+void GUI::clickUndoEvent()
+{
+	
+}
+
+void GUI::clickRedoEvent()
+{
+	
+}
+
+void GUI::clickPrimaryKeyEvent()
+{
+	
+}
+
+void GUI::clickDeleteEvent()
+{
+	
 }

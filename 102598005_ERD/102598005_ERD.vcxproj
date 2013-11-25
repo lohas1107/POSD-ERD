@@ -131,12 +131,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cursor.png" />
+    <None Include="Resources\delete.png" />
     <None Include="Resources\ellipse.png" />
     <None Include="Resources\exit.png" />
+    <None Include="Resources\key.png" />
     <None Include="Resources\line.png" />
     <None Include="Resources\open.png" />
     <None Include="Resources\rectangle.png" />
+    <None Include="Resources\redo.png" />
     <None Include="Resources\rhombus.png" />
+    <None Include="Resources\undo.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FB46AB63-87A3-4369-A39B-820700852B5B}</ProjectGuid>

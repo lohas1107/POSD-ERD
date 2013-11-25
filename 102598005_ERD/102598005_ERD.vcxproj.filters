@@ -53,6 +53,12 @@
     <Filter Include="Source Files\State">
       <UniqueIdentifier>{5118e5f0-9ccb-436e-9535-c51abb62f9fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Observer">
+      <UniqueIdentifier>{81d57bde-092e-43fd-9377-49a4ea6aa491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observer">
+      <UniqueIdentifier>{e5a0e4e8-3582-4fb1-9b18-25e9ad81ec94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ERModel.cpp">
@@ -243,6 +249,18 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\line.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\key.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\delete.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\redo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\undo.png">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

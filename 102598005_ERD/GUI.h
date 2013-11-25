@@ -29,6 +29,10 @@ private slots:
 	void clickAttributeEvent();
 	void clickEntityEvent();
 	void clickRelationEvent();
+	void clickUndoEvent();
+	void clickRedoEvent();
+	void clickPrimaryKeyEvent();
+	void clickDeleteEvent();
 	void updatePointerButton();
 
 private:
@@ -41,11 +45,15 @@ private:
 	QActionGroup* _actionGroup;
 	QAction* _fileAction;
 	QAction* _exitAction;
+	QAction* _undoAction;
+	QAction* _redoAction;
 	QAction* _pointerAction;
 	QAction* _connectAction;
 	QAction* _attributeAction;
 	QAction* _entityAction;
 	QAction* _relationAction;
+	QAction* _keyAction;
+	QAction* _deleteAction;
 	QMenu* _fileMenu;
 	QMenu* _addMenu;
 	QToolBar* _fileToolBar;
