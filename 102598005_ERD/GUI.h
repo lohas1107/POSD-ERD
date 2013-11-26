@@ -11,7 +11,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QScrollArea>
+#include <QTableView>
+#include <QStandardItemModel>
 #include "GraphicsScene.h"
 
 class GUI : public QMainWindow
@@ -41,6 +44,7 @@ private:
 	void createMenus();
 	void createToolBars();
 	void createCanvas();
+	void setTableModel();
 	PresentationModel* _presentationModel;
 	QActionGroup* _actionGroup;
 	QAction* _fileAction;
@@ -60,7 +64,10 @@ private:
 	QToolBar* _editToolBar;
 	GraphicsScene* _scene;
 	QGraphicsView* _view;
-	QHBoxLayout* _layout;
+	QHBoxLayout* _hLayout;
+	QVBoxLayout* _vLayout;
+	QTableView* _tableView;
+	QStandardItemModel* _tableModel;
 	QWidget* _widget;
 };
 

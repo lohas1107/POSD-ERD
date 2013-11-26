@@ -4,6 +4,7 @@
 #include "GraphicsItem.h"
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
+#include <QLabel>
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -17,6 +18,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	createMenus();
 	createToolBars();
 	createCanvas();
+	setTableModel();
 	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 }
 
@@ -40,7 +42,7 @@ GUI::~GUI()
 	delete _editToolBar;
 	delete _scene;
 	delete _view;
-	delete _layout;
+	delete _hLayout;
 	delete _widget;
 	delete _presentationModel;
 }
@@ -140,11 +142,29 @@ void GUI::createCanvas()
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	_view = new QGraphicsView(_scene);
 	_scene->setParent(_view);
-	_layout = new QHBoxLayout();
+
+	_vLayout = new QVBoxLayout();
+	_vLayout->addWidget(new QLabel("Components"), 0, Qt::AlignCenter);
+	_tableView = new QTableView();
+	_tableView->setMinimumWidth(220);
+	_vLayout->addWidget(_tableView);
+	_hLayout = new QHBoxLayout();
+	_hLayout->addWidget(_view);
+	_hLayout->addLayout(_vLayout);
+
 	_widget = new QWidget();
-	_layout->addWidget(_view);
-	_widget->setLayout(_layout);
+	_widget->setLayout(_hLayout);
 	setCentralWidget(_widget);
+}
+
+void GUI::setTableModel()
+{
+	_tableModel = new QStandardItemModel();
+	QStringList labels;
+	labels << "Type" << "Text";
+	_tableModel->setHorizontalHeaderLabels(labels);
+	_presentationModel->setTableData(_tableModel);
+	_tableView->setModel(_tableModel);
 }
 
 // ¶}±ÒÀÉ®×

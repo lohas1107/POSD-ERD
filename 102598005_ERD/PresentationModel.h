@@ -5,6 +5,7 @@
 #include "CommandManager.h"
 #include <vector>
 #include <QPointF>
+#include <QStandardItemModel>
 
 class PresentationModel
 {
@@ -45,6 +46,7 @@ public:
 	bool canRedo();
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
+	void setTableData(QStandardItemModel* tableModel);
 
 private:
 	ERModel* _erModel;

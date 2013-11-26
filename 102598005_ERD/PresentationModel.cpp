@@ -272,3 +272,14 @@ void PresentationModel::setNodePosition(int id, QPointF position)
 {
 	_erModel->setNodePosition(id, position);
 }
+
+void PresentationModel::setTableData(QStandardItemModel* tableModel)
+{
+	vector<ERComponent*> components = _erModel->getComponentList();
+
+	for (unsigned i = 0; i < components.size(); i++)
+	{
+		tableModel->setItem(i, 0, new QStandardItem(QString::fromStdString(components[i]->getType().second)));
+		tableModel->setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
+	}
+}
