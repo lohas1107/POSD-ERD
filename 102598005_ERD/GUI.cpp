@@ -160,12 +160,13 @@ void GUI::createCanvas()
 
 void GUI::setTableModel()
 {
-	_tableModel = new QStandardItemModel();
+	_tableModel = new TableModel();
 	QStringList labels;
 	labels << "Type" << "Text";
 	_tableModel->setHorizontalHeaderLabels(labels);
 	_presentationModel->setTableData(_tableModel);
 	_tableView->setModel(_tableModel);
+	//_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 // ¶}±ÒÀÉ®×

@@ -169,6 +169,9 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Observer</Filter>
     </ClCompile>
+    <ClCompile Include="TableModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
@@ -245,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="Subject.h">
       <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="TableModel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

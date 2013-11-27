@@ -48,6 +48,7 @@ public:
 	void setNodePosition(int id, QPointF position);
 	void setTableData(QStandardItemModel* tableModel);
 	void attach(Observer* observer);
+
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

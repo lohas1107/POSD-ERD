@@ -52,6 +52,7 @@
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Subject.cpp" />
+    <ClCompile Include="TableModel.cpp" />
     <ClCompile Include="TextUI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,7 @@
     <ClInclude Include="PointerState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="TableModel.h" />
     <CustomBuild Include="GUI.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing GUI.h...</Message>
