@@ -6,10 +6,7 @@ Subject::Subject()
 
 Subject::~Subject()
 {
-	while (!_observers.empty())
-	{
-		_observers.pop_back();
-	}
+	_observers.clear(); 
 }
 
 void Subject::attach(Observer* observer)
