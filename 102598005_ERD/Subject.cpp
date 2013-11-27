@@ -8,9 +8,7 @@ Subject::~Subject()
 {
 	while (!_observers.empty())
 	{
-		Observer* toDelete = _observers.back();
 		_observers.pop_back();
-		delete toDelete;
 	}
 }
 
@@ -21,7 +19,13 @@ void Subject::attach(Observer* observer)
 
 void Subject::detach(Observer* observer)
 {
-	_observers.erase(_observers.remove(_observers.begin(), _observers.end(), observer));
+	for (unsigned i = 0; i < _observers.size(); i++)
+	{
+		if (_observers[i] == observer)
+		{
+			_observers.erase(_observers.begin() + i);
+		}
+	}
 }
 
 void Subject::notify()
