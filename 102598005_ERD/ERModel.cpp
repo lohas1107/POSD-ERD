@@ -56,6 +56,7 @@ void ERModel::addComponent(pair<Type, string> type, string text)
 	_currentComponent->setID(_componentID++);
 	_currentComponent->setText(text);
 	_components.push_back(_currentComponent);
+	notify();
 }
 
 // ´¡¤J¤¸¥ó

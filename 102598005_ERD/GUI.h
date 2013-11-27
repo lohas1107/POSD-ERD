@@ -16,14 +16,16 @@
 #include <QTableView>
 #include <QStandardItemModel>
 #include "GraphicsScene.h"
+#include "Observer.h"
 
-class GUI : public QMainWindow
+class GUI : public QMainWindow, public Observer
 {
 	Q_OBJECT
 
 public:
 	GUI(PresentationModel* presentationModel);
 	~GUI();
+	void update();
 	
 private slots:
 	void openFile();

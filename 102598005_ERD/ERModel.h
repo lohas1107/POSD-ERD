@@ -6,10 +6,11 @@
 #include "ComponentFactory.h"
 #include <QPointF>
 #include "gtest/gtest_prod.h"
+#include "Subject.h"
 
 using namespace std;
 
-class ERModel
+class ERModel : public Subject
 {
 	friend class ERModelTest;
 	FRIEND_TEST(ERModelTest, addComponent);

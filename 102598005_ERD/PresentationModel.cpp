@@ -283,3 +283,8 @@ void PresentationModel::setTableData(QStandardItemModel* tableModel)
 		tableModel->setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
 	}
 }
+
+void PresentationModel::attach(Observer* observer)
+{
+	_erModel->attach(observer);
+}

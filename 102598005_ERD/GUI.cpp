@@ -20,6 +20,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	createCanvas();
 	setTableModel();
 	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
+	_presentationModel->attach(this);
 }
 
 GUI::~GUI()
@@ -226,4 +227,9 @@ void GUI::clickPrimaryKeyEvent()
 void GUI::clickDeleteEvent()
 {
 	
+}
+
+void GUI::update()
+{
+	_presentationModel->setTableData(_tableModel);
 }

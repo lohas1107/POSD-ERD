@@ -138,5 +138,11 @@
     <ClCompile Include="..\102598005_ERD\GraphicsScene.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\102598005_ERD\Observer.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\Subject.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
