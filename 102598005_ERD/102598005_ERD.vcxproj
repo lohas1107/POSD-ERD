@@ -45,11 +45,13 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="PointerState.cpp" />
     <ClCompile Include="PresentationModel.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TextUI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -66,8 +68,10 @@
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="PointerState.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Subject.h" />
     <CustomBuild Include="GUI.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing GUI.h...</Message>
