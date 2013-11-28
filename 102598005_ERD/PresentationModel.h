@@ -5,7 +5,7 @@
 #include "CommandManager.h"
 #include <vector>
 #include <QPointF>
-#include <QStandardItemModel>
+//#include <QStandardItemModel>
 
 class PresentationModel
 {
@@ -46,9 +46,9 @@ public:
 	bool canRedo();
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
-	void setTableData(QStandardItemModel* tableModel);
+	//void setTableData(QStandardItemModel* tableModel);
 	void attach(Observer* observer);
-
+	bool isEditable(int index);
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

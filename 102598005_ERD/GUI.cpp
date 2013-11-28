@@ -160,11 +160,11 @@ void GUI::createCanvas()
 
 void GUI::setTableModel()
 {
-	_tableModel = new TableModel();
+	_tableModel = new TableModel(_presentationModel);
 	QStringList labels;
 	labels << "Type" << "Text";
 	_tableModel->setHorizontalHeaderLabels(labels);
-	_presentationModel->setTableData(_tableModel);
+	_tableModel->setTableData();
 	_tableView->setModel(_tableModel);
 	//_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
@@ -232,5 +232,5 @@ void GUI::clickDeleteEvent()
 
 void GUI::update()
 {
-	_presentationModel->setTableData(_tableModel);
+	_tableModel->setTableData();
 }

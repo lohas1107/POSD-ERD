@@ -272,19 +272,30 @@ void PresentationModel::setNodePosition(int id, QPointF position)
 {
 	_erModel->setNodePosition(id, position);
 }
-
-void PresentationModel::setTableData(QStandardItemModel* tableModel)
-{
-	vector<ERComponent*> components = _erModel->getComponentList();
-
-	for (unsigned i = 0; i < components.size(); i++)
-	{
-		tableModel->setItem(i, 0, new QStandardItem(QString::fromStdString(components[i]->getType().second)));
-		tableModel->setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
-	}
-}
+//
+//void PresentationModel::setTableData(QStandardItemModel* tableModel)
+//{
+//	vector<ERComponent*> components = _erModel->getComponentList();
+//
+//	for (unsigned i = 0; i < components.size(); i++)
+//	{
+//		tableModel->setItem(i, 0, new QStandardItem(QString::fromStdString(components[i]->getType().second)));
+//		tableModel->setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
+//	}
+//}
 
 void PresentationModel::attach(Observer* observer)
 {
 	_erModel->attach(observer);
+}
+
+bool PresentationModel::isEditable(int index)
+{
+	ERComponent* component = _erModel->getComponentList()[index];
+	if (_erModel->isType(component->getID(), connection))
+	{
+		pair<int, int> connectionPair = ((Connector*)component)->getConnectionPair();
+		return needAskCardinality(connectionPair.first, connectionPair.second);
+	}
+	return true;
 }
