@@ -77,7 +77,7 @@ void GraphicsScene::draw()
 		{
 			((GraphicsAttribute*)item)->setPrimaryKey(((AttributeNode*)components[i])->isPrimaryKey());
 		}
-		else if (components[i]->getType().first == connection)
+		else if (components[i]->getType().first == connection && components[i]->getConnection().size() > 1)
 		{
 			vector<ERComponent*> connections = components[i]->getConnection();
 			QLineF line(connections[0]->getPosition().x(), connections[0]->getPosition().y(), connections[1]->getPosition().x(), connections[1]->getPosition().y());

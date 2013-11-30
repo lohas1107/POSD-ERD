@@ -9,6 +9,7 @@ public:
 	Connector();
 	Connector(int id, string text);
 	~Connector();
+	void setText(string text);
 	bool canConnectTo(ERComponent* component);
 	string getConnectionLine();
 	bool checkOneToOne(pair<int, int> relationPair);

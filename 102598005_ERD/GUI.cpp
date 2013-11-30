@@ -146,7 +146,7 @@ void GUI::createCanvas()
 
 	_vLayout = new QVBoxLayout();
 	_vLayout->addWidget(new QLabel("Components"), 0, Qt::AlignCenter);
-	_tableView = new QTableView();
+	_tableView = new TableView();
 	_tableView->setMinimumWidth(220);
 	_vLayout->addWidget(_tableView);
 	_hLayout = new QHBoxLayout();
@@ -166,7 +166,7 @@ void GUI::setTableModel()
 	_tableModel->setHorizontalHeaderLabels(labels);
 	_tableModel->setTableData();
 	_tableView->setModel(_tableModel);
-	//_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	connect(_tableView, SIGNAL(editChanged(const QModelIndex*)), _tableModel, SLOT(editChanged(const QModelIndex*)));
 }
 
 // ¶}±ÒÀÉ®×
@@ -233,4 +233,5 @@ void GUI::clickDeleteEvent()
 void GUI::update()
 {
 	_tableModel->setTableData();
+	_scene->draw();
 }

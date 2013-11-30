@@ -299,3 +299,8 @@ bool PresentationModel::isEditable(int index)
 	}
 	return true;
 }
+
+void PresentationModel::notify()
+{
+	_erModel->notify();
+}

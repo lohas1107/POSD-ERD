@@ -26,7 +26,7 @@ public:
 	pair<Type, string> getType();
 	bool isType(Type type);
 	string getText();
-	void setText(string text);
+	virtual void setText(string text);
 	vector<ERComponent*> getConnection();
 	void setConnection(vector<ERComponent*> connections);
 	bool hasConnection(int id);

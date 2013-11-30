@@ -3,14 +3,21 @@
 
 #include <QStandardItemModel>
 #include "PresentationModel.h"
+#include <QObject>
+#include <QAbstractItemDelegate>
 
 class TableModel : public QStandardItemModel
 {
+	Q_OBJECT
+
 public:
 	TableModel(PresentationModel* presentationModel);
 	~TableModel();
 	void setTableData();
-	Qt::ItemFlags flags (const QModelIndex &index) const;
+	Qt::ItemFlags flags(const QModelIndex &index) const;
+
+public slots:
+	void editChanged(const QModelIndex* index);
 
 private:
 	PresentationModel* _presentationModel;

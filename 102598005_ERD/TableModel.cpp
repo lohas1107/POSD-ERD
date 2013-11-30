@@ -32,3 +32,13 @@ void TableModel::setTableData()
 		setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
 	}
 }
+
+void TableModel::editChanged(const QModelIndex* index)
+{
+	if (index != NULL)
+	{
+		ERComponent* component = _presentationModel->getComponents()[index->row()];
+		component->setText(index->data().toString().toStdString());
+		_presentationModel->notify();
+	}
+}

@@ -49,6 +49,8 @@ public:
 	//void setTableData(QStandardItemModel* tableModel);
 	void attach(Observer* observer);
 	bool isEditable(int index);
+	void notify();
+
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

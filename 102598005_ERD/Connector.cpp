@@ -3,6 +3,7 @@
 
 const string TYPE_CONNECTION = "Connection";
 const string CARDINALITY_ONE = "1";
+const string CARDINALITY_N = "N";
 const string NEXT_LINE_STRING = "\n";
 const string CONNECTION_DATA = "%9d  |  %2d  |  %2d  |\n";
 const int CONNECTION_SPACE = 30;
@@ -21,6 +22,14 @@ Connector::Connector(int id, string text) : ERComponent(make_pair(connection, TY
 
 Connector::~Connector()
 {
+}
+
+void Connector::setText(string text)
+{
+	if (text == CARDINALITY_ONE || text == CARDINALITY_N)
+	{
+		_text = text;
+	}
 }
 
 // 是否可以連接

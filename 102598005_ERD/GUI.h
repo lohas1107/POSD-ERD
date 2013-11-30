@@ -13,10 +13,10 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QScrollArea>
-#include <QTableView>
 #include "GraphicsScene.h"
 #include "Observer.h"
 #include "TableModel.h"
+#include "TableView.h"
 
 class GUI : public QMainWindow, public Observer
 {
@@ -68,7 +68,7 @@ private:
 	QGraphicsView* _view;
 	QHBoxLayout* _hLayout;
 	QVBoxLayout* _vLayout;
-	QTableView* _tableView;
+	TableView* _tableView;
 	TableModel* _tableModel;
 	QWidget* _widget;
 };
