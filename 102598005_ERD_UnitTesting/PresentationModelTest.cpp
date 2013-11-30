@@ -7,7 +7,8 @@ class PresentationModelTest : public ::testing::Test
 protected:
 	virtual void SetUp()
 	{
-		_presentation = new PresentationModel(&_model);
+		_model = new ERModel();
+		_presentation = new PresentationModel(_model);
 		_presentation->addNodeCommand("E", "PC");
 		_presentation->addNodeCommand("A", "Name");
 		_presentation->addNodeCommand("R", "Has");
@@ -26,7 +27,7 @@ protected:
 		vector<string> content;
 		content.push_back("3 0,1");
 		content.push_back("4 0,2");
-		_model.loadConnection(content);
+		_model->loadConnection(content);
 	}
 
 	// 設定 primary key 資料
@@ -34,21 +35,21 @@ protected:
 	{
 		vector<int> primaryKey;
 		primaryKey.push_back(id);
-		_model.setPrimaryKey(primaryKey);
+		_model->setPrimaryKey(primaryKey);
 	}
 
 	// 加入一對一資料
 	void addOneToOne()
 	{
-		_model._componentID = 5;
-		_model.addComponent(make_pair(entity, ""), "Person");
-		_model.addComponent(make_pair(attribute, ""), "ID");
-		_model.addConnection(2, 5, "1");
-		_model.addConnection(5, 6, "");
+		_model->_componentID = 5;
+		_model->addComponent(make_pair(entity, ""), "Person");
+		_model->addComponent(make_pair(attribute, ""), "ID");
+		_model->addConnection(2, 5, "1");
+		_model->addConnection(5, 6, "");
 		setPrimaryKey(1);
 		setPrimaryKey(6);
 	}
-	ERModel _model;
+	ERModel* _model;
 	PresentationModel* _presentation; 
 };
 
@@ -68,8 +69,8 @@ TEST_F(PresentationModelTest, checkInputType)
 // 測試新增元件
 TEST_F(PresentationModelTest, addNodeCommand)
 {
-	_model.clearComponent();
-	_model.initialize();
+	_model->clearComponent();
+	_model->initialize();
 	_presentation->addNodeCommand("E", "PC");
 	EXPECT_EQ(0, _presentation->getNodeID());
 	_presentation->addNodeCommand("A", "ID");
@@ -107,7 +108,7 @@ TEST_F(PresentationModelTest, getComponentLine)
 	EXPECT_EQ("   A  |   1  |  Name\n", _presentation->getComponentLine(attribute));
 	EXPECT_EQ("   R  |   2  |  Has\n", _presentation->getComponentLine(relation));
 	EXPECT_EQ("   C  |   3  |  \n   C  |   4  |  1\n", _presentation->getComponentLine(connection));
-	_model.clearComponent();
+	_model->clearComponent();
 	EXPECT_EQ("", _presentation->getComponentLine(all));
 }
 
@@ -117,9 +118,9 @@ TEST_F(PresentationModelTest, deleteComponentCommand)
 	loadConnection();
 	_presentation->deleteComponentCommand(1);
 	EXPECT_EQ(3, _presentation->getComponentSize());
-	EXPECT_EQ(0, _model._components[0]->getID());
-	EXPECT_EQ(2, _model._components[1]->getID());
-	EXPECT_EQ(4, _model._components[2]->getID());
+	EXPECT_EQ(0, _model->_components[0]->getID());
+	EXPECT_EQ(2, _model->_components[1]->getID());
+	EXPECT_EQ(4, _model->_components[2]->getID());
 }
 
 // 測試連結元件命令
@@ -139,7 +140,7 @@ TEST_F(PresentationModelTest, connectNodeCommand)
 TEST_F(PresentationModelTest, getComponentSize)
 {
 	EXPECT_EQ(5, _presentation->getComponentSize());
-	_model.clearComponent();
+	_model->clearComponent();
 	EXPECT_EQ(0, _presentation->getComponentSize());
 }
 
@@ -185,7 +186,7 @@ TEST_F(PresentationModelTest, getConnectionLine)
 {
 	loadConnection();
 	EXPECT_EQ("        3  |   0  |   1  |\n        4  |   0  |   2  |\n", _presentation->getConnectionLine());
-	_model.clearComponent();
+	_model->clearComponent();
 	EXPECT_EQ("", _presentation->getConnectionLine());
 }
 
@@ -210,7 +211,7 @@ TEST_F(PresentationModelTest, hasAttribute)
 TEST_F(PresentationModelTest, hasEntity)
 {
 	EXPECT_TRUE(_presentation->hasEntity());
-	_model.clearComponent();
+	_model->clearComponent();
 	EXPECT_FALSE(_presentation->hasEntity());
 }
 
@@ -237,16 +238,16 @@ TEST_F(PresentationModelTest, getPrimaryKey)
 	loadConnection();
 	vector<int> primaryKey;
 	primaryKey.push_back(1);
-	_model.setPrimaryKey(primaryKey);
+	_model->setPrimaryKey(primaryKey);
 	EXPECT_EQ("1", _presentation->getPrimaryKey(0));
 }
 
 // 測試設定primary key
 TEST_F(PresentationModelTest, setPrimaryKey)
 {
-	EXPECT_FALSE(((AttributeNode*)_model._components[1])->isPrimaryKey());
+	EXPECT_FALSE(((AttributeNode*)_model->_components[1])->isPrimaryKey());
 	setPrimaryKey(1);
-	EXPECT_TRUE(((AttributeNode*)_model._components[1])->isPrimaryKey());
+	EXPECT_TRUE(((AttributeNode*)_model->_components[1])->isPrimaryKey());
 }
 
 // 測試顯示資料庫欄位
@@ -265,7 +266,7 @@ TEST_F(PresentationModelTest, getTable)
 	EXPECT_EQ("         PC |  PK()\n", _presentation->getTable());
 	loadConnection();
 	addOneToOne();
-	oneToOne = _model.getOneToOne();
+	oneToOne = _model->getOneToOne();
 	EXPECT_EQ("         PC |  PK(Name)\n     Person |  PK(ID), FK(Name)\n", _presentation->getTable());
 }
 
