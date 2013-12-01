@@ -35,4 +35,5 @@ void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void PointerState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_item = NULL;
+	_id = INT_MIN;
 }
