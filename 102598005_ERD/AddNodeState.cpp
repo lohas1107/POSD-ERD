@@ -39,7 +39,7 @@ void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	{
 		_presentationModel->addNodeCommand(_type.second, text.toStdString());
 		_presentationModel->setNodePosition(_presentationModel->getNodeID(), mouseEvent->scenePos());
-		_scene->draw();
+		_presentationModel->notify();
 		_scene->updateChecked();
 		_scene->clickPointerEvent();
 	}

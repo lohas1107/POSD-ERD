@@ -349,7 +349,7 @@ void TextUI::displayTableCommand()
 // 刪除元件命令
 void TextUI::deleteComponentCommand()
 {
-	if (_presentationModel->getComponentSize() == 0)
+	if (_presentationModel->isComponentEmpty())
 	{
 		cout << "No component to delete!" << endl;
 		return;

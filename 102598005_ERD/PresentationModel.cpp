@@ -304,3 +304,8 @@ void PresentationModel::notify()
 {
 	_erModel->notify();
 }
+
+bool PresentationModel::isComponentEmpty()
+{
+	return getComponentSize() == 0;
+}

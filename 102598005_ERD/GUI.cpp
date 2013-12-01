@@ -19,6 +19,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	createToolBars();
 	createCanvas();
 	setTableModel();
+	updateButtonEnabled();
 	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 	_presentationModel->attach(this);
 }
@@ -97,6 +98,13 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_keyAction);
 	//_deleteAction->setCheckable(true);
 	//_actionGroup->addAction(_deleteAction);
+}
+
+void GUI::updateButtonEnabled()
+{
+	_undoAction->setEnabled(_presentationModel->canUndo());
+	_redoAction->setEnabled(_presentationModel->canRedo());
+	_deleteAction->setEnabled(!_presentationModel->isComponentEmpty());
 }
 
 // 更新選取 pointer button
@@ -232,6 +240,7 @@ void GUI::clickDeleteEvent()
 
 void GUI::update()
 {
+	updateButtonEnabled();
 	_tableModel->setTableData();
 	_scene->draw();
 }

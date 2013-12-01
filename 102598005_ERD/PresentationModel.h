@@ -50,7 +50,7 @@ public:
 	void attach(Observer* observer);
 	bool isEditable(int index);
 	void notify();
-
+	bool isComponentEmpty();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

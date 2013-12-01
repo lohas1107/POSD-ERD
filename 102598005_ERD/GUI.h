@@ -39,6 +39,7 @@ private slots:
 	void clickPrimaryKeyEvent();
 	void clickDeleteEvent();
 	void updatePointerButton();
+	void updateButtonEnabled();
 
 private:
 	void createActions();
