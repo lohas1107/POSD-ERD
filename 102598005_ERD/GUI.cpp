@@ -230,7 +230,7 @@ void GUI::clickRedoEvent()
 
 void GUI::clickPrimaryKeyEvent()
 {
-	
+	_scene->clickPrimaryKeyEvent();
 }
 
 void GUI::clickDeleteEvent()

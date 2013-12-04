@@ -37,6 +37,7 @@
     <ClCompile Include="..\102598005_ERD\PointerState.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
     <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\SetPrimaryKeyState.cpp" />
     <ClCompile Include="..\102598005_ERD\State.cpp" />
     <ClCompile Include="..\102598005_ERD\Subject.cpp" />
     <ClCompile Include="..\102598005_ERD\TextUI.cpp" />

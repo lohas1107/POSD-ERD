@@ -309,3 +309,8 @@ bool PresentationModel::isComponentEmpty()
 {
 	return getComponentSize() == 0;
 }
+
+bool PresentationModel::canSetPrimaryKey(int id)
+{
+	return _erModel->canSetPrimaryKey(id);
+}

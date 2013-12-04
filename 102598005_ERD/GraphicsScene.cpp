@@ -9,6 +9,7 @@
 #include "PointerState.h"
 #include "AddNodeState.h"
 #include "ConnectState.h"
+#include "SetPrimaryKeyState.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -165,6 +166,12 @@ void GraphicsScene::clickRelationEvent()
 {
 	changeState(new AddNodeState(this, make_pair(relation, INPUT_R)));
 	((QGraphicsView*)parent())->setMouseTracking(true);
+}
+
+void GraphicsScene::clickPrimaryKeyEvent()
+{
+	changeState(new SetPrimaryKeyState(this));
+	((QGraphicsView*)parent())->setMouseTracking(false);
 }
 
 // 更新選取按鈕

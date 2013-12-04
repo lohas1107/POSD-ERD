@@ -586,3 +586,12 @@ void ERModel::setNodePosition(int id, QPointF position)
 {
 	getComponent(id)->setPosition(position);
 }
+
+bool ERModel::canSetPrimaryKey(int id)
+{
+	if (getComponent(id)->isType(attribute) && !getComponent(id)->getConnection().empty())
+	{
+		return true;
+	}
+	return false;
+}

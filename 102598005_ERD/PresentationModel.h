@@ -51,6 +51,7 @@ public:
 	bool isEditable(int index);
 	void notify();
 	bool isComponentEmpty();
+	bool canSetPrimaryKey(int id);
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

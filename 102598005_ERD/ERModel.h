@@ -89,7 +89,7 @@ public:
 	string savePrimaryKey();
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
-
+	bool canSetPrimaryKey(int id);
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

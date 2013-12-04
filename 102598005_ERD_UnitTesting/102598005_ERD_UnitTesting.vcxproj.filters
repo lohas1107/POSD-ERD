@@ -144,5 +144,8 @@
     <ClCompile Include="..\102598005_ERD\Subject.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\102598005_ERD\SetPrimaryKeyState.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -62,6 +62,7 @@
     <ClCompile Include="PointerState.cpp" />
     <ClCompile Include="PresentationModel.cpp" />
     <ClCompile Include="RelationNode.cpp" />
+    <ClCompile Include="SetPrimaryKeyState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TableModel.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="ERModel.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PointerState.h" />
+    <ClInclude Include="SetPrimaryKeyState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Subject.h" />
     <CustomBuild Include="TableView.h">

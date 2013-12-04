@@ -27,6 +27,7 @@ public:
 	void clickAttributeEvent();
 	void clickEntityEvent();
 	void clickRelationEvent();
+	void clickPrimaryKeyEvent();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
