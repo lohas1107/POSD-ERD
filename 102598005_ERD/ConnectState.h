@@ -12,7 +12,7 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	int getItemId(QPointF position);
+	//int getItemId(QPointF position);
 	bool isValidConnection(int firstID, int secondID);
 	string getCardinality(int firstID, int secondID);
 

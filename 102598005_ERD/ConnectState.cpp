@@ -46,6 +46,7 @@ void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_scene->removeItem(_line);
 	_secondID = getItemId(mouseEvent->scenePos());
+	initialize();
 	if (isValidConnection(_firstID, _secondID))
 	{
 		string cardinality = getCardinality(_firstID, _secondID);
@@ -55,17 +56,17 @@ void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 }
 
 // 取得 item 的 id
-int ConnectState::getItemId(QPointF position)
-{
-	QGraphicsItem* item = _scene->itemAt(position);
-
-	if (item != NULL)
-	{
-		return item->data(idData).toInt();
-	}
-
-	return INT_MIN;
-}
+//int ConnectState::getItemId(QPointF position)
+//{
+//	QGraphicsItem* item = _scene->itemAt(position);
+//
+//	if (item != NULL)
+//	{
+//		return item->data(idData).toInt();
+//	}
+//
+//	return INT_MIN;
+//}
 
 // 是否為合法的連結
 bool ConnectState::isValidConnection(int firstID, int secondID)

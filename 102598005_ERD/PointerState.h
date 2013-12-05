@@ -11,10 +11,10 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-
-private:
-	QGraphicsItem* _item;
-	int _id;
+//
+//private:
+//	QGraphicsItem* _item;
+//	int _id;
 };
 
 #endif

@@ -10,12 +10,13 @@ SetPrimaryKeyState::~SetPrimaryKeyState()
 
 void SetPrimaryKeyState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	_item = _scene->itemAt(mouseEvent->scenePos());
+	//_item = _scene->itemAt(mouseEvent->scenePos());
 
-	if (_item != NULL)
-	{
-		_id = _item->data(idData).toInt();
-	}
+	//if (_item != NULL)
+	//{
+	//	_id = _item->data(idData).toInt();
+	//}
+	getItemId(mouseEvent->scenePos());
 }
 
 void SetPrimaryKeyState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
@@ -24,13 +25,12 @@ void SetPrimaryKeyState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
 void SetPrimaryKeyState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	if (_presentationModel->isIDExsit(_id) && _presentationModel->canSetPrimaryKey(_id))
+	if (_presentationModel->isIDExsit(_pointId) && _presentationModel->canSetPrimaryKey(_pointId))
 	{
-		ERComponent* component = _presentationModel->getComponents()[_id];
+		ERComponent* component = _presentationModel->getComponents()[_pointId];
 		bool isPrimaryKey = ((AttributeNode*)component)->isPrimaryKey();
 		((AttributeNode*)component)->setPrimaryKey(!isPrimaryKey);
 		_presentationModel->notify();
 	}
-	_item = NULL;
-	_id = INT_MIN;
+	initialize();
 }
