@@ -104,7 +104,7 @@ void GUI::updateButtonEnabled()
 {
 	_undoAction->setEnabled(_presentationModel->canUndo());
 	_redoAction->setEnabled(_presentationModel->canRedo());
-	_deleteAction->setEnabled(!_presentationModel->isComponentEmpty());
+	_deleteAction->setEnabled(_presentationModel->getDeleteEnabled());
 }
 
 // 更新選取 pointer button

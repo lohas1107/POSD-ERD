@@ -3,7 +3,7 @@
 
 const int OFFSET = 30;
 
-GraphicsEntity::GraphicsEntity()
+GraphicsEntity::GraphicsEntity(PresentationModel* presentationModel) : GraphicsItem(presentationModel)
 {
 }
 

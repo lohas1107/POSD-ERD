@@ -7,7 +7,7 @@
 class GraphicsConnector : public GraphicsItem
 {
 public:
-	GraphicsConnector();
+	GraphicsConnector(PresentationModel* presentationModel);
 	~GraphicsConnector();
 	void doAdjustSize(QFontMetrics fontMetrics);
 	void setLine(QLineF line);

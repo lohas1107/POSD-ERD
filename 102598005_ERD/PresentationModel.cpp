@@ -21,6 +21,7 @@ using namespace std;
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
+	_isDeleteEnabled = false;
 }
 
 PresentationModel::~PresentationModel()
@@ -313,4 +314,19 @@ bool PresentationModel::isComponentEmpty()
 bool PresentationModel::canSetPrimaryKey(int id)
 {
 	return _erModel->canSetPrimaryKey(id);
+}
+
+bool PresentationModel::getDeleteEnabled()
+{
+	return _isDeleteEnabled;
+}
+
+void PresentationModel::setDeleteEnabled(bool isEnabled)
+{
+	_isDeleteEnabled = isEnabled;
+}
+
+void PresentationModel::notifyButtonEnabled()
+{
+	_erModel->notifyButtonEnabled();
 }

@@ -8,7 +8,7 @@
 class GraphicsAttribute : public GraphicsItem
 {
 public:
-	GraphicsAttribute();
+	GraphicsAttribute(PresentationModel* presentationModel);
 	~GraphicsAttribute();
 	void doAdjustSize(QFontMetrics fontMetrics);
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

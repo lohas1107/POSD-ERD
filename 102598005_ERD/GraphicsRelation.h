@@ -7,7 +7,7 @@
 class GraphicsRelation : public GraphicsItem
 {
 public:
-	GraphicsRelation();
+	GraphicsRelation(PresentationModel* presentationModel);
 	~GraphicsRelation();
 	void doAdjustSize(QFontMetrics fontMetrics);
 };

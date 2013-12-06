@@ -14,6 +14,7 @@ public:
 	void attach(Observer* observer);
 	void detach(Observer* observer);
 	void notify();
+	void notifyButtonEnabled();
 
 private:
 	vector<Observer*> _observers;

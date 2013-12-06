@@ -1,6 +1,6 @@
 #include "GraphicsConnector.h"
 
-GraphicsConnector::GraphicsConnector()
+GraphicsConnector::GraphicsConnector(PresentationModel* presentationModel) : GraphicsItem(presentationModel)
 {
 	QGraphicsItem* toDelete = _item;
 	delete toDelete;

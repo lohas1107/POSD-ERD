@@ -2,6 +2,7 @@
 #define _GRAPHICSITEM_H_
 
 #include <QGraphicsItem>
+#include "PresentationModel.h"
 #include <string>
 
 using namespace std;
@@ -14,7 +15,7 @@ enum Data {
 class GraphicsItem : public QGraphicsItem
 {
 public:
-	GraphicsItem();
+	GraphicsItem(PresentationModel* presentationModel);
 	virtual ~GraphicsItem();
 	virtual void doAdjustSize(QFontMetrics fontMetrics);
 	QRectF boundingRect() const;
@@ -23,6 +24,7 @@ public:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 protected:
+	PresentationModel* _presentationModel;
 	QGraphicsItem* _item;
 	bool _isSelected;
 };

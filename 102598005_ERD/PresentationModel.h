@@ -52,9 +52,13 @@ public:
 	void notify();
 	bool isComponentEmpty();
 	bool canSetPrimaryKey(int id);
+	bool getDeleteEnabled();
+	void setDeleteEnabled(bool isEnabled);
+	void notifyButtonEnabled();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;
+	bool _isDeleteEnabled;
 };
 
 #endif

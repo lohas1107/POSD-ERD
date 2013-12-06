@@ -3,7 +3,7 @@
 const int OFFSET = 5;
 const double SCALE = 0.8;
 
-GraphicsRelation::GraphicsRelation()
+GraphicsRelation::GraphicsRelation(PresentationModel* presentationModel) : GraphicsItem(presentationModel)
 {
 }
 

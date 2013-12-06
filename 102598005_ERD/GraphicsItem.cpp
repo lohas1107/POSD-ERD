@@ -4,8 +4,9 @@
 const string STRING_EMPTY = "";
 const int OFFSET = 30;
 
-GraphicsItem::GraphicsItem()
+GraphicsItem::GraphicsItem(PresentationModel* presentationModel)
 {
+	_presentationModel = presentationModel;
 	_item = new QGraphicsPolygonItem();
 	_isSelected = false;
 	setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -62,18 +63,23 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 	{
 		if (value == true)
 		{
-			if (_isSelected)
-			{
-				_isSelected = false;
-			}
-			else
+			if (!_isSelected)
+			//{
+			//	_isSelected = false;
+			//	
+			//}
+			//else
 			{
 				_isSelected = true;
+				_presentationModel->setDeleteEnabled(true);
+				_presentationModel->notifyButtonEnabled();
 			}
 		}
 		else
 		{
 			_isSelected = false;
+			_presentationModel->setDeleteEnabled(false);
+			_presentationModel->notifyButtonEnabled();
 		}
 	}
 	return QGraphicsItem::itemChange(change, value);

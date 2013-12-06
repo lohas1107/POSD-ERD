@@ -2,7 +2,7 @@
 
 const int OFFSET = 30;
 
-GraphicsAttribute::GraphicsAttribute()
+GraphicsAttribute::GraphicsAttribute(PresentationModel* presentationModel) : GraphicsItem(presentationModel)
 {
 	_isPrimaryKey = false;
 }

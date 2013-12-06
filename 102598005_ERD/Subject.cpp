@@ -32,3 +32,13 @@ void Subject::notify()
 		_observers[i]->update();
 	}
 }
+
+void Subject::notifyButtonEnabled()
+{
+	for (unsigned i = 0; i < _observers.size(); i++)
+	{
+		_observers[i]->updateButtonEnabled();
+	}
+}
+
+

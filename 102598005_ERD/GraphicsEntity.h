@@ -6,7 +6,7 @@
 class GraphicsEntity : public GraphicsItem
 {
 public:
-	GraphicsEntity();
+	GraphicsEntity(PresentationModel* presentationModel);
 	~GraphicsEntity();
 	void doAdjustSize(QFontMetrics fontMetrics);
 };

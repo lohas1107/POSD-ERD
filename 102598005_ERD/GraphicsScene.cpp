@@ -43,19 +43,19 @@ GraphicsItem* GraphicsScene::createGraphicsItem(Type type)
 {
 	if (type == entity)
 	{
-		return new GraphicsEntity();
+		return new GraphicsEntity(_presentationModel);
 	}
 	else if (type == attribute)
 	{
-		return new GraphicsAttribute();
+		return new GraphicsAttribute(_presentationModel);
 	}
 	else if (type == relation)
 	{
-		return new GraphicsRelation();
+		return new GraphicsRelation(_presentationModel);
 	}
 	else if (type == connection)
 	{
-		return new GraphicsConnector();
+		return new GraphicsConnector(_presentationModel);
 	}
 
 	return NULL;
@@ -65,12 +65,13 @@ GraphicsItem* GraphicsScene::createGraphicsItem(Type type)
 void GraphicsScene::draw()
 {
 	vector<ERComponent*> components = _presentationModel->getComponents();
-	GraphicsItem* item;
+	//item;
 
 	clear();
+	//clearItem();
 	for (unsigned i = 0; i < components.size(); i++)
 	{
-		item = createGraphicsItem(components[i]->getType().first);
+		GraphicsItem* item = createGraphicsItem(components[i]->getType().first);
 		item->setData(idData, components[i]->getID());
 		item->setData(textData, QString::fromStdString(components[i]->getText()));
 		item->setPos(QPointF(components[i]->getPosition().x(), components[i]->getPosition().y()));
@@ -86,6 +87,7 @@ void GraphicsScene::draw()
 			item->setZValue(-1);
 		}
 		addItem(item);
+		//_graphicsItems.push_back(item);
 	}
 	update(0, 0, width(), height());
 }
@@ -177,5 +179,5 @@ void GraphicsScene::clickPrimaryKeyEvent()
 // 更新選取按鈕
 void GraphicsScene::updateChecked()
 {
-	emit updateButton();
+	emit updateButton(); 
 }
