@@ -7,9 +7,9 @@ protected:
 	virtual void SetUp()
 	{
 		_model = new ERModel();
-		_commandEntity = AddComponentCommand(_model, make_pair(entity, ""), "PC");
-		_commandAttribute = AddComponentCommand(_model, make_pair(attribute, ""), "ID");
-		_commandRelation = AddComponentCommand(_model, make_pair(relation, ""), "Has");
+		_commandEntity = AddComponentCommand(_model, make_pair(entity, ""), "PC", QPointF(0, 0));
+		_commandAttribute = AddComponentCommand(_model, make_pair(attribute, ""), "ID", QPointF(0, 0));
+		_commandRelation = AddComponentCommand(_model, make_pair(relation, ""), "Has", QPointF(0, 0));
 	}
 
 	virtual void TearDown()

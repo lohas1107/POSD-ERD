@@ -37,8 +37,8 @@ protected:
 	void addOneToOne()
 	{
 		_model._componentID = 5;
-		_model.addComponent(make_pair(entity, ""), "Person");
-		_model.addComponent(make_pair(attribute, ""), "ID");
+		_model.addComponent(make_pair(entity, ""), "Person", QPointF(0, 0));
+		_model.addComponent(make_pair(attribute, ""), "ID", QPointF(0, 0));
 		_model.addConnection(2, 5, "1");
 		_model.addConnection(5, 6, "");
 		setPrimaryKey(1);
@@ -61,7 +61,7 @@ TEST_F(ERModelTest, addComponent)
 	{
 		component = _model._components[i];
 		_model._components.erase(_model._components.begin() + i);
-		_model.addComponent(component->getType(), component->getText());
+		_model.addComponent(component->getType(), component->getText(), QPointF(0, 0));
 		EXPECT_EQ(i, _model._components.back()->getID());
 		EXPECT_EQ(component->getType(), _model._components.back()->getType());
 		EXPECT_EQ(component->getText(), _model._components.back()->getText());

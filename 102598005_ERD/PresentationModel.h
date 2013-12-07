@@ -13,7 +13,7 @@ public:
 	PresentationModel(ERModel* erModel);
 	~PresentationModel();
 	bool checkInputType(string type);
-	void addNodeCommand(string type, string name);
+	void addNodeCommand(string type, string name, QPointF position);
 	int getNodeID();
 	string getNodeType(int id);
 	string getNodeText(int id);
@@ -52,15 +52,21 @@ public:
 	void notify();
 	bool isComponentEmpty();
 	bool canSetPrimaryKey(int id);
-	bool getDeleteEnabled();
-	void setDeleteEnabled(bool isEnabled);
+	//bool getDeleteEnabled();
+	//void setDeleteEnabled(bool isEnabled);
 	void notifyButtonEnabled();
 	void setNodeSelected(int id, bool isSelected);
 	int getSelectedID();
-
+	bool getPointerButtonChecked();
+	void setPointerButtonChecked(bool isChecked);
+	bool isDeleteEnabled();
+	void clearSelected();
+	void editText(int index, string text);
+	void setNodePrimaryKey(int pointID);
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;
+	bool _isPointerChecked;
 	bool _isDeleteEnabled;
 };
 

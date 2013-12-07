@@ -42,8 +42,9 @@ void TableModel::editChanged(const QModelIndex* index)
 {
 	if (index != NULL)
 	{
-		ERComponent* component = _presentationModel->getComponents()[index->row()];
-		component->setText(index->data().toString().toStdString());
+		_presentationModel->editText(index->row(), index->data().toString().toStdString());
+		//ERComponent* component = _presentationModel->getComponents()[index->row()];
+		//component->setText(index->data().toString().toStdString());
 		_presentationModel->notify();
 	}
 }

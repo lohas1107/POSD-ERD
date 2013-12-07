@@ -46,7 +46,7 @@ public:
 	~ERModel();
 	void initialize();
 	void clearComponent();
-	void addComponent(pair<Type, string> type, string text);
+	void addComponent(pair<Type, string> type, string text, QPointF position);
 	void insertComponent(int index, ERComponent* component);
 	void deleteLastComponent();
 	void deleteComponent(int id);
@@ -92,6 +92,10 @@ public:
 	bool canSetPrimaryKey(int id);
 	void setNodeSelected(int id, bool isSelected);
 	int getSelectedID();
+	bool isDeleteEnabled();
+	void clearSelected();
+	void setNodeText(int index, string text);
+	void setNodePrimaryKey(int id, bool isPrimaryKey);
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

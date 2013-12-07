@@ -17,8 +17,8 @@ protected:
 
 	void addCommand()
 	{
-		_manager._redoCommands.push(new AddComponentCommand(_model, make_pair(entity, ""), "PC"));
-		_manager._undoCommands.push(new AddComponentCommand(_model, make_pair(entity, ""), "PC"));
+		_manager._redoCommands.push(new AddComponentCommand(_model, make_pair(entity, ""), "PC", QPointF(0, 0)));
+		_manager._undoCommands.push(new AddComponentCommand(_model, make_pair(entity, ""), "PC", QPointF(0, 0)));
 	}
 	CommandManager _manager;
 	ERModel* _model;
@@ -53,7 +53,7 @@ TEST_F(CommandManagerTest, canRedo)
 // ´ú¸Õ°õ¦æ©R¥O
 TEST_F(CommandManagerTest, execute)
 {
-	_manager.execute(new AddComponentCommand(_model, make_pair(entity, ""), "PC"));
+	_manager.execute(new AddComponentCommand(_model, make_pair(entity, ""), "PC", QPointF(0, 0)));
 	EXPECT_EQ(1, _model->getComponentSize());
 	EXPECT_EQ(1, _manager._undoCommands.size());
 	EXPECT_EQ(0, _manager._redoCommands.size());
@@ -63,7 +63,7 @@ TEST_F(CommandManagerTest, execute)
 TEST_F(CommandManagerTest, undo)
 {
 	addCommand();
-	_model->addComponent(make_pair(entity, ""), "PC");
+	_model->addComponent(make_pair(entity, ""), "PC", QPointF(0, 0));
 	_manager.undo();
 	EXPECT_EQ(0, _model->getComponentSize());
 	EXPECT_EQ(0, _manager._undoCommands.size());

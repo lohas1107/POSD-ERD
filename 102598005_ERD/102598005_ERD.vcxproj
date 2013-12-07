@@ -21,6 +21,7 @@
     <ClCompile Include="Connector.cpp" />
     <ClCompile Include="ConnectState.cpp" />
     <ClCompile Include="DeleteComponentCommand.cpp" />
+    <ClCompile Include="EditTextCommand.cpp" />
     <ClCompile Include="EntityNode.cpp" />
     <ClCompile Include="ERComponent.cpp" />
     <ClCompile Include="ERModel.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="PointerState.cpp" />
     <ClCompile Include="PresentationModel.cpp" />
     <ClCompile Include="RelationNode.cpp" />
+    <ClCompile Include="SetPrimaryKeyCommand.cpp" />
     <ClCompile Include="SetPrimaryKeyState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Subject.cpp" />
@@ -80,11 +82,13 @@
     <ClInclude Include="Connector.h" />
     <ClInclude Include="ConnectState.h" />
     <ClInclude Include="DeleteComponentCommand.h" />
+    <ClInclude Include="EditTextCommand.h" />
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PointerState.h" />
+    <ClInclude Include="SetPrimaryKeyCommand.h" />
     <ClInclude Include="SetPrimaryKeyState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Subject.h" />

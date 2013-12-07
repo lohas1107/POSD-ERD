@@ -37,10 +37,11 @@ void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
 	if (_isOK && !text.isEmpty())
 	{
-		_presentationModel->addNodeCommand(_type.second, text.toStdString());
-		_presentationModel->setNodePosition(_presentationModel->getNodeID(), mouseEvent->scenePos());
+		_presentationModel->addNodeCommand(_type.second, text.toStdString(), mouseEvent->scenePos());
+		//_presentationModel->setNodePosition(_presentationModel->getNodeID(), mouseEvent->scenePos());
+		//_presentationModel->setPointerButtonChecked(true);
 		_presentationModel->notify();
-		_scene->updateChecked();
+		//_scene->updateChecked();
 		_scene->clickPointerEvent();
 	}
 	else

@@ -147,5 +147,11 @@
     <ClCompile Include="..\102598005_ERD\SetPrimaryKeyState.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\102598005_ERD\EditTextCommand.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\102598005_ERD\SetPrimaryKeyCommand.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

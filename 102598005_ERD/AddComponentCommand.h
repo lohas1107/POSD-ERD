@@ -8,7 +8,7 @@ class AddComponentCommand : public Command
 {
 public:
 	AddComponentCommand();
-	AddComponentCommand(ERModel* model, pair<Type, string> type, string text);
+	AddComponentCommand(ERModel* model, pair<Type, string> type, string text, QPointF position);
 	~AddComponentCommand();
 	void execute();
 	void unexecute();
@@ -16,6 +16,7 @@ public:
 private:
 	pair<Type, string> _type;
 	string _text;
+	QPointF _position;
 };
 
 #endif

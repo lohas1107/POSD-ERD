@@ -109,6 +109,7 @@ ERComponent* Connector::clone()
 	ERComponent* component = factory.createComponent(make_pair(connection, TYPE_CONNECTION));
 	component->setID(_id);
 	component->setText(_text);
+	component->setPosition(_position);
 
 	vector<ERComponent*> connections;
 	for (unsigned i = 0; i < _connections.size(); i++)

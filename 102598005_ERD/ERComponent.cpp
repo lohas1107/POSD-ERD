@@ -142,6 +142,7 @@ ERComponent* ERComponent::clone()
 	ERComponent* component = factory.createComponent(_type);
 	component->setID(_id);
 	component->setText(_text);
+	component->setPosition(_position);
 	return component;
 }
 

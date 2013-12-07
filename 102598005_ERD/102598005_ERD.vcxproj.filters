@@ -190,6 +190,12 @@
     <ClCompile Include="TableModel.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="EditTextCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPrimaryKeyCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
@@ -269,6 +275,12 @@
     </ClInclude>
     <ClInclude Include="SetPrimaryKeyState.h">
       <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="EditTextCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPrimaryKeyCommand.h">
+      <Filter>Header Files\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

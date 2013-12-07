@@ -30,7 +30,7 @@ void ConnectState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	((GraphicsConnector*)_line)->setLine(_linePosition);
 	_scene->update(0, 0, _scene->width(), _scene->height());
 
-	_firstID = getItemId(position);
+	_firstID = getItemID(position);
 }
 
 // ²¾°Ê·Æ¹«¨Æ¥ó
@@ -45,13 +45,13 @@ void ConnectState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
 	_scene->removeItem(_line);
-	_secondID = getItemId(mouseEvent->scenePos());
+	_secondID = getItemID(mouseEvent->scenePos());
 	initialize();
 	if (isValidConnection(_firstID, _secondID))
 	{
 		string cardinality = getCardinality(_firstID, _secondID);
 		_presentationModel->connectNodeCommand(_firstID, _secondID, cardinality);
-		_scene->draw();
+		_presentationModel->notify();
 	}
 }
 

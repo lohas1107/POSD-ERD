@@ -49,14 +49,15 @@ void ERModel::clearComponent()
 }
 
 //新增節點
-void ERModel::addComponent(pair<Type, string> type, string text)
+void ERModel::addComponent(pair<Type, string> type, string text, QPointF position)
 {
 	ComponentFactory factory; 
 	_currentComponent = factory.createComponent(type);
 	_currentComponent->setID(_componentID++);
 	_currentComponent->setText(text);
+	_currentComponent->setPosition(position);
 	_components.push_back(_currentComponent);
-	notify();
+	//notify();
 }
 
 // 插入元件
@@ -155,6 +156,8 @@ void ERModel::revertComponent(vector<pair<int, ERComponent*>> deleteList)
 		if (deleteList[i].second->isType(connection))
 		{
 			pair<int, int> idPair = ((Connector*)deleteList[i].second)->getConnectionPair();
+			getComponent(deleteList[i].second->getID())->disconnectTo(idPair.first);
+			getComponent(deleteList[i].second->getID())->disconnectTo(idPair.second);
 			insertConnection(deleteList[i].second->getID(), idPair.first, idPair.second);
 		}
 	}
@@ -174,7 +177,7 @@ void ERModel::addConnection(int firstID, int secondID, string cardinality)
 {
 	if (getComponent(firstID)->canConnectTo(getComponent(secondID)) && getComponent(secondID)->canConnectTo(getComponent(firstID)))
 	{
-		addComponent(make_pair(connection, STRING_EMPTY), cardinality);
+		addComponent(make_pair(connection, STRING_EMPTY), cardinality, QPointF(0, 0));
 		insertConnection(getNodeID(), firstID, secondID);
 		_creationFail = false;
 	}
@@ -481,7 +484,7 @@ void ERModel::loadComponent(vector<string> content)
 			text = line.substr(line.find_last_of(STRING_SPACE) + 1);
 		}
 
-		addComponent(type, text);
+		addComponent(type, text, QPointF(0, 0));
 	}
 }
 
@@ -611,4 +614,31 @@ int ERModel::getSelectedID()
 		}
 	}
 	return INT_MIN;
+}
+
+bool ERModel::isDeleteEnabled()
+{
+	if (isIDExsit(getSelectedID()))
+	{
+		return true;
+	}
+	return false;
+}
+
+void ERModel::clearSelected()
+{
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		_components[i]->setSelected(false);
+	}
+}
+
+void ERModel::setNodeText(int index, string text)
+{
+	_components[index]->setText(text);
+}
+
+void ERModel::setNodePrimaryKey(int id, bool isPrimaryKey)
+{
+	((AttributeNode*)getComponent(id))->setPrimaryKey(isPrimaryKey);
 }

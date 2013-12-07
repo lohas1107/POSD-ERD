@@ -76,7 +76,7 @@ TEST_F(IntegrationTest, testIsPrimaryExist)
 TEST_F(IntegrationTest, testUndoDeleteComponent)
 {
 	EXPECT_TRUE(_presentation->loadFile(_filePath));
-	_presentation->addNodeCommand("E", "Test");
+	_presentation->addNodeCommand("E", "Test", QPointF(0, 0));
 	EXPECT_EQ(16, _model->getComponentSize());
 	EXPECT_EQ(15, _model->getNodeID());
 	EXPECT_EQ(entity, _model->getNodeType(15).first);
@@ -94,12 +94,12 @@ TEST_F(IntegrationTest, testUndoDeleteComponent)
 TEST_F(IntegrationTest, testRedoConnectComponent)
 {
 	EXPECT_TRUE(_presentation->loadFile(_filePath));
-	_presentation->addNodeCommand("E", "Test");
+	_presentation->addNodeCommand("E", "Test", QPointF(0, 0));
 	EXPECT_EQ(16, _model->getComponentSize());
 	EXPECT_EQ(15, _model->getNodeID());
 	EXPECT_EQ(entity, _model->getNodeType(15).first);
 	EXPECT_EQ("Test", _model->getNodeText(15));
-	_presentation->addNodeCommand("A", "Test Attr");
+	_presentation->addNodeCommand("A", "Test Attr", QPointF(0, 0));
 	EXPECT_EQ(17, _model->getComponentSize());
 	EXPECT_EQ(16, _model->getNodeID());
 	EXPECT_EQ(attribute, _model->getNodeType(16).first);
@@ -119,12 +119,12 @@ TEST_F(IntegrationTest, testRedoConnectComponent)
 TEST_F(IntegrationTest, testCommonUsage)
 {
 	EXPECT_TRUE(_presentation->loadFile(_filePath));
-	_presentation->addNodeCommand("E", "Work Diary");
+	_presentation->addNodeCommand("E", "Work Diary", QPointF(0, 0));
 	EXPECT_EQ(16, _model->getComponentSize());
 	EXPECT_EQ(15, _model->getNodeID());
 	EXPECT_EQ(entity, _model->getNodeType(15).first);
 	EXPECT_EQ("Work Diary", _model->getNodeText(15));
-	_presentation->addNodeCommand("R", "Write");
+	_presentation->addNodeCommand("R", "Write", QPointF(0, 0));
 	EXPECT_EQ(17, _model->getComponentSize());
 	EXPECT_EQ(16, _model->getNodeID());
 	EXPECT_EQ(relation, _model->getNodeType(16).first);
@@ -135,17 +135,17 @@ TEST_F(IntegrationTest, testCommonUsage)
 	_presentation->connectNodeCommand(15, 16, "");
 	EXPECT_EQ(15, _model->_components[18]->getConnection()[0]->getID());
 	EXPECT_EQ(16, _model->_components[18]->getConnection()[1]->getID());
-	_presentation->addNodeCommand("A", "Content");
+	_presentation->addNodeCommand("A", "Content", QPointF(0, 0));
 	EXPECT_EQ(20, _model->getComponentSize());
 	EXPECT_EQ(19, _model->getNodeID());
 	EXPECT_EQ(attribute, _model->getNodeType(19).first);
 	EXPECT_EQ("Content", _model->getNodeText(19));
-	_presentation->addNodeCommand("A", "WD_ID");
+	_presentation->addNodeCommand("A", "WD_ID", QPointF(0, 0));
 	EXPECT_EQ(21, _model->getComponentSize());
 	EXPECT_EQ(20, _model->getNodeID());
 	EXPECT_EQ(attribute, _model->getNodeType(20).first);
 	EXPECT_EQ("WD_ID", _model->getNodeText(20));
-	_presentation->addNodeCommand("A", "WD_date");
+	_presentation->addNodeCommand("A", "WD_date", QPointF(0, 0));
 	EXPECT_EQ(22, _model->getComponentSize());
 	EXPECT_EQ(21, _model->getNodeID());
 	EXPECT_EQ(attribute, _model->getNodeType(21).first);

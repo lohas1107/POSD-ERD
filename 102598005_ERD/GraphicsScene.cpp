@@ -131,6 +131,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void GraphicsScene::changeState(State* state)
 {
 	State* toDelete = _currentState;
+	//_presentationModel->clearSelected();
 	_currentState = state;
 	delete toDelete;
 }
@@ -176,12 +177,6 @@ void GraphicsScene::clickPrimaryKeyEvent()
 	((QGraphicsView*)parent())->setMouseTracking(false);
 }
 
-// 更新選取按鈕
-void GraphicsScene::updateChecked()
-{
-	emit updateButton(); 
-}
-
 void GraphicsScene::clickDeleteEvent()
 {
 	int id = _presentationModel->getSelectedID();
@@ -191,3 +186,21 @@ void GraphicsScene::clickDeleteEvent()
 		_presentationModel->notify();
 	}
 }
+
+void GraphicsScene::clickUndoEvent()
+{
+	_presentationModel->undo();
+	_presentationModel->notify();
+}
+
+void GraphicsScene::clickRedoEvent()
+{
+	_presentationModel->redo();
+	_presentationModel->notify();
+}
+
+// 更新選取按鈕
+//void GraphicsScene::updateChecked()
+//{
+//	emit updateButton(); 
+//}

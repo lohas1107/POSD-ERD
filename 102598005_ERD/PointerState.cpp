@@ -2,6 +2,9 @@
 
 PointerState::PointerState(GraphicsScene* scene) : State(scene)
 {
+	_presentationModel->setPointerButtonChecked(true);
+	_presentationModel->clearSelected();
+	_presentationModel->notifyButtonEnabled();
 	//_item = NULL;
 }
 
@@ -19,15 +22,15 @@ void PointerState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	//{
 	//	_id = _item->data(idData).toInt();
 	//}
-	getItemId(mouseEvent->scenePos());
+	getItemID(mouseEvent->scenePos());
 }
 
 // ²¾°Ê·Æ¹«¨Æ¥ó
 void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	if (_presentationModel->isIDExsit(_pointId))
+	if (_presentationModel->isIDExsit(_pointID))
 	{
-		_presentationModel->setNodePosition(_pointId, mouseEvent->scenePos());
+		_presentationModel->setNodePosition(_pointID, mouseEvent->scenePos());
 	}
 	_scene->draw();
 }

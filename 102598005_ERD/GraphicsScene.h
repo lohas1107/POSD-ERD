@@ -28,14 +28,16 @@ public:
 	void clickEntityEvent();
 	void clickRelationEvent();
 	void clickPrimaryKeyEvent();
+	void clickDeleteEvent();
+	void clickUndoEvent();
+	void clickRedoEvent();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void updateChecked();
-	void clickDeleteEvent();
 
 signals:
-	void updateButton();
+	//void updateButton();
 
 private:
 	vector<GraphicsItem*> _graphicsItems;

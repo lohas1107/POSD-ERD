@@ -20,7 +20,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	createCanvas();
 	setTableModel();
 	updateButtonEnabled();
-	connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
+	//connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 	_presentationModel->attach(this);
 }
 
@@ -84,7 +84,7 @@ void GUI::createActionGroup()
 	_actionGroup = new QActionGroup(this);
 	_actionGroup->setExclusive(true);
 	_pointerAction->setCheckable(true);
-	updatePointerButton();
+	//updatePointerButton();
 	_actionGroup->addAction(_pointerAction);
 	_connectAction->setCheckable(true);
 	_actionGroup->addAction(_connectAction);
@@ -104,14 +104,15 @@ void GUI::updateButtonEnabled()
 {
 	_undoAction->setEnabled(_presentationModel->canUndo());
 	_redoAction->setEnabled(_presentationModel->canRedo());
-	_deleteAction->setEnabled(_presentationModel->getDeleteEnabled());
+	_pointerAction->setChecked(_presentationModel->getPointerButtonChecked());
+	_deleteAction->setEnabled(_presentationModel->isDeleteEnabled());
 }
 
 // 更新選取 pointer button
-void GUI::updatePointerButton()
-{
-	_pointerAction->setChecked(true);
-}
+//void GUI::updatePointerButton()
+//{
+//	_pointerAction->setChecked(true);
+//}
 
 // 產生選單
 void GUI::createMenus()
@@ -177,12 +178,13 @@ void GUI::setTableModel()
 // 開啟檔案
 void GUI::openFile()
 {
-	updatePointerButton();
+	//updatePointerButton();
 	clickPointerEvent();
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
 	_presentationModel->composePosition();
-	_scene->draw();
+	//_scene->draw();
+	update();
 }
 
 // 點擊 pointer 事件
@@ -217,12 +219,12 @@ void GUI::clickRelationEvent()
 
 void GUI::clickUndoEvent()
 {
-	
+	_scene->clickUndoEvent();
 }
 
 void GUI::clickRedoEvent()
 {
-	
+	_scene->clickRedoEvent();
 }
 
 void GUI::clickPrimaryKeyEvent()

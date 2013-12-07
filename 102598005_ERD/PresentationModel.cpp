@@ -6,6 +6,8 @@
 #include <fstream>
 #include <string>
 #include <direct.h>
+#include "EditTextCommand.h"
+#include "SetPrimaryKeyCommand.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -21,6 +23,7 @@ using namespace std;
 PresentationModel::PresentationModel(ERModel* erModel)
 {
 	_erModel = erModel;
+	_isPointerChecked = false;
 	_isDeleteEnabled = false;
 }
 
@@ -40,9 +43,9 @@ bool PresentationModel::checkInputType(string type)
 }
 
 // 新增節點命令
-void PresentationModel::addNodeCommand(string type, string name)
+void PresentationModel::addNodeCommand(string type, string name, QPointF position)
 {
-	_commandManager.execute(new AddComponentCommand(_erModel, make_pair(none, type), name));
+	_commandManager.execute(new AddComponentCommand(_erModel, make_pair(none, type), name, position));
 }
 
 // 取得 node id
@@ -316,15 +319,15 @@ bool PresentationModel::canSetPrimaryKey(int id)
 	return _erModel->canSetPrimaryKey(id);
 }
 
-bool PresentationModel::getDeleteEnabled()
-{
-	return _isDeleteEnabled;
-}
-
-void PresentationModel::setDeleteEnabled(bool isEnabled)
-{
-	_isDeleteEnabled = isEnabled;
-}
+//bool PresentationModel::getDeleteEnabled()
+//{
+//	return _isDeleteEnabled && _isPointerChecked;
+//}
+//
+//void PresentationModel::setDeleteEnabled(bool isEnabled)
+//{
+//	_isDeleteEnabled = isEnabled;
+//}
 
 void PresentationModel::notifyButtonEnabled()
 {
@@ -335,8 +338,39 @@ void PresentationModel::setNodeSelected(int id, bool isSelected)
 {
 	_erModel->setNodeSelected(id, isSelected);
 }
-
+//
 int PresentationModel::getSelectedID()
 {
 	return _erModel->getSelectedID();
+}
+
+bool PresentationModel::getPointerButtonChecked()
+{
+	return _isPointerChecked;
+}
+
+void PresentationModel::setPointerButtonChecked(bool isChecked)
+{
+	_isPointerChecked = isChecked;
+}
+
+bool PresentationModel::isDeleteEnabled()
+{
+	return _erModel->isDeleteEnabled() && _isPointerChecked;
+}
+
+void PresentationModel::clearSelected()
+{
+	_erModel->clearSelected();
+}
+
+void PresentationModel::editText(int index, string text)
+{
+	string previousText = getComponents()[index]->getText();
+	_commandManager.execute(new EditTextCommand(_erModel, index, previousText, text));
+}
+
+void PresentationModel::setNodePrimaryKey(int pointID)
+{
+	_commandManager.execute(new SetPrimaryKeyCommand(_erModel, pointID));
 }

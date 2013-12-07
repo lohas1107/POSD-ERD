@@ -6,6 +6,8 @@ State::State(GraphicsScene* scene)
 {
 	_scene = scene;
 	_presentationModel = _scene->getPresentationModel();
+	_presentationModel->setPointerButtonChecked(false);
+	_presentationModel->notifyButtonEnabled();
 	initialize();
 }
 
@@ -17,17 +19,17 @@ State::~State()
 void State::initialize()
 {
 	_pointItem = NULL;
-	_pointId = INT_MIN;
+	_pointID = INT_MIN;
 }
 
-int State::getItemId(QPointF position)
+int State::getItemID(QPointF position)
 {
 	_pointItem = _scene->itemAt(position);
 
 	if (_pointItem != NULL)
 	{
-		_pointId = _pointItem->data(idData).toInt();
+		_pointID = _pointItem->data(idData).toInt();
 	}
 
-	return _pointId;
+	return _pointID;
 }

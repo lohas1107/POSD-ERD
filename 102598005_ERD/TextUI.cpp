@@ -145,7 +145,7 @@ void TextUI::addNodeCommand()
 	cin.get();
 	cout << "Enter the name of this node:" << endl;
 	cin.getline(nodeName, NODE_NAME_SPACE);
-	_presentationModel->addNodeCommand(nodeType, nodeName);
+	_presentationModel->addNodeCommand(nodeType, nodeName, QPointF(0, 0));
 	int id = _presentationModel->getNodeID();
 	printf("A node [%s] has been added. ID: %d, Name: \"%s\"\n", _presentationModel->getNodeType(id).c_str(), id, _presentationModel->getNodeText(id).c_str());
 	showComponents(all);

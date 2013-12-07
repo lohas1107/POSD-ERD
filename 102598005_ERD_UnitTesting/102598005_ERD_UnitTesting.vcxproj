@@ -21,6 +21,7 @@
     <ClCompile Include="..\102598005_ERD\Connector.cpp" />
     <ClCompile Include="..\102598005_ERD\ConnectState.cpp" />
     <ClCompile Include="..\102598005_ERD\DeleteComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\EditTextCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
     <ClCompile Include="..\102598005_ERD\ERModel.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="..\102598005_ERD\PointerState.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
     <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\SetPrimaryKeyCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\SetPrimaryKeyState.cpp" />
     <ClCompile Include="..\102598005_ERD\State.cpp" />
     <ClCompile Include="..\102598005_ERD\Subject.cpp" />

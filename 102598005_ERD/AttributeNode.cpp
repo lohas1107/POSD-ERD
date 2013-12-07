@@ -46,6 +46,7 @@ ERComponent* AttributeNode::clone()
 	ERComponent* component = factory.createComponent(make_pair(attribute, TYPE_ATTRIBUTE));
 	component->setID(_id);
 	component->setText(_text);
+	component->setPosition(_position);
 	((AttributeNode*)component)->setPrimaryKey(_isPrimaryKey);
 	return component;
 }

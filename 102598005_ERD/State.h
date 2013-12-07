@@ -15,13 +15,13 @@ public:
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
 	void initialize();
-	int getItemId(QPointF position);
+	int getItemID(QPointF position);
 
 protected:
 	GraphicsScene* _scene;
 	PresentationModel* _presentationModel;
 	QGraphicsItem* _pointItem;
-	int _pointId;
+	int _pointID;
 };
 
 #endif

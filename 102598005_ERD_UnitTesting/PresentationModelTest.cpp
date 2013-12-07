@@ -9,11 +9,11 @@ protected:
 	{
 		_model = new ERModel();
 		_presentation = new PresentationModel(_model);
-		_presentation->addNodeCommand("E", "PC");
-		_presentation->addNodeCommand("A", "Name");
-		_presentation->addNodeCommand("R", "Has");
-		_presentation->addNodeCommand("C", "");
-		_presentation->addNodeCommand("C", "1");
+		_presentation->addNodeCommand("E", "PC", QPointF(0, 0));
+		_presentation->addNodeCommand("A", "Name", QPointF(0, 0));
+		_presentation->addNodeCommand("R", "Has", QPointF(0, 0));
+		_presentation->addNodeCommand("C", "", QPointF(0, 0));
+		_presentation->addNodeCommand("C", "1", QPointF(0, 0));
 	}
 
 	virtual void TearDown()
@@ -42,8 +42,8 @@ protected:
 	void addOneToOne()
 	{
 		_model->_componentID = 5;
-		_model->addComponent(make_pair(entity, ""), "Person");
-		_model->addComponent(make_pair(attribute, ""), "ID");
+		_model->addComponent(make_pair(entity, ""), "Person", QPointF(0, 0));
+		_model->addComponent(make_pair(attribute, ""), "ID", QPointF(0, 0));
 		_model->addConnection(2, 5, "1");
 		_model->addConnection(5, 6, "");
 		setPrimaryKey(1);
@@ -71,32 +71,32 @@ TEST_F(PresentationModelTest, addNodeCommand)
 {
 	_model->clearComponent();
 	_model->initialize();
-	_presentation->addNodeCommand("E", "PC");
+	_presentation->addNodeCommand("E", "PC", QPointF(0, 0));
 	EXPECT_EQ(0, _presentation->getNodeID());
-	_presentation->addNodeCommand("A", "ID");
+	_presentation->addNodeCommand("A", "ID", QPointF(0, 0));
 	EXPECT_EQ(1, _presentation->getNodeID());
-	_presentation->addNodeCommand("R", "Has");
+	_presentation->addNodeCommand("R", "Has", QPointF(0, 0));
 	EXPECT_EQ(2, _presentation->getNodeID());
 }
 
 // 代刚眔じンid
 TEST_F(PresentationModelTest, getNodeID)
 {
-	_presentation->addNodeCommand("E", "Person");
+	_presentation->addNodeCommand("E", "Person", QPointF(0, 0));
 	EXPECT_EQ(5, _presentation->getNodeID());
 }
 
 // 代刚眔じンtype
 TEST_F(PresentationModelTest, getNodeType)
 {
-	_presentation->addNodeCommand("E", "Person");
+	_presentation->addNodeCommand("E", "Person", QPointF(0, 0));
 	EXPECT_EQ("Entity", _presentation->getNodeType(5));
 }
 
 // 代刚眔じンtext
 TEST_F(PresentationModelTest, getNodeText)
 {
-	_presentation->addNodeCommand("E", "Person");
+	_presentation->addNodeCommand("E", "Person", QPointF(0, 0));
 	EXPECT_EQ("Person", _presentation->getNodeText(5));
 }
 
@@ -310,7 +310,7 @@ TEST_F(PresentationModelTest, makeDirectory)
 // 代刚˙
 TEST_F(PresentationModelTest, undo)
 {
-	_presentation->addNodeCommand("E", "Test");
+	_presentation->addNodeCommand("E", "Test", QPointF(0, 0));
 	EXPECT_EQ(6, _presentation->getComponentSize());
 	EXPECT_EQ(5, _presentation->getNodeID());
 	EXPECT_EQ("Entity", _presentation->getNodeType(5));
@@ -334,7 +334,7 @@ TEST_F(PresentationModelTest, canUndo)
 // 代刚˙
 TEST_F(PresentationModelTest, redo)
 {
-	_presentation->addNodeCommand("E", "Test");
+	_presentation->addNodeCommand("E", "Test", QPointF(0, 0));
 	EXPECT_EQ(6, _presentation->getComponentSize());
 	EXPECT_EQ(5, _presentation->getNodeID());
 	EXPECT_EQ("Entity", _presentation->getNodeType(5));
@@ -352,7 +352,7 @@ TEST_F(PresentationModelTest, redo)
 TEST_F(PresentationModelTest, canRedo)
 {
 	EXPECT_FALSE(_presentation->canRedo());
-	_presentation->addNodeCommand("E", "Test");
+	_presentation->addNodeCommand("E", "Test", QPointF(0, 0));
 	EXPECT_EQ(6, _presentation->getComponentSize());
 	EXPECT_EQ(5, _presentation->getNodeID());
 	EXPECT_EQ("Entity", _presentation->getNodeType(5));

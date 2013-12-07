@@ -7,9 +7,9 @@ protected:
 	virtual void SetUp()
 	{
 		_model = new ERModel();
-		_model->addComponent(make_pair(entity, ""), "PC");
-		_model->addComponent(make_pair(attribute, ""), "ID");
-		_model->addComponent(make_pair(relation, ""), "Has");
+		_model->addComponent(make_pair(entity, ""), "PC", QPointF(0, 0));
+		_model->addComponent(make_pair(attribute, ""), "ID", QPointF(0, 0));
+		_model->addComponent(make_pair(relation, ""), "Has", QPointF(0, 0));
 
 		_noCardinality = ConnectComponentCommand(_model, 0, 1, "");
 		_hasCardinality = ConnectComponentCommand(_model, 0, 2, "1");
