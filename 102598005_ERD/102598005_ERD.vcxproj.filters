@@ -148,12 +148,6 @@
     <ClCompile Include="GraphicsScene.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_GraphicsScene.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_GraphicsScene.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ERModel.cpp">
       <Filter>Source Files\MVC</Filter>
     </ClCompile>

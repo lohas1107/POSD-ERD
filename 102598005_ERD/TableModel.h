@@ -4,7 +4,6 @@
 #include <QStandardItemModel>
 #include "PresentationModel.h"
 #include <QObject>
-#include <QAbstractItemDelegate>
 
 class TableModel : public QStandardItemModel
 {

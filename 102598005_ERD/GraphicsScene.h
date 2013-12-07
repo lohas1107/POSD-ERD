@@ -6,14 +6,11 @@
 #include "PresentationModel.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QObject>
 #include "State.h"
 
 class State;
 class GraphicsScene : public QGraphicsScene
 {
-	Q_OBJECT
-
 public:
 	GraphicsScene(PresentationModel* presentationModel);
 	~GraphicsScene();
@@ -34,10 +31,6 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void updateChecked();
-
-signals:
-	//void updateButton();
 
 private:
 	vector<GraphicsItem*> _graphicsItems;

@@ -38,7 +38,6 @@ private slots:
 	void clickRedoEvent();
 	void clickPrimaryKeyEvent();
 	void clickDeleteEvent();
-	//void updatePointerButton();
 	void updateButtonEnabled();
 
 private:

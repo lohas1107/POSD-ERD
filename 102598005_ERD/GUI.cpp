@@ -44,7 +44,10 @@ GUI::~GUI()
 	delete _editToolBar;
 	delete _scene;
 	delete _view;
+	delete _vLayout;
 	delete _hLayout;
+	delete _tableView;
+	delete _tableModel;
 	delete _widget;
 	delete _presentationModel;
 }

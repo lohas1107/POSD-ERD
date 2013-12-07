@@ -5,7 +5,6 @@
 #include "CommandManager.h"
 #include <vector>
 #include <QPointF>
-//#include <QStandardItemModel>
 
 class PresentationModel
 {
@@ -46,15 +45,13 @@ public:
 	bool canRedo();
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
-	//void setTableData(QStandardItemModel* tableModel);
 	void attach(Observer* observer);
 	bool isEditable(int index);
 	void notify();
+	void notifyButtonEnabled();
 	bool isComponentEmpty();
 	bool canSetPrimaryKey(int id);
-	//bool getDeleteEnabled();
-	//void setDeleteEnabled(bool isEnabled);
-	void notifyButtonEnabled();
+	void setNodePrimaryKey(int pointID);
 	void setNodeSelected(int id, bool isSelected);
 	int getSelectedID();
 	bool getPointerButtonChecked();
@@ -62,7 +59,7 @@ public:
 	bool isDeleteEnabled();
 	void clearSelected();
 	void editText(int index, string text);
-	void setNodePrimaryKey(int pointID);
+
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

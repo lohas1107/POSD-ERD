@@ -96,6 +96,7 @@ public:
 	void clearSelected();
 	void setNodeText(int index, string text);
 	void setNodePrimaryKey(int id, bool isPrimaryKey);
+
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

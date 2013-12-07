@@ -17,7 +17,7 @@ signals:
 
 public slots:
 	void doubleClicked(const QModelIndex &index);
-	void closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint);
+	void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
 
 private:
 	const QModelIndex* _index;

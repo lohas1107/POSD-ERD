@@ -25,7 +25,6 @@
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />
     <ClCompile Include="..\102598005_ERD\ERModel.cpp" />
-    <ClCompile Include="..\102598005_ERD\GeneratedFiles\Debug\moc_GraphicsScene.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsAttribute.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsConnector.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsEntity.cpp" />
