@@ -10,6 +10,7 @@ ERComponent::ERComponent(pair<Type, string> type)
 	_id = 0;
 	_type = type;
 	_text = STRING_EMPTY;
+	_isSelected = false;
 }
 
 ERComponent::~ERComponent()
@@ -142,4 +143,14 @@ ERComponent* ERComponent::clone()
 	component->setID(_id);
 	component->setText(_text);
 	return component;
+}
+
+bool ERComponent::isSelected()
+{
+	return _isSelected;
+}
+
+void ERComponent::setSelected(bool isSelected)
+{
+	_isSelected = isSelected;
 }

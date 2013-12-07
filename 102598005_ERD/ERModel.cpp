@@ -595,3 +595,20 @@ bool ERModel::canSetPrimaryKey(int id)
 	}
 	return false;
 }
+
+void ERModel::setNodeSelected(int id, bool isSelected)
+{
+	getComponent(id)->setSelected(isSelected);
+}
+
+int ERModel::getSelectedID()
+{
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		if (_components[i]->isSelected())
+		{
+			return _components[i]->getID();
+		}
+	}
+	return INT_MIN;
+}

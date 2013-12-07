@@ -330,3 +330,13 @@ void PresentationModel::notifyButtonEnabled()
 {
 	_erModel->notifyButtonEnabled();
 }
+
+void PresentationModel::setNodeSelected(int id, bool isSelected)
+{
+	_erModel->setNodeSelected(id, isSelected);
+}
+
+int PresentationModel::getSelectedID()
+{
+	return _erModel->getSelectedID();
+}

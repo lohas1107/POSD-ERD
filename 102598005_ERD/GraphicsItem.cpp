@@ -72,6 +72,7 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 			{
 				_isSelected = true;
 				_presentationModel->setDeleteEnabled(true);
+				_presentationModel->setNodeSelected(data(idData).toInt(), true);
 				_presentationModel->notifyButtonEnabled();
 			}
 		}
@@ -79,6 +80,7 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 		{
 			_isSelected = false;
 			_presentationModel->setDeleteEnabled(false);
+			_presentationModel->setNodeSelected(data(idData).toInt(), false);
 			_presentationModel->notifyButtonEnabled();
 		}
 	}

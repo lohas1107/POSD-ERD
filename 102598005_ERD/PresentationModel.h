@@ -55,6 +55,9 @@ public:
 	bool getDeleteEnabled();
 	void setDeleteEnabled(bool isEnabled);
 	void notifyButtonEnabled();
+	void setNodeSelected(int id, bool isSelected);
+	int getSelectedID();
+
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

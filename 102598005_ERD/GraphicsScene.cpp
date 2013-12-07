@@ -181,3 +181,13 @@ void GraphicsScene::updateChecked()
 {
 	emit updateButton(); 
 }
+
+void GraphicsScene::clickDeleteEvent()
+{
+	int id = _presentationModel->getSelectedID();
+	if (_presentationModel->isIDExsit(id))
+	{
+		_presentationModel->deleteComponentCommand(id);
+		_presentationModel->notify();
+	}
+}

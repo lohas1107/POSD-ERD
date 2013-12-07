@@ -169,9 +169,6 @@ void GUI::createCanvas()
 void GUI::setTableModel()
 {
 	_tableModel = new TableModel(_presentationModel);
-	QStringList labels;
-	labels << "Type" << "Text";
-	_tableModel->setHorizontalHeaderLabels(labels);
 	_tableModel->setTableData();
 	_tableView->setModel(_tableModel);
 	connect(_tableView, SIGNAL(editChanged(const QModelIndex*)), _tableModel, SLOT(editChanged(const QModelIndex*)));
@@ -235,7 +232,7 @@ void GUI::clickPrimaryKeyEvent()
 
 void GUI::clickDeleteEvent()
 {
-	
+	_scene->clickDeleteEvent();
 }
 
 void GUI::update()

@@ -90,6 +90,8 @@ public:
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);
+	void setNodeSelected(int id, bool isSelected);
+	int getSelectedID();
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

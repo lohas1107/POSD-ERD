@@ -32,6 +32,8 @@ public:
 	bool hasConnection(int id);
 	QPointF getPosition();
 	void setPosition(QPointF position);
+	bool isSelected();
+	void setSelected(bool isSelected);
 	virtual void connectTo(ERComponent* component);
 	virtual bool canConnectTo(ERComponent* component) = 0;
 	void disconnectTo(int id);
@@ -43,6 +45,7 @@ protected:
 	pair<Type, string> _type;
 	string _text;
 	QPointF _position;
+	bool _isSelected;
 	vector<ERComponent*> _connections;
 };
 

@@ -24,7 +24,12 @@ Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
 
 void TableModel::setTableData()
 {
+	this->clear();
 	vector<ERComponent*> components = _presentationModel->getComponents();
+
+	QStringList labels;
+	labels << "Type" << "Text";
+	setHorizontalHeaderLabels(labels);
 
 	for (unsigned i = 0; i < components.size(); i++)
 	{

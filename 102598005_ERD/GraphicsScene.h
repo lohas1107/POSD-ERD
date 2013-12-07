@@ -32,6 +32,7 @@ public:
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void updateChecked();
+	void clickDeleteEvent();
 
 signals:
 	void updateButton();
