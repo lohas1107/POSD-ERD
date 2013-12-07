@@ -169,9 +169,6 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="TableModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TableModel.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -189,6 +186,9 @@
     </ClCompile>
     <ClCompile Include="SetPrimaryKeyState.cpp">
       <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="TableModel.cpp">
+      <Filter>Source Files\MVC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,11 +319,11 @@
     <CustomBuild Include="TextUI.h">
       <Filter>Header Files\MVC</Filter>
     </CustomBuild>
-    <CustomBuild Include="TableModel.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="TableView.h">
       <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TableModel.h">
+      <Filter>Header Files\MVC</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>
