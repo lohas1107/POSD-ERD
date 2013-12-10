@@ -276,23 +276,14 @@ void PresentationModel::setNodePosition(int id, QPointF position)
 {
 	_erModel->setNodePosition(id, position);
 }
-//
-//void PresentationModel::setTableData(QStandardItemModel* tableModel)
-//{
-//	vector<ERComponent*> components = _erModel->getComponentList();
-//
-//	for (unsigned i = 0; i < components.size(); i++)
-//	{
-//		tableModel->setItem(i, 0, new QStandardItem(QString::fromStdString(components[i]->getType().second)));
-//		tableModel->setItem(i, 1, new QStandardItem(QString::fromStdString(components[i]->getText())));
-//	}
-//}
 
+// 訂閱model
 void PresentationModel::attach(Observer* observer)
 {
 	_erModel->attach(observer);
 }
 
+// 是否可以編輯
 bool PresentationModel::isEditable(int index)
 {
 	ERComponent* component = _erModel->getComponentList()[index];
@@ -304,72 +295,74 @@ bool PresentationModel::isEditable(int index)
 	return true;
 }
 
+// 更新提醒
 void PresentationModel::notify()
 {
 	_erModel->notify();
 }
 
+// 是否沒有任何component
 bool PresentationModel::isComponentEmpty()
 {
 	return getComponentSize() == 0;
 }
 
+// 是否可以設定 primary key
 bool PresentationModel::canSetPrimaryKey(int id)
 {
 	return _erModel->canSetPrimaryKey(id);
 }
 
-//bool PresentationModel::getDeleteEnabled()
-//{
-//	return _isDeleteEnabled && _isPointerChecked;
-//}
-//
-//void PresentationModel::setDeleteEnabled(bool isEnabled)
-//{
-//	_isDeleteEnabled = isEnabled;
-//}
-
+// 提示更新按鈕狀態
 void PresentationModel::notifyButtonEnabled()
 {
 	_erModel->notifyButtonEnabled();
 }
 
+// 設定選取節點
 void PresentationModel::setNodeSelected(int id, bool isSelected)
 {
 	_erModel->setNodeSelected(id, isSelected);
 }
-//
+
+// 取得選取節點的id
 int PresentationModel::getSelectedID()
 {
 	return _erModel->getSelectedID();
 }
 
+// 取得pointer 按鈕是否選取
 bool PresentationModel::getPointerButtonChecked()
 {
 	return _isPointerChecked;
 }
 
+// 設定pointer 按鈕是否選取
 void PresentationModel::setPointerButtonChecked(bool isChecked)
 {
 	_isPointerChecked = isChecked;
 }
 
+// 是否顯示刪除按鈕
 bool PresentationModel::isDeleteEnabled()
 {
 	return _erModel->isDeleteEnabled() && _isPointerChecked;
 }
 
+// 清除選取項目
 void PresentationModel::clearSelected()
 {
 	_erModel->clearSelected();
 }
 
+// 編輯文字
 void PresentationModel::editText(int index, string text)
 {
 	string previousText = getComponents()[index]->getText();
 	_commandManager.execute(new EditTextCommand(_erModel, index, previousText, text));
 }
 
+// 設定節點為primary key'
 void PresentationModel::setNodePrimaryKey(int pointID)
 {
 	_commandManager.execute(new SetPrimaryKeyCommand(_erModel, pointID));

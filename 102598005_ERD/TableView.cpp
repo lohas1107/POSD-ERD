@@ -1,5 +1,4 @@
 #include "TableView.h"
-#include <QDebug>
 
 TableView::TableView()
 {
@@ -18,6 +17,7 @@ void TableView::doubleClicked(const QModelIndex &index)
 	_index = &index;
 }
 
+// 結束編輯器事件
 void TableView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint)
 {
 	QTableView::closeEditor(editor, hint);

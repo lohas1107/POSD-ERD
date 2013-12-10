@@ -8,6 +8,7 @@
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
+const int TABLE_VIEW_WIDTH = 220;
 
 GUI::GUI(PresentationModel* presentationModel)
 {
@@ -20,7 +21,6 @@ GUI::GUI(PresentationModel* presentationModel)
 	createCanvas();
 	setTableModel();
 	updateButtonEnabled();
-	//connect(_scene, SIGNAL(updateButton()), this, SLOT(updatePointerButton()));
 	_presentationModel->attach(this);
 }
 
@@ -87,7 +87,6 @@ void GUI::createActionGroup()
 	_actionGroup = new QActionGroup(this);
 	_actionGroup->setExclusive(true);
 	_pointerAction->setCheckable(true);
-	//updatePointerButton();
 	_actionGroup->addAction(_pointerAction);
 	_connectAction->setCheckable(true);
 	_actionGroup->addAction(_connectAction);
@@ -99,10 +98,9 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_relationAction);
 	_keyAction->setCheckable(true);
 	_actionGroup->addAction(_keyAction);
-	//_deleteAction->setCheckable(true);
-	//_actionGroup->addAction(_deleteAction);
 }
 
+// 更新按鈕狀態
 void GUI::updateButtonEnabled()
 {
 	_undoAction->setEnabled(_presentationModel->canUndo());
@@ -110,12 +108,6 @@ void GUI::updateButtonEnabled()
 	_pointerAction->setChecked(_presentationModel->getPointerButtonChecked());
 	_deleteAction->setEnabled(_presentationModel->isDeleteEnabled());
 }
-
-// 更新選取 pointer button
-//void GUI::updatePointerButton()
-//{
-//	_pointerAction->setChecked(true);
-//}
 
 // 產生選單
 void GUI::createMenus()
@@ -155,21 +147,20 @@ void GUI::createCanvas()
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	_view = new QGraphicsView(_scene);
 	_scene->setParent(_view);
-
 	_vLayout = new QVBoxLayout();
 	_vLayout->addWidget(new QLabel("Components"), 0, Qt::AlignCenter);
 	_tableView = new TableView();
-	_tableView->setMinimumWidth(220);
+	_tableView->setMinimumWidth(TABLE_VIEW_WIDTH);
 	_vLayout->addWidget(_tableView);
 	_hLayout = new QHBoxLayout();
 	_hLayout->addWidget(_view);
 	_hLayout->addLayout(_vLayout);
-
 	_widget = new QWidget();
 	_widget->setLayout(_hLayout);
 	setCentralWidget(_widget);
 }
 
+// 設定 table model
 void GUI::setTableModel()
 {
 	_tableModel = new TableModel(_presentationModel);
@@ -181,12 +172,10 @@ void GUI::setTableModel()
 // 開啟檔案
 void GUI::openFile()
 {
-	//updatePointerButton();
 	clickPointerEvent();
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
 	_presentationModel->composePosition();
-	//_scene->draw();
 	update();
 }
 
@@ -220,26 +209,31 @@ void GUI::clickRelationEvent()
 	_scene->clickRelationEvent();
 }
 
+// 點擊 undo 事件
 void GUI::clickUndoEvent()
 {
 	_scene->clickUndoEvent();
 }
 
+// 點擊 redo 事件
 void GUI::clickRedoEvent()
 {
 	_scene->clickRedoEvent();
 }
 
+// 點擊 primary key 事件
 void GUI::clickPrimaryKeyEvent()
 {
 	_scene->clickPrimaryKeyEvent();
 }
 
+// 點擊刪除事件
 void GUI::clickDeleteEvent()
 {
 	_scene->clickDeleteEvent();
 }
 
+// 更新畫面
 void GUI::update()
 {
 	updateButtonEnabled();

@@ -16,12 +16,14 @@ State::~State()
 	delete _pointItem;
 }
 
+// 初始化
 void State::initialize()
 {
 	_pointItem = NULL;
 	_pointID = INT_MIN;
 }
 
+// 取得選取item的id
 int State::getItemID(QPointF position)
 {
 	_pointItem = _scene->itemAt(position);

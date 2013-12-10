@@ -146,11 +146,13 @@ ERComponent* ERComponent::clone()
 	return component;
 }
 
+// 是否被選取
 bool ERComponent::isSelected()
 {
 	return _isSelected;
 }
 
+// 設定選取
 void ERComponent::setSelected(bool isSelected)
 {
 	_isSelected = isSelected;

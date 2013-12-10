@@ -10,6 +10,7 @@ TableModel::~TableModel()
 {
 }
 
+// 設定table item狀態
 Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
 {
 	if (index.column() == 0 || !_presentationModel->isEditable(index.row()))
@@ -22,6 +23,7 @@ Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
 	}
 }
 
+// 設定表格資料
 void TableModel::setTableData()
 {
 	this->clear();
@@ -38,13 +40,12 @@ void TableModel::setTableData()
 	}
 }
 
+// 編輯修改事件
 void TableModel::editChanged(const QModelIndex* index)
 {
 	if (index != NULL)
 	{
 		_presentationModel->editText(index->row(), index->data().toString().toStdString());
-		//ERComponent* component = _presentationModel->getComponents()[index->row()];
-		//component->setText(index->data().toString().toStdString());
 		_presentationModel->notify();
 	}
 }

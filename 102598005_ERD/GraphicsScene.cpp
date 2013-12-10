@@ -65,10 +65,8 @@ GraphicsItem* GraphicsScene::createGraphicsItem(Type type)
 void GraphicsScene::draw()
 {
 	vector<ERComponent*> components = _presentationModel->getComponents();
-	//item;
 
 	clear();
-	//clearItem();
 	for (unsigned i = 0; i < components.size(); i++)
 	{
 		GraphicsItem* item = createGraphicsItem(components[i]->getType().first);
@@ -87,7 +85,6 @@ void GraphicsScene::draw()
 			item->setZValue(-1);
 		}
 		addItem(item);
-		//_graphicsItems.push_back(item);
 	}
 	update(0, 0, width(), height());
 }
@@ -131,7 +128,6 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void GraphicsScene::changeState(State* state)
 {
 	State* toDelete = _currentState;
-	//_presentationModel->clearSelected();
 	_currentState = state;
 	delete toDelete;
 }
@@ -171,12 +167,14 @@ void GraphicsScene::clickRelationEvent()
 	((QGraphicsView*)parent())->setMouseTracking(true);
 }
 
+// 헕을 primary key ㉵τ
 void GraphicsScene::clickPrimaryKeyEvent()
 {
 	changeState(new SetPrimaryKeyState(this));
 	((QGraphicsView*)parent())->setMouseTracking(false);
 }
 
+// 헕을쬟간㉵τ
 void GraphicsScene::clickDeleteEvent()
 {
 	int id = _presentationModel->getSelectedID();
@@ -187,20 +185,16 @@ void GraphicsScene::clickDeleteEvent()
 	}
 }
 
+// 헕을 undo ㉵τ
 void GraphicsScene::clickUndoEvent()
 {
 	_presentationModel->undo();
 	_presentationModel->notify();
 }
 
+// 헕을 redo ㉵τ
 void GraphicsScene::clickRedoEvent()
 {
 	_presentationModel->redo();
 	_presentationModel->notify();
 }
-
-// �着s울¾ヶ턵
-//void GraphicsScene::updateChecked()
-//{
-//	emit updateButton(); 
-//}

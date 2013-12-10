@@ -57,7 +57,6 @@ void ERModel::addComponent(pair<Type, string> type, string text, QPointF positio
 	_currentComponent->setText(text);
 	_currentComponent->setPosition(position);
 	_components.push_back(_currentComponent);
-	//notify();
 }
 
 // 插入元件
@@ -590,6 +589,7 @@ void ERModel::setNodePosition(int id, QPointF position)
 	getComponent(id)->setPosition(position);
 }
 
+// 是否可以設定為 primary key
 bool ERModel::canSetPrimaryKey(int id)
 {
 	if (getComponent(id)->isType(attribute) && !getComponent(id)->getConnection().empty())
@@ -599,11 +599,13 @@ bool ERModel::canSetPrimaryKey(int id)
 	return false;
 }
 
+// 設定選取節點
 void ERModel::setNodeSelected(int id, bool isSelected)
 {
 	getComponent(id)->setSelected(isSelected);
 }
 
+// 取得選取節點的id
 int ERModel::getSelectedID()
 {
 	for (unsigned i = 0; i < _components.size(); i++)
@@ -616,6 +618,7 @@ int ERModel::getSelectedID()
 	return INT_MIN;
 }
 
+// 是否可以顯示刪除按鈕
 bool ERModel::isDeleteEnabled()
 {
 	if (isIDExsit(getSelectedID()))
@@ -625,6 +628,7 @@ bool ERModel::isDeleteEnabled()
 	return false;
 }
 
+// 清除選取
 void ERModel::clearSelected()
 {
 	for (unsigned i = 0; i < _components.size(); i++)
@@ -633,11 +637,13 @@ void ERModel::clearSelected()
 	}
 }
 
+// 設定節點文字
 void ERModel::setNodeText(int index, string text)
 {
 	_components[index]->setText(text);
 }
 
+// 設定節點為 primary key
 void ERModel::setNodePrimaryKey(int id, bool isPrimaryKey)
 {
 	((AttributeNode*)getComponent(id))->setPrimaryKey(isPrimaryKey);
