@@ -311,6 +311,30 @@
     <None Include="Resources\undo.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\copy.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\paste.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\db.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\foreign_key.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\primary_key.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\save.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cut.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\about.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="GUI.h">

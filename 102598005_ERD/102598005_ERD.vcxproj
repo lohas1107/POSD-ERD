@@ -174,16 +174,24 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\about.png" />
+    <None Include="Resources\copy.png" />
     <None Include="Resources\cursor.png" />
+    <None Include="Resources\cut.png" />
+    <None Include="Resources\db.png" />
     <None Include="Resources\delete.png" />
     <None Include="Resources\ellipse.png" />
     <None Include="Resources\exit.png" />
+    <None Include="Resources\foreign_key.png" />
     <None Include="Resources\key.png" />
     <None Include="Resources\line.png" />
     <None Include="Resources\open.png" />
+    <None Include="Resources\paste.png" />
+    <None Include="Resources\primary_key.png" />
     <None Include="Resources\rectangle.png" />
     <None Include="Resources\redo.png" />
     <None Include="Resources\rhombus.png" />
+    <None Include="Resources\save.png" />
     <None Include="Resources\undo.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
