@@ -15,6 +15,7 @@ GUI::GUI(PresentationModel* presentationModel)
 	_presentationModel = presentationModel;
 	setWindowTitle("Entity Relation Diagramming Tool");	
 	createActions();
+	connectActions();
 	createActionGroup();
 	createMenus();
 	createToolBars();
@@ -27,7 +28,7 @@ GUI::GUI(PresentationModel* presentationModel)
 GUI::~GUI()
 {
 	delete _actionGroup;
-	delete _fileAction;
+	delete _loadFileAction;
 	delete _exitAction;
 	delete _undoAction;
 	delete _redoAction;
@@ -38,8 +39,16 @@ GUI::~GUI()
 	delete _relationAction;
 	delete _keyAction;
 	delete _deleteAction;
+	delete _saveFileAction;
+	delete _cutAction;
+	delete _copyAction;
+	delete _pasteAction;
+	delete _aboutAction;
+	//delete _dbTableAction;
 	delete _fileMenu;
 	delete _addMenu;
+	delete _editMenu;
+	delete _helpMenu;
 	delete _fileToolBar;
 	delete _editToolBar;
 	delete _scene;
@@ -55,30 +64,51 @@ GUI::~GUI()
 // 產生動作
 void GUI::createActions()
 {
-	_fileAction = new QAction(QIcon("Resources/open.png"), "Open...", this);
-	_fileAction->setShortcut(Qt::CTRL + Qt::Key_O);
-	connect(_fileAction, SIGNAL(triggered()), this, SLOT(openFile()));
+	_loadFileAction = new QAction(QIcon("Resources/open.png"), "Open...", this);
+	_loadFileAction->setShortcut(Qt::CTRL + Qt::Key_O);
+	_saveFileAction = new QAction(QIcon("Resources/save.png"), "Save", this);
+	_saveFileAction->setShortcut(Qt::CTRL + Qt::Key_S);
 	_exitAction = new QAction(QIcon("Resources/exit.png"), "Exit", this);
-	_exitAction->setShortcut(Qt::CTRL + Qt::Key_X);
-	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
+	//_exitAction->setShortcut(Qt::CTRL + Qt::Key_X);
 	_undoAction = new QAction(QIcon("Resources/undo.png"), "Undo", this);
-	connect(_undoAction, SIGNAL(triggered()), this, SLOT(clickUndoEvent()));
+	_undoAction->setShortcut(Qt::CTRL + Qt::Key_Z);
 	_redoAction = new QAction(QIcon("Resources/redo.png"), "Redo", this);
-	connect(_redoAction, SIGNAL(triggered()), this, SLOT(clickRedoEvent()));
-	_pointerAction = new QAction(QIcon("Resources/cursor.png"), "Pointer", this);
-	connect(_pointerAction, SIGNAL(triggered()), this, SLOT(clickPointerEvent()));
-	_connectAction = new QAction(QIcon("Resources/line.png"), "Connect", this);
-	connect(_connectAction, SIGNAL(triggered()), this, SLOT(clickConnectEvent()));
-	_attributeAction = new QAction(QIcon("Resources/ellipse.png"), "Attribute", this);
-	connect(_attributeAction, SIGNAL(triggered()), this, SLOT(clickAttributeEvent()));
-	_entityAction = new QAction(QIcon("Resources/rectangle.png"), "Entity", this);
-	connect(_entityAction, SIGNAL(triggered()), this, SLOT(clickEntityEvent()));
-	_relationAction = new QAction(QIcon("Resources/rhombus.png"), "Relation", this);
-	connect(_relationAction, SIGNAL(triggered()), this, SLOT(clickRelationEvent()));
-	_keyAction = new QAction(QIcon("Resources/key.png"), "Primary key", this);
-	connect(_keyAction, SIGNAL(triggered()), this, SLOT(clickPrimaryKeyEvent()));
+	_redoAction->setShortcut(Qt::CTRL + Qt::Key_Y);
+	_cutAction = new QAction(QIcon("Resources/cut.png"), "Cut", this);
+	_cutAction->setShortcut(Qt::CTRL + Qt::Key_X);
+	_copyAction = new QAction(QIcon("Resources/copy.png"), "Copy", this);
+	_copyAction->setShortcut(Qt::CTRL + Qt::Key_C);
+	_pasteAction = new QAction(QIcon("Resources/paste.png"), "Paste", this);
+	_pasteAction->setShortcut(Qt::CTRL + Qt::Key_V);
 	_deleteAction = new QAction(QIcon("Resources/delete.png"), "Delete", this);
+	_deleteAction->setShortcut(Qt::Key_Delete);
+	_pointerAction = new QAction(QIcon("Resources/cursor.png"), "Pointer", this);
+	_connectAction = new QAction(QIcon("Resources/line.png"), "Connect", this);
+	_attributeAction = new QAction(QIcon("Resources/ellipse.png"), "Attribute", this);
+	_entityAction = new QAction(QIcon("Resources/rectangle.png"), "Entity", this);
+	_relationAction = new QAction(QIcon("Resources/rhombus.png"), "Relation", this);
+	_keyAction = new QAction(QIcon("Resources/key.png"), "Primary key", this);
+	_aboutAction = new QAction(QIcon("Resources/about.png"), "About", this);
+}
+
+void GUI::connectActions()
+{	
+	connect(_loadFileAction, SIGNAL(triggered()), this, SLOT(openFile()));
+	connect(_saveFileAction, SIGNAL(triggered()), this, SLOT(saveFile()));
+	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
+	connect(_undoAction, SIGNAL(triggered()), this, SLOT(clickUndoEvent()));
+	connect(_redoAction, SIGNAL(triggered()), this, SLOT(clickRedoEvent()));
+	connect(_cutAction, SIGNAL(triggered()), this, SLOT(clickCutEvent()));
+	connect(_copyAction, SIGNAL(triggered()), this, SLOT(clickCopyEvent()));
+	connect(_pasteAction, SIGNAL(triggered()), this, SLOT(clickPasteEvent()));
 	connect(_deleteAction, SIGNAL(triggered()), this, SLOT(clickDeleteEvent()));
+	connect(_pointerAction, SIGNAL(triggered()), this, SLOT(clickPointerEvent()));
+	connect(_connectAction, SIGNAL(triggered()), this, SLOT(clickConnectEvent()));
+	connect(_attributeAction, SIGNAL(triggered()), this, SLOT(clickAttributeEvent()));
+	connect(_entityAction, SIGNAL(triggered()), this, SLOT(clickEntityEvent()));
+	connect(_relationAction, SIGNAL(triggered()), this, SLOT(clickRelationEvent()));
+	connect(_keyAction, SIGNAL(triggered()), this, SLOT(clickPrimaryKeyEvent()));
+	connect(_aboutAction, SIGNAL(triggered()), this, SLOT(clickAboutEvent()));
 }
 
 // 產生 ActionGroup
@@ -113,31 +143,45 @@ void GUI::updateButtonEnabled()
 void GUI::createMenus()
 {
 	_fileMenu = menuBar()->addMenu("File");
-	_fileMenu->addAction(_fileAction);
+	_fileMenu->addAction(_loadFileAction);
+	_fileMenu->addAction(_saveFileAction);
 	_fileMenu->addAction(_exitAction);
 	_addMenu = menuBar()->addMenu("Add");
 	_addMenu->addAction(_attributeAction);
 	_addMenu->addAction(_entityAction);
 	_addMenu->addAction(_relationAction);
+	_editMenu = menuBar()->addMenu("Edit");
+	_editMenu->addAction(_undoAction);
+	_editMenu->addAction(_redoAction);
+	_editMenu->addAction(_cutAction);
+	_editMenu->addAction(_copyAction);
+	_editMenu->addAction(_pasteAction);
+	_editMenu->addAction(_deleteAction);
+	_helpMenu = menuBar()->addMenu("Help");
+	_helpMenu->addAction(_aboutAction);
 }
 
 // 產生工具列
 void GUI::createToolBars()
 {
 	_fileToolBar = addToolBar("File");
-	_fileToolBar->addAction(_fileAction);
+	_fileToolBar->addAction(_loadFileAction);
+	_fileToolBar->addAction(_saveFileAction);
 	_fileToolBar->addAction(_exitAction);
-	_fileToolBar->addAction(_undoAction);
-	_fileToolBar->addAction(_redoAction);
 	_editToolBar = addToolBar("Edit");
+	_editToolBar->addAction(_undoAction);
+	_editToolBar->addAction(_redoAction);
+	_editToolBar->addAction(_cutAction);
+	_editToolBar->addAction(_copyAction);
+	_editToolBar->addAction(_pasteAction);
+	_editToolBar->addAction(_deleteAction);
+	_editToolBar->addSeparator();
 	_editToolBar->addAction(_pointerAction);
 	_editToolBar->addAction(_connectAction);
-	_editToolBar->addSeparator();
 	_editToolBar->addAction(_attributeAction);
 	_editToolBar->addAction(_entityAction);
 	_editToolBar->addAction(_relationAction);
 	_editToolBar->addAction(_keyAction);
-	_editToolBar->addAction(_deleteAction);
 }
 
 // 產生畫布
@@ -177,6 +221,11 @@ void GUI::openFile()
 	_presentationModel->loadFile(fileName.toStdString());
 	_presentationModel->composePosition();
 	update();
+}
+
+void GUI::saveFile()
+{
+
 }
 
 // 點擊 pointer 事件
@@ -231,6 +280,26 @@ void GUI::clickPrimaryKeyEvent()
 void GUI::clickDeleteEvent()
 {
 	_scene->clickDeleteEvent();
+}
+
+void GUI::clickCutEvent()
+{
+
+}
+
+void GUI::clickCopyEvent()
+{
+
+}
+
+void GUI::clickPasteEvent()
+{
+
+}
+
+void GUI::clickAboutEvent()
+{
+
 }
 
 // 更新畫面

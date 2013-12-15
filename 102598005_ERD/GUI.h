@@ -29,6 +29,7 @@ public:
 	
 private slots:
 	void openFile();
+	void saveFile();
 	void clickPointerEvent();
 	void clickConnectEvent();
 	void clickAttributeEvent();
@@ -38,10 +39,15 @@ private slots:
 	void clickRedoEvent();
 	void clickPrimaryKeyEvent();
 	void clickDeleteEvent();
+	void clickCutEvent();
+	void clickCopyEvent();
+	void clickPasteEvent();
+	void clickAboutEvent();
 	void updateButtonEnabled();
 
 private:
 	void createActions();
+	void connectActions();
 	void createActionGroup();
 	void createMenus();
 	void createToolBars();
@@ -49,7 +55,7 @@ private:
 	void setTableModel();
 	PresentationModel* _presentationModel;
 	QActionGroup* _actionGroup;
-	QAction* _fileAction;
+	QAction* _loadFileAction;
 	QAction* _exitAction;
 	QAction* _undoAction;
 	QAction* _redoAction;
@@ -60,8 +66,16 @@ private:
 	QAction* _relationAction;
 	QAction* _keyAction;
 	QAction* _deleteAction;
+	QAction* _saveFileAction;
+	QAction* _cutAction;
+	QAction* _copyAction;
+	QAction* _pasteAction;
+	QAction* _aboutAction;
+	//QAction* _dbTableAction;
 	QMenu* _fileMenu;
 	QMenu* _addMenu;
+	QMenu* _editMenu;
+	QMenu* _helpMenu;
 	QToolBar* _fileToolBar;
 	QToolBar* _editToolBar;
 	GraphicsScene* _scene;
