@@ -299,7 +299,7 @@ void GUI::clickPasteEvent()
 
 void GUI::clickAboutEvent()
 {
-
+	_scene->clickAboutEvent();
 }
 
 // 更新畫面
