@@ -65,6 +65,12 @@
     <Filter Include="Source Files\MVC">
       <UniqueIdentifier>{71908958-d887-4691-8fea-d5b2807704e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Visitor">
+      <UniqueIdentifier>{f20a01d4-d45c-4f1f-8b75-5b56eff14f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visitor">
+      <UniqueIdentifier>{07cefbf9-90dc-456b-ada3-e59218a47e98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,6 +196,15 @@
     <ClCompile Include="SetPrimaryKeyCommand.cpp">
       <Filter>Source Files\Command</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveComponentVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveXmlComponentVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
@@ -275,6 +290,15 @@
     </ClInclude>
     <ClInclude Include="SetPrimaryKeyCommand.h">
       <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveComponentVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveXmlComponentVisitor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
