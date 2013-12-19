@@ -17,6 +17,7 @@
     <ClCompile Include="..\102598005_ERD\Command.cpp" />
     <ClCompile Include="..\102598005_ERD\CommandManager.cpp" />
     <ClCompile Include="..\102598005_ERD\ComponentFactory.cpp" />
+    <ClCompile Include="..\102598005_ERD\ComponentVisitor.cpp" />
     <ClCompile Include="..\102598005_ERD\ConnectComponentCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\Connector.cpp" />
     <ClCompile Include="..\102598005_ERD\ConnectState.cpp" />
@@ -37,6 +38,8 @@
     <ClCompile Include="..\102598005_ERD\PointerState.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
     <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />
+    <ClCompile Include="..\102598005_ERD\SaveComponentVisitor.cpp" />
+    <ClCompile Include="..\102598005_ERD\SaveXmlComponentVisitor.cpp" />
     <ClCompile Include="..\102598005_ERD\SetPrimaryKeyCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\SetPrimaryKeyState.cpp" />
     <ClCompile Include="..\102598005_ERD\State.cpp" />

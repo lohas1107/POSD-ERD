@@ -1,6 +1,8 @@
 #include "EntityNode.h"
 #include "AttributeNode.h"
+#include "ComponentVisitor.h"
 
+const string SINGLE_COMMA = ",";
 const string COMMA = ", ";
 const string STRING_EMPTY = "";
 const int COMMA_SPACE = 2;
@@ -108,6 +110,24 @@ vector<int> EntityNode::getPrimaryKey()
 	return primaryKey;
 }
 
+std::string EntityNode::getPrimaryKeyString()
+{
+	vector<int> primaryKey = getPrimaryKey();
+	string primaryKeyString;
+
+	for (unsigned i = 0; i < primaryKey.size(); i++)
+	{
+		primaryKeyString += SINGLE_COMMA + to_string((long long)primaryKey[i]);
+	}
+
+	if (primaryKey.size() > 0)
+	{
+		primaryKeyString = primaryKeyString.substr(1);
+	}
+
+	return primaryKeyString;
+}
+
 // ³]©w attributes ¦r¦ê
 void EntityNode::setAttributeString(string &primaryKey, string &attributeString)
 {
@@ -154,4 +174,9 @@ string EntityNode::getTable()
 	sprintf_s(buffer, TABLE_SPACE, TABLE_LINE.c_str(), _text.c_str(), primaryKey.c_str(), attributes.c_str(), _foreignKey.c_str());
 	string table = buffer;
 	return table;
+}
+
+void EntityNode::accept(ComponentVisitor* visitor)
+{
+	visitor->visit(this);
 }

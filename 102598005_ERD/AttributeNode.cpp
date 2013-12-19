@@ -1,5 +1,6 @@
 #include "AttributeNode.h"
 #include "ComponentFactory.h"
+#include "ComponentVisitor.h"
 
 AttributeNode::AttributeNode() : Node(make_pair(attribute, TYPE_ATTRIBUTE))
 {
@@ -49,4 +50,9 @@ ERComponent* AttributeNode::clone()
 	component->setPosition(_position);
 	((AttributeNode*)component)->setPrimaryKey(_isPrimaryKey);
 	return component;
+}
+
+void AttributeNode::accept(ComponentVisitor* visitor)
+{
+	visitor->visit(this);
 }

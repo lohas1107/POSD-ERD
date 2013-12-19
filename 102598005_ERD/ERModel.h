@@ -84,9 +84,10 @@ public:
 	void loadComponent(vector<string> content);
 	void loadConnection(vector<string> content);
 	void loadPrimaryKey(vector<string> content);
-	string saveComponent();
-	string saveConnection();
-	string savePrimaryKey();
+	//string saveComponent();
+	//string saveConnection();
+	//string savePrimaryKey();
+	string saveFile();
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);

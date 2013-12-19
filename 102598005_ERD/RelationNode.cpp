@@ -1,4 +1,5 @@
 #include "RelationNode.h"
+#include "ComponentVisitor.h"
 
 const int PAIR = 2;
 
@@ -38,4 +39,9 @@ vector<pair<int, int>> RelationNode::getRelationPair()
 	}
 
 	return relationPair;
+}
+
+void RelationNode::accept(ComponentVisitor* visitor)
+{
+	visitor->visit(this);
 }

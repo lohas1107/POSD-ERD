@@ -213,6 +213,11 @@ bool PresentationModel::loadFile(string filePath)
 // Àx¦sÀÉ®×
 bool PresentationModel::saveFile(string filePath)
 {
+	if (filePath == STRING_EMPTY)
+	{
+		return false;
+	}
+
 	makeDirectory(filePath);
 	ofstream file(filePath);
 
@@ -221,9 +226,10 @@ bool PresentationModel::saveFile(string filePath)
 		return false;
 	}
 
-	file << _erModel->saveComponent();
-	file << _erModel->saveConnection();
-	file << _erModel->savePrimaryKey();
+	//file << _erModel->saveComponent();
+	//file << _erModel->saveConnection();
+	//file << _erModel->savePrimaryKey();
+	file << _erModel->saveFile();
 	file.close();
 	return true;
 }

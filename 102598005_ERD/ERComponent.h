@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <QPointF>
+//#include "ComponentVisitor.h"
 
 using namespace std;
 
@@ -16,17 +17,18 @@ enum Type {
 	all
 };
 
+class ComponentVisitor;
 class ERComponent
 {
 public:
-	ERComponent(pair<Type, string> type);
+	ERComponent(pair<Type, std::string> type);
 	virtual ~ERComponent();
 	int getID();
 	void setID(int id);
-	pair<Type, string> getType();
+	pair<Type, std::string> getType();
 	bool isType(Type type);
-	string getText();
-	virtual void setText(string text);
+	std::string getText();
+	virtual void setText(std::string text);
 	vector<ERComponent*> getConnection();
 	void setConnection(vector<ERComponent*> connections);
 	bool hasConnection(int id);
@@ -37,8 +39,9 @@ public:
 	virtual void connectTo(ERComponent* component);
 	virtual bool canConnectTo(ERComponent* component) = 0;
 	void disconnectTo(int id);
-	string getData(Type type);
+	std::string getData(Type type);
 	virtual ERComponent* clone();
+	virtual void accept(ComponentVisitor* visitor) = 0;
 
 protected:
 	int _id;

@@ -1,6 +1,7 @@
 #include "ERModel.h"
 #include "Parser.h"
 #include <fstream>
+#include "SaveComponentVisitor.h"
 
 const string STRING_EMPTY = "";
 const string COMMA = ",";
@@ -333,20 +334,21 @@ vector<int> ERModel::getPrimaryKey(int entityID)
 // 取得 primary key id 字串
 string ERModel::getPrimaryKeyString(int entityID)
 {
-	vector<int> primaryKey = getPrimaryKey(entityID);
-	string primaryKeyString;
+	//vector<int> primaryKey = getPrimaryKey(entityID);
+	//string primaryKeyString;
 
-	for (unsigned i = 0; i < primaryKey.size(); i++)
-	{
-		primaryKeyString += COMMA + to_string((long long)primaryKey[i]);
-	}
+	//for (unsigned i = 0; i < primaryKey.size(); i++)
+	//{
+	//	primaryKeyString += COMMA + to_string((long long)primaryKey[i]);
+	//}
 
-	if (primaryKey.size() > 0)
-	{
-		primaryKeyString = primaryKeyString.substr(1);
-	}
+	//if (primaryKey.size() > 0)
+	//{
+	//	primaryKeyString = primaryKeyString.substr(1);
+	//}
 
-	return primaryKeyString;
+	//return primaryKeyString;
+	return ((EntityNode*)getComponent(entityID))->getPrimaryKeyString();
 }
 
 // 取得 primary key 字串
@@ -516,44 +518,57 @@ void ERModel::loadPrimaryKey(vector<string> content)
 }
 
 // 儲存元件
-string ERModel::saveComponent()
-{
-	string component;
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		component += _components[i]->getType().second[0] + COMMA_SPACE + _components[i]->getText() + NEXT_LINE;
-	}
-	component += NEXT_LINE;
-	return component;
-}
+//string ERModel::saveComponent()
+//{
+//	string component;
+//	for (unsigned i = 0; i < _components.size(); i++)
+//	{
+//		component += _components[i]->getType().second[0] + COMMA_SPACE + _components[i]->getText() + NEXT_LINE;
+//	}
+//	component += NEXT_LINE;
+//	return component;
+//}
+//
+//// 儲存連結
+//string ERModel::saveConnection()
+//{
+//	string connections;
+//	for (unsigned i = 0; i < _components.size(); i++)
+//	{
+//		if (_components[i]->isType(connection))
+//		{
+//			connections += to_string((long long)_components[i]->getID()) + STRING_SPACE + ((Connector*)_components[i])->getConnection() + NEXT_LINE;
+//		}
+//	}
+//	connections += NEXT_LINE;
+//	return connections;
+//}
+//
+//// 儲存 primary key
+//string ERModel::savePrimaryKey()
+//{
+//	string primaryKey;
+//	for (unsigned i = 0; i < _components.size(); i++)
+//	{
+//		if (_components[i]->isType(entity) && hasAttribute(_components[i]->getID()))
+//		{
+//			primaryKey += to_string((long long)_components[i]->getID()) + STRING_SPACE + getPrimaryKeyString(_components[i]->getID()) + NEXT_LINE;
+//		}
+//	}
+//	return primaryKey;
+//}
 
-// 儲存連結
-string ERModel::saveConnection()
+// 儲存檔案
+string ERModel::saveFile()
 {
-	string connections;
-	for (unsigned i = 0; i < _components.size(); i++)
-	{
-		if (_components[i]->isType(connection))
-		{
-			connections += to_string((long long)_components[i]->getID()) + STRING_SPACE + ((Connector*)_components[i])->getConnection() + NEXT_LINE;
-		}
-	}
-	connections += NEXT_LINE;
-	return connections;
-}
+	ComponentVisitor* visitor = new SaveComponentVisitor();
 
-// 儲存 primary key
-string ERModel::savePrimaryKey()
-{
-	string primaryKey;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
-		if (_components[i]->isType(entity) && hasAttribute(_components[i]->getID()))
-		{
-			primaryKey += to_string((long long)_components[i]->getID()) + STRING_SPACE + getPrimaryKeyString(_components[i]->getID()) + NEXT_LINE;
-		}
+		_components[i]->accept(visitor);
 	}
-	return primaryKey;
+
+	return ((SaveComponentVisitor*)visitor)->getContentFile();
 }
 
 // 排座標

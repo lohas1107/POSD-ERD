@@ -11,6 +11,9 @@ public:
 	~RelationNode();
 	bool canConnectTo(ERComponent* component);
 	vector<pair<int, int>> getRelationPair();
+
+	virtual void accept(ComponentVisitor* visitor);
+
 };
 
 #endif

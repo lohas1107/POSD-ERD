@@ -5,6 +5,7 @@
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
 #include <QLabel>
+#include <QDebug>
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -225,7 +226,8 @@ void GUI::openFile()
 
 void GUI::saveFile()
 {
-
+	QString fileName = QFileDialog::getSaveFileName(this, "Save ERD files", "C:\\", "ERD Files (*.erd *xml)");
+	_presentationModel->saveFile(fileName.toStdString());
 }
 
 // ÂIÀ» pointer ¨Æ¥ó

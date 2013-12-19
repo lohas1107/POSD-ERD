@@ -1,5 +1,6 @@
 #include "Connector.h"
 #include "ComponentFactory.h"
+#include "ComponentVisitor.h"
 
 const string TYPE_CONNECTION = "Connection";
 const string CARDINALITY_ONE = "1";
@@ -119,4 +120,9 @@ ERComponent* Connector::clone()
 	((Connector*)component)->setConnection(connections);
 
 	return component;
+}
+
+void Connector::accept(ComponentVisitor* visitor)
+{
+	visitor->visit(this);
 }

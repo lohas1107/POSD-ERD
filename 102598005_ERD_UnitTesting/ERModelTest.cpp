@@ -449,31 +449,31 @@ TEST_F(ERModelTest, loadPrimaryKey)
 	EXPECT_TRUE(((AttributeNode*)_model._components[5])->isPrimaryKey());
 }
 
-// 測試儲存元件
-TEST_F(ERModelTest, saveComponent)
-{
-	EXPECT_EQ("E, PC\nA, Name\nR, Has\nC, \nC, 1\n\n", _model.saveComponent());
-	_model.clearComponent();
-	EXPECT_EQ("\n", _model.saveComponent());
-}
-
-// 測試儲存連結
-TEST_F(ERModelTest, saveConnection)
-{
-	loadConnection();
-	EXPECT_EQ("3 0,1\n4 0,2\n\n", _model.saveConnection());
-	_model._components.clear();
-	EXPECT_EQ("\n", _model.saveConnection());
-}
-
-// 測試儲存 primary key
-TEST_F(ERModelTest, savePrimaryKey)
-{
-	EXPECT_EQ("", _model.savePrimaryKey());
-
-	vector<string> content;
-	content.push_back("3 0,1");
-	_model.loadConnection(content);
-	((AttributeNode*)_model._components[1])->setPrimaryKey(true);
-	EXPECT_EQ("0 1\n", _model.savePrimaryKey());
-}
+//// 測試儲存元件
+//TEST_F(ERModelTest, saveComponent)
+//{
+//	EXPECT_EQ("E, PC\nA, Name\nR, Has\nC, \nC, 1\n\n", _model.saveComponent());
+//	_model.clearComponent();
+//	EXPECT_EQ("\n", _model.saveComponent());
+//}
+//
+//// 測試儲存連結
+//TEST_F(ERModelTest, saveConnection)
+//{
+//	loadConnection();
+//	EXPECT_EQ("3 0,1\n4 0,2\n\n", _model.saveConnection());
+//	_model._components.clear();
+//	EXPECT_EQ("\n", _model.saveConnection());
+//}
+//
+//// 測試儲存 primary key
+//TEST_F(ERModelTest, savePrimaryKey)
+//{
+//	EXPECT_EQ("", _model.savePrimaryKey());
+//
+//	vector<string> content;
+//	content.push_back("3 0,1");
+//	_model.loadConnection(content);
+//	((AttributeNode*)_model._components[1])->setPrimaryKey(true);
+//	EXPECT_EQ("0 1\n", _model.savePrimaryKey());
+//}

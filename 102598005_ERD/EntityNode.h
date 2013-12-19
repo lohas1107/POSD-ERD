@@ -16,9 +16,12 @@ public:
 	bool isAttribute(int attributeID);
 	bool hasAttribute();
 	vector<int> getPrimaryKey();
+	string getPrimaryKeyString();
 	void setAttributeString(string &primaryKey, string &attributeString);
 	void setForeignKey(string foreignKey);
 	string getTable();
+
+	virtual void accept(ComponentVisitor* visitor);
 
 private:
 	string _foreignKey;
