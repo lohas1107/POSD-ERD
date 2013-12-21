@@ -19,6 +19,7 @@ public:
 	virtual void visit(AttributeNode* node) = 0;
 	virtual void visit(RelationNode* node) = 0;
 	virtual void visit(Connector* node) = 0;
+	virtual string getContentFile() = 0;
 };
 
 #endif

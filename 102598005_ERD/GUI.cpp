@@ -226,7 +226,7 @@ void GUI::openFile()
 
 void GUI::saveFile()
 {
-	QString fileName = QFileDialog::getSaveFileName(this, "Save ERD files", "C:\\", "ERD Files (*.erd *xml)");
+	QString fileName = QFileDialog::getSaveFileName(this, "Save ERD files", "C:\\", "ERD Files (*.erd);;XML files (*.xml)");
 	_presentationModel->saveFile(fileName.toStdString());
 }
 

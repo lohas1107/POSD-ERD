@@ -87,7 +87,7 @@ public:
 	//string saveComponent();
 	//string saveConnection();
 	//string savePrimaryKey();
-	string saveFile();
+	string saveFile(ComponentVisitor* visitor);
 	void composePosition();
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);

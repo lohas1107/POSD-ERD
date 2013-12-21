@@ -2,6 +2,7 @@
 #include "Parser.h"
 #include <fstream>
 #include "SaveComponentVisitor.h"
+#include "SaveXmlComponentVisitor.h"
 
 const string STRING_EMPTY = "";
 const string COMMA = ",";
@@ -559,16 +560,14 @@ void ERModel::loadPrimaryKey(vector<string> content)
 //}
 
 // 儲存檔案
-string ERModel::saveFile()
+string ERModel::saveFile(ComponentVisitor* visitor)
 {
-	ComponentVisitor* visitor = new SaveComponentVisitor();
-
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		_components[i]->accept(visitor);
 	}
 
-	return ((SaveComponentVisitor*)visitor)->getContentFile();
+	return visitor->getContentFile();
 }
 
 // 排座標

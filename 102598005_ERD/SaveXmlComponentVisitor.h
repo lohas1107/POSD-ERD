@@ -12,6 +12,10 @@ public:
 	void visit(AttributeNode* node);
 	void visit(RelationNode* node);
 	void visit(Connector* node);
+	string getContentFile();
+
+private:
+	string _xml;
 };
 
 #endif

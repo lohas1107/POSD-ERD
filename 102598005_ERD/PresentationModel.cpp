@@ -8,6 +8,9 @@
 #include <direct.h>
 #include "EditTextCommand.h"
 #include "SetPrimaryKeyCommand.h"
+#include <QDebug>
+#include "SaveComponentVisitor.h"
+#include "SaveXmlComponentVisitor.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -220,16 +223,25 @@ bool PresentationModel::saveFile(string filePath)
 
 	makeDirectory(filePath);
 	ofstream file(filePath);
+	ComponentVisitor* visitor;
 
 	if (!file.is_open())
 	{
 		return false;
 	}
+	else if (filePath.find(".xml") == ULONG_MAX)
+	{
+		visitor = new SaveComponentVisitor();
+	}
+	else
+	{
+		visitor = new SaveXmlComponentVisitor();
+	}
 
 	//file << _erModel->saveComponent();
 	//file << _erModel->saveConnection();
 	//file << _erModel->savePrimaryKey();
-	file << _erModel->saveFile();
+	file << _erModel->saveFile(visitor);
 	file.close();
 	return true;
 }
