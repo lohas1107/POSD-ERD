@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QDebug>
+#include <QMessageBox>
 
 const int WIDTH = 1024;
 const int HEIGHT = 768;
@@ -216,6 +217,17 @@ void GUI::setTableModel()
 	_tableModel->setTableData();
 	_tableView->setModel(_tableModel);
 	connect(_tableView, SIGNAL(editChanged(const QModelIndex*)), _tableModel, SLOT(editChanged(const QModelIndex*)));
+}
+
+void GUI::close()
+{
+	QMessageBox messageBox;
+	int isOK = messageBox.warning(NULL, "ERD", "Do you want to save the current diagram?", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+	if (isOK == QMessageBox::Yes)
+	{
+		saveFile();
+	}
+	QWidget::close();
 }
 
 // ¶}±ÒÀÉ®×

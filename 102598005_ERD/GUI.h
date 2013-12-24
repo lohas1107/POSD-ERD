@@ -28,6 +28,7 @@ public:
 	void update();
 	
 private slots:
+	void close();
 	void openFile();
 	void saveFile();
 	void saveXmlFile();
