@@ -14,6 +14,7 @@ public:
 	void visit(Connector* node);
 	string getNodeInformation(ERComponent* node);
 	string getContentFile();
+	void setPositions(int x, int y);
 	string getPositionFile();
 
 private:

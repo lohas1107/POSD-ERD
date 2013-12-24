@@ -216,11 +216,6 @@ bool PresentationModel::loadFile(string filePath)
 // 儲存檔案
 bool PresentationModel::saveFile(string filePath)
 {
-	if (filePath == STRING_EMPTY)
-	{
-		return false;
-	}
-
 	makeDirectory(filePath);
 	ofstream file(filePath);
 	ComponentVisitor* visitor;
@@ -232,23 +227,39 @@ bool PresentationModel::saveFile(string filePath)
 	else if (filePath.find(".xml") == ULONG_MAX)
 	{
 		visitor = new SaveComponentVisitor();
+		file << _erModel->saveFile(visitor);
+		savePosition(filePath, visitor);
 	}
 	else
 	{
 		visitor = new SaveXmlComponentVisitor();
+		file << _erModel->saveFile(visitor);
 	}
 
-	//file << _erModel->saveComponent();
-	//file << _erModel->saveConnection();
-	//file << _erModel->savePrimaryKey();
-	file << _erModel->saveFile(visitor);
 	file.close();
 	return true;
+}
+
+void PresentationModel::savePosition(string filePath, ComponentVisitor* visitor)
+{
+	ofstream position(filePath.substr(0, filePath.find(".erd")) + ".pos");
+
+	if (position.is_open())
+	{
+		position << ((SaveComponentVisitor*)visitor)->getPositionFile();
+	}
+
+	position.close();
 }
 
 // 建立資料夾
 void PresentationModel::makeDirectory(string filePath)
 {
+	if (filePath == STRING_EMPTY)
+	{
+		return;
+	}
+
 	vector<string> pathList = Parser::split(filePath, SLASH_CHAR);
 
 	string path = pathList[0];

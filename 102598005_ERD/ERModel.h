@@ -89,6 +89,10 @@ public:
 	//string savePrimaryKey();
 	string saveFile(ComponentVisitor* visitor);
 	void composePosition();
+
+	vector<QPointF> getFilePosition(ifstream &file);
+	void loadPosition(vector<QPointF> positionList);
+
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);
 	void setNodeSelected(int id, bool isSelected);

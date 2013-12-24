@@ -3,6 +3,7 @@
 #include <fstream>
 #include "SaveComponentVisitor.h"
 #include "SaveXmlComponentVisitor.h"
+#include <QDebug>
 
 const string STRING_EMPTY = "";
 const string COMMA = ",";
@@ -446,7 +447,51 @@ bool ERModel::loadFile(string filePath)
 	loadComponent(content[0]);
 	loadConnection(content[1]);
 	loadPrimaryKey(content[PAIR_AMOUNT]);
+
+	ifstream positionFile(filePath.substr(0, filePath.find(".erd")) + ".pos");
+	if (!positionFile.is_open())
+	{
+		composePosition();
+	}
+	else
+	{
+		loadPosition(getFilePosition(positionFile));
+	}
+
 	return true;
+}
+
+vector<QPointF> ERModel::getFilePosition(ifstream &file)
+{
+	string line;
+	Parser parser;
+	vector<QPointF> positionList;
+
+	while (getline(file, line))
+	{
+		if (line != STRING_EMPTY)
+		{
+			vector<int> position = parser.changeToVectorInt(parser.split(line, ' '));
+			QPointF point = QPointF(position[0], position[1]);
+			positionList.push_back(point);
+		}
+	}
+
+	file.close();
+	return positionList;
+}
+
+void ERModel::loadPosition(vector<QPointF> positionList)
+{
+	int j = 0;
+	for (unsigned i = 0; i < _components.size(); i++)
+	{
+		if (!_components[i]->isType(connection))
+		{
+			_components[i]->setPosition(positionList[j]);	
+			j++;
+		}
+	}
 }
 
 // 取得檔案分段內容
