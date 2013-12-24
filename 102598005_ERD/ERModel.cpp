@@ -65,6 +65,10 @@ void ERModel::addComponent(pair<Type, string> type, string text, QPointF positio
 // 插入元件
 void ERModel::insertComponent(int index, ERComponent* component)
 {
+	if (index > getComponentSize())
+	{
+		index = getComponentSize();
+	}
 	_components.insert(_components.begin() + index, component->clone());
 }
 
@@ -130,7 +134,7 @@ vector<ERComponent*> ERModel::getDeleteList(int id)
 // 刪除元件
 void ERModel::deleteComponent(int id)
 {
-	if (isType(id, connection))
+	if (isType(id, connection) && isIDExsit(id))
 	{
 		deleteConnection(id);
 	}
@@ -153,16 +157,38 @@ void ERModel::revertComponent(vector<pair<int, ERComponent*>> deleteList)
 {
 	for (unsigned i = 0; i < deleteList.size(); i++)
 	{
-		insertComponent(deleteList[i].first, deleteList[i].second);
-
 		if (deleteList[i].second->isType(connection))
 		{
-			pair<int, int> idPair = ((Connector*)deleteList[i].second)->getConnectionPair();
-			getComponent(deleteList[i].second->getID())->disconnectTo(idPair.first);
-			getComponent(deleteList[i].second->getID())->disconnectTo(idPair.second);
-			insertConnection(deleteList[i].second->getID(), idPair.first, idPair.second);
+			_buffer.push_back(deleteList[i]);
+		} 
+		else
+		{
+			insertComponent(deleteList[i].first, deleteList[i].second);
 		}
+
+
+		//if (deleteList[i].second->isType(connection))
+		//{
+		//	pair<int, int> idPair = ((Connector*)deleteList[i].second)->getConnectionPair();
+		//	getComponent(deleteList[i].second->getID())->disconnectTo(idPair.first);
+		//	getComponent(deleteList[i].second->getID())->disconnectTo(idPair.second);
+		//	insertConnection(deleteList[i].second->getID(), idPair.first, idPair.second);
+		//}
 	}
+}
+
+void ERModel::revertConnector()
+{
+	for (unsigned i = 0; i < _buffer.size(); i++)
+	{
+		insertComponent(_buffer[i].first, _buffer[i].second);
+
+		pair<int, int> idPair = ((Connector*)_buffer[i].second)->getConnectionPair();
+		getComponent(_buffer[i].second->getID())->disconnectTo(idPair.first);
+		getComponent(_buffer[i].second->getID())->disconnectTo(idPair.second);
+		insertConnection(_buffer[i].second->getID(), idPair.first, idPair.second);
+	}
+	_buffer.clear();
 }
 
 // 插入連結
@@ -665,22 +691,27 @@ void ERModel::setNodeSelected(int id, bool isSelected)
 }
 
 // 取得選取節點的id
-int ERModel::getSelectedID()
+vector<int> ERModel::getSelectedID()
 {
+	vector<int> idList;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isSelected())
+		//{
+		//	return _components[i]->getID();
+		//}
 		{
-			return _components[i]->getID();
+			idList.push_back(_components[i]->getID());
 		}
 	}
-	return INT_MIN;
+	//return INT_MIN;
+	return idList;
 }
 
 // 是否可以顯示刪除按鈕
 bool ERModel::isDeleteEnabled()
 {
-	if (isIDExsit(getSelectedID()))
+	if (getSelectedID().size() > 0)
 	{
 		return true;
 	}
@@ -706,4 +737,12 @@ void ERModel::setNodeText(int index, string text)
 void ERModel::setNodePrimaryKey(int id, bool isPrimaryKey)
 {
 	((AttributeNode*)getComponent(id))->setPrimaryKey(isPrimaryKey);
+}
+
+void ERModel::deleteMultiple(vector<int> deleteList)
+{
+	for (unsigned i = 0; i < deleteList.size(); i++)
+	{
+		this->deleteComponent(deleteList[i]);
+	}
 }

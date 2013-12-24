@@ -22,6 +22,7 @@
     <ClCompile Include="..\102598005_ERD\Connector.cpp" />
     <ClCompile Include="..\102598005_ERD\ConnectState.cpp" />
     <ClCompile Include="..\102598005_ERD\DeleteComponentCommand.cpp" />
+    <ClCompile Include="..\102598005_ERD\DeleteMultipleCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\EditTextCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\EntityNode.cpp" />
     <ClCompile Include="..\102598005_ERD\ERComponent.cpp" />

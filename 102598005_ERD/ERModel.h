@@ -53,6 +53,7 @@ public:
 	void deleteConnection(int id);
 	vector<ERComponent*> getDeleteList(int id);
 	void revertComponent(vector<pair<int, ERComponent*>> deleteList);
+	void revertConnector();
 	int findIndex(int id);
 	void insertConnection(int id, int firstID, int secondID);
 	void addConnection(int firstID, int secondID, string cardinality);
@@ -96,17 +97,19 @@ public:
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);
 	void setNodeSelected(int id, bool isSelected);
-	int getSelectedID();
+	vector<int> getSelectedID();
 	bool isDeleteEnabled();
 	void clearSelected();
 	void setNodeText(int index, string text);
 	void setNodePrimaryKey(int id, bool isPrimaryKey);
+	void deleteMultiple(vector<int> deleteList);
 
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;
 	int _componentID;	
 	bool _creationFail;
+	vector<pair<int, ERComponent*>> _buffer;
 };
 
 #endif

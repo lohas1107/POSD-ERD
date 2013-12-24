@@ -55,12 +55,14 @@ public:
 	bool canSetPrimaryKey(int id);
 	void setNodePrimaryKey(int pointID);
 	void setNodeSelected(int id, bool isSelected);
-	int getSelectedID();
+	vector<int> getSelectedID();
 	bool getPointerButtonChecked();
 	void setPointerButtonChecked(bool isChecked);
 	bool isDeleteEnabled();
 	void clearSelected();
 	void editText(int index, string text);
+	void cut();
+	void deleteMultipleCommand();
 
 private:
 	ERModel* _erModel;

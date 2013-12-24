@@ -180,12 +180,13 @@ void GraphicsScene::clickPrimaryKeyEvent()
 // 헕을쬟간㉵τ
 void GraphicsScene::clickDeleteEvent()
 {
-	int id = _presentationModel->getSelectedID();
-	if (_presentationModel->isIDExsit(id))
-	{
-		_presentationModel->deleteComponentCommand(id);
+	//vector<int> idList = _presentationModel->getSelectedID();
+	//if (!idList.empty()/*_presentationModel->isIDExsit(id)*/)
+	//{
+	//	_presentationModel->deleteComponentCommand(idList);
+		_presentationModel->deleteMultipleCommand();
 		_presentationModel->notify();
-	}
+	//}
 }
 
 // 헕을 undo ㉵τ
@@ -205,4 +206,10 @@ void GraphicsScene::clickRedoEvent()
 void GraphicsScene::clickAboutEvent()
 {
 	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
+}
+
+void GraphicsScene::clickCutEvent()
+{
+	_presentationModel->cut();
+	_presentationModel->notify();
 }

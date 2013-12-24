@@ -22,6 +22,7 @@
     <ClCompile Include="Connector.cpp" />
     <ClCompile Include="ConnectState.cpp" />
     <ClCompile Include="DeleteComponentCommand.cpp" />
+    <ClCompile Include="DeleteMultipleCommand.cpp" />
     <ClCompile Include="EditTextCommand.cpp" />
     <ClCompile Include="EntityNode.cpp" />
     <ClCompile Include="ERComponent.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Connector.h" />
     <ClInclude Include="ConnectState.h" />
     <ClInclude Include="DeleteComponentCommand.h" />
+    <ClInclude Include="DeleteMultipleCommand.h" />
     <ClInclude Include="EditTextCommand.h" />
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />

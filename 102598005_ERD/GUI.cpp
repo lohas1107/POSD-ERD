@@ -308,7 +308,7 @@ void GUI::clickDeleteEvent()
 
 void GUI::clickCutEvent()
 {
-
+	_scene->clickCutEvent();
 }
 
 void GUI::clickCopyEvent()

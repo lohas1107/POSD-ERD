@@ -29,6 +29,7 @@ public:
 	void clickUndoEvent();
 	void clickRedoEvent();
 	void clickAboutEvent();
+	void clickCutEvent();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);

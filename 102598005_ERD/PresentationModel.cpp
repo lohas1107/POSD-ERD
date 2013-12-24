@@ -11,6 +11,7 @@
 #include <QDebug>
 #include "SaveComponentVisitor.h"
 #include "SaveXmlComponentVisitor.h"
+#include "DeleteMultipleCommand.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -355,7 +356,7 @@ void PresentationModel::setNodeSelected(int id, bool isSelected)
 }
 
 // 取得選取節點的id
-int PresentationModel::getSelectedID()
+vector<int> PresentationModel::getSelectedID()
 {
 	return _erModel->getSelectedID();
 }
@@ -395,4 +396,26 @@ void PresentationModel::editText(int index, string text)
 void PresentationModel::setNodePrimaryKey(int pointID)
 {
 	_commandManager.execute(new SetPrimaryKeyCommand(_erModel, pointID));
+}
+
+void PresentationModel::cut()
+{
+	// 剪貼簿放command constructor裡
+	//_erModel->deleteMultiple(_erModel->getSelectedID());
+	deleteMultipleCommand();
+
+}
+
+void PresentationModel::deleteMultipleCommand()
+{
+	//_erModel->deleteMultiple(_erModel->getSelectedID());
+	vector<int> idList = _erModel->getSelectedID();
+	vector<Command*> commandList;
+
+	for (unsigned i = 0; i < idList.size(); i++)
+	{
+		commandList.push_back(new DeleteComponentCommand(_erModel, idList[i]));
+	}
+
+	_commandManager.execute(new DeleteMultipleCommand(_erModel, commandList));
 }
