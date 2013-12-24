@@ -30,6 +30,7 @@ public:
 private slots:
 	void openFile();
 	void saveFile();
+	void saveXmlFile();
 	void clickPointerEvent();
 	void clickConnectEvent();
 	void clickAttributeEvent();
@@ -67,6 +68,7 @@ private:
 	QAction* _keyAction;
 	QAction* _deleteAction;
 	QAction* _saveFileAction;
+	QAction* _saveXmlFileAction;
 	QAction* _cutAction;
 	QAction* _copyAction;
 	QAction* _pasteAction;

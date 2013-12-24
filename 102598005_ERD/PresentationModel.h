@@ -38,7 +38,6 @@ public:
 	string getTable();
 	bool loadFile(string filePath);
 	bool saveFile(string filePath);
-	//void saveErdFile(string filePath);
 	void savePosition(string filePath, ComponentVisitor* visitor);
 	void makeDirectory(string filePath);
 	void deleteComponentCommand(int id);

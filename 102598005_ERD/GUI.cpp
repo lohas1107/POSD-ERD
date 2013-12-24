@@ -41,6 +41,7 @@ GUI::~GUI()
 	delete _keyAction;
 	delete _deleteAction;
 	delete _saveFileAction;
+	delete _saveXmlFileAction;
 	delete _cutAction;
 	delete _copyAction;
 	delete _pasteAction;
@@ -69,8 +70,9 @@ void GUI::createActions()
 	_loadFileAction->setShortcut(Qt::CTRL + Qt::Key_O);
 	_saveFileAction = new QAction(QIcon("Resources/save.png"), "Save", this);
 	_saveFileAction->setShortcut(Qt::CTRL + Qt::Key_S);
+	_saveXmlFileAction = new QAction("Save as xml", this);
 	_exitAction = new QAction(QIcon("Resources/exit.png"), "Exit", this);
-	//_exitAction->setShortcut(Qt::CTRL + Qt::Key_X);
+	_exitAction->setShortcut(Qt::CTRL + Qt::Key_E);
 	_undoAction = new QAction(QIcon("Resources/undo.png"), "Undo", this);
 	_undoAction->setShortcut(Qt::CTRL + Qt::Key_Z);
 	_redoAction = new QAction(QIcon("Resources/redo.png"), "Redo", this);
@@ -96,6 +98,7 @@ void GUI::connectActions()
 {	
 	connect(_loadFileAction, SIGNAL(triggered()), this, SLOT(openFile()));
 	connect(_saveFileAction, SIGNAL(triggered()), this, SLOT(saveFile()));
+	connect(_saveXmlFileAction, SIGNAL(triggered()), this, SLOT(saveXmlFile()));
 	connect(_exitAction, SIGNAL(triggered()), this, SLOT(close()));
 	connect(_undoAction, SIGNAL(triggered()), this, SLOT(clickUndoEvent()));
 	connect(_redoAction, SIGNAL(triggered()), this, SLOT(clickRedoEvent()));
@@ -146,6 +149,7 @@ void GUI::createMenus()
 	_fileMenu = menuBar()->addMenu("File");
 	_fileMenu->addAction(_loadFileAction);
 	_fileMenu->addAction(_saveFileAction);
+	_fileMenu->addAction(_saveXmlFileAction);
 	_fileMenu->addAction(_exitAction);
 	_addMenu = menuBar()->addMenu("Add");
 	_addMenu->addAction(_attributeAction);
@@ -227,6 +231,12 @@ void GUI::openFile()
 void GUI::saveFile()
 {
 	QString fileName = QFileDialog::getSaveFileName(this, "Save ERD files", "C:\\", "ERD Files (*.erd);;XML files (*.xml)");
+	_presentationModel->saveFile(fileName.toStdString());
+}
+
+void GUI::saveXmlFile()
+{
+	QString fileName = QFileDialog::getSaveFileName(this, "Save XML files", "C:\\", "XML files (*.xml)");
 	_presentationModel->saveFile(fileName.toStdString());
 }
 
