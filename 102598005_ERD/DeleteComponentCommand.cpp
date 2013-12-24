@@ -33,4 +33,5 @@ void DeleteComponentCommand::execute()
 void DeleteComponentCommand::unexecute()
 {
 	_model->revertComponent(_deleteList);
+	_model->revertConnector();
 }

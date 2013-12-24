@@ -161,6 +161,7 @@ TEST_F(ERModelTest, revertComponent)
 	EXPECT_EQ(3, _model.getComponentSize());
 
 	_model.revertComponent(deleteList);
+	_model.revertConnector();
 	EXPECT_EQ(5, _model.getComponentSize());
 	EXPECT_EQ(1, _model._components[1]->getID());
 	EXPECT_EQ(attribute, _model._components[1]->getType().first);
