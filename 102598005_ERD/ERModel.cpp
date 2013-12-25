@@ -65,10 +65,14 @@ void ERModel::addComponent(pair<Type, string> type, string text, QPointF positio
 // ´¡¤J¤¸¥ó
 void ERModel::insertComponent(int index, ERComponent* component)
 {
-	if (index > getComponentSize())
+	int count = 0;
+	while (count < _components.size() && _components[count]->getID() < component->getID())
 	{
-		index = getComponentSize();
+		index = count;
+		count++;
 	}
+	index = count;
+
 	_components.insert(_components.begin() + index, component->clone());
 }
 
