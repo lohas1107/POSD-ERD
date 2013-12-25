@@ -753,3 +753,14 @@ void ERModel::deleteMultiple(vector<int> deleteList)
 		this->deleteComponent(deleteList[i]);
 	}
 }
+
+void ERModel::copy()
+{
+	vector<int> idList = getSelectedID();
+
+	_clipboard.clear();
+	for (unsigned i = 0; i < idList.size(); i++)
+	{
+		_clipboard.push_back(getComponent(idList[i])->clone());
+	}
+}

@@ -63,7 +63,7 @@ public:
 	void editText(int index, string text);
 	void cut();
 	void deleteMultipleCommand();
-
+	void copy();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

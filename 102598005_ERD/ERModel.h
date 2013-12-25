@@ -103,6 +103,7 @@ public:
 	void setNodeText(int index, string text);
 	void setNodePrimaryKey(int id, bool isPrimaryKey);
 	void deleteMultiple(vector<int> deleteList);
+	void copy();
 
 private:
 	vector<ERComponent*> _components;
@@ -110,6 +111,7 @@ private:
 	int _componentID;	
 	bool _creationFail;
 	vector<pair<int, ERComponent*>> _buffer;
+	vector<ERComponent*> _clipboard;
 };
 
 #endif

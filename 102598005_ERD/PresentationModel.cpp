@@ -400,17 +400,8 @@ void PresentationModel::setNodePrimaryKey(int pointID)
 	_commandManager.execute(new SetPrimaryKeyCommand(_erModel, pointID));
 }
 
-void PresentationModel::cut()
-{
-	// °Å¶KÃ¯©ñcommand constructor¸Ì
-	//_erModel->deleteMultiple(_erModel->getSelectedID());
-	deleteMultipleCommand();
-
-}
-
 void PresentationModel::deleteMultipleCommand()
 {
-	//_erModel->deleteMultiple(_erModel->getSelectedID());
 	vector<int> idList = _erModel->getSelectedID();
 	vector<Command*> commandList;
 
@@ -418,6 +409,16 @@ void PresentationModel::deleteMultipleCommand()
 	{
 		commandList.push_back(new DeleteComponentCommand(_erModel, idList[i]));
 	}
-
 	_commandManager.execute(new DeleteMultipleCommand(_erModel, commandList));
+}
+
+void PresentationModel::cut()
+{
+	_erModel->copy();
+	deleteMultipleCommand();
+}
+
+void PresentationModel::copy()
+{
+	_erModel->copy();
 }

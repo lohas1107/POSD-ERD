@@ -213,3 +213,8 @@ void GraphicsScene::clickCutEvent()
 	_presentationModel->cut();
 	_presentationModel->notify();
 }
+
+void GraphicsScene::clickCopyEvent()
+{
+	_presentationModel->copy();
+}

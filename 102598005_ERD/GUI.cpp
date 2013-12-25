@@ -313,7 +313,7 @@ void GUI::clickCutEvent()
 
 void GUI::clickCopyEvent()
 {
-
+	_scene->clickCopyEvent();
 }
 
 void GUI::clickPasteEvent()

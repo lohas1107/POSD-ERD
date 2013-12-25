@@ -33,7 +33,7 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-
+	void clickCopyEvent();
 private:
 	vector<GraphicsItem*> _graphicsItems;
 	PresentationModel* _presentationModel;
