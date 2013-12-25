@@ -85,7 +85,9 @@ vector<ERComponent*> PresentationModel::getComponents()
 // 刪除元件
 void PresentationModel::deleteComponentCommand(int id)
 {
-	_commandManager.execute(new DeleteComponentCommand(_erModel, id));
+	vector<Command*> commands;
+	commands.push_back(new DeleteComponentCommand(_erModel, id));
+	_commandManager.execute(new DeleteMultipleCommand(_erModel, commands));
 }
 
 // 連接節點命令

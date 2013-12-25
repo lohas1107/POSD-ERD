@@ -134,7 +134,7 @@ vector<ERComponent*> ERModel::getDeleteList(int id)
 // §R°£¤¸¥ó
 void ERModel::deleteComponent(int id)
 {
-	if (isType(id, connection) && isIDExsit(id))
+	if (isIDExsit(id) && isType(id, connection))
 	{
 		deleteConnection(id);
 	}
@@ -181,12 +181,15 @@ void ERModel::revertConnector()
 {
 	for (unsigned i = 0; i < _buffer.size(); i++)
 	{
-		insertComponent(_buffer[i].first, _buffer[i].second);
+		if (!isIDExsit(_buffer[i].second->getID()))
+		{
+			insertComponent(_buffer[i].first, _buffer[i].second);
 
-		pair<int, int> idPair = ((Connector*)_buffer[i].second)->getConnectionPair();
-		getComponent(_buffer[i].second->getID())->disconnectTo(idPair.first);
-		getComponent(_buffer[i].second->getID())->disconnectTo(idPair.second);
-		insertConnection(_buffer[i].second->getID(), idPair.first, idPair.second);
+			pair<int, int> idPair = ((Connector*)_buffer[i].second)->getConnectionPair();
+			getComponent(_buffer[i].second->getID())->disconnectTo(idPair.first);
+			getComponent(_buffer[i].second->getID())->disconnectTo(idPair.second);
+			insertConnection(_buffer[i].second->getID(), idPair.first, idPair.second);
+		}
 	}
 	_buffer.clear();
 }
