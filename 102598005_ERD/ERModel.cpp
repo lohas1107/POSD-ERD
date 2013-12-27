@@ -765,9 +765,11 @@ void ERModel::copy()
 	}
 }
 
-void ERModel::paste(vector<pair<int, int>> &idTable)
+void ERModel::paste()
 {
-	idTable.clear();
+	vector<pair<int, int>> idTable;
+	_copyCount = 0;
+
 	for (unsigned i = 0; i < _clipboard.size(); i++)
 	{
 		if (!_clipboard[i]->isType(connection))
@@ -779,6 +781,7 @@ void ERModel::paste(vector<pair<int, int>> &idTable)
 			copyClone->setID(newID);
 			copyClone->setPosition(copyClone->getPosition() + QPointF(5, 5));
 			insertComponent(_components.size(), copyClone);
+			_copyCount++;
 		}
 	}
 
@@ -802,6 +805,7 @@ void ERModel::pasteConnection(vector<pair<int, int>> idTable)
 				getComponent(_clipboard[i]->getID())->disconnectTo(idPair.first);
 				getComponent(_clipboard[i]->getID())->disconnectTo(idPair.second);
 				insertConnection(_clipboard[i]->getID(), pastedID.first, pastedID.second);
+				_copyCount++;
 			}
 		}
 	}
@@ -824,4 +828,12 @@ pair<int, int> ERModel::getPastedID(vector<pair<int, int>> idTable, pair<int, in
 	}
 
 	return pastedID;
+}
+
+void ERModel::unPaste()
+{
+	for (unsigned i = 0; i < _copyCount; i++)
+	{
+		deleteLastComponent();
+	}
 }

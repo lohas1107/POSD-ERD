@@ -104,9 +104,11 @@ public:
 	void setNodePrimaryKey(int id, bool isPrimaryKey);
 	void deleteMultiple(vector<int> deleteList);
 	void copy();
-	void paste(vector<pair<int, int>> &idTable);
+	void paste();
+	void unPaste();
 	void pasteConnection(vector<pair<int, int>> idTable);
 	pair<int, int> getPastedID(vector<pair<int, int>> idTable, pair<int, int> idPair);
+
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;
@@ -114,6 +116,7 @@ private:
 	bool _creationFail;
 	vector<pair<int, ERComponent*>> _buffer;
 	vector<ERComponent*> _clipboard;
+	int _copyCount;
 };
 
 #endif

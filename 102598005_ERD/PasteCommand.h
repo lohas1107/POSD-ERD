@@ -10,9 +10,6 @@ public:
 	~PasteCommand();
 	void execute();
 	void unexecute();
-
-private:
-	vector<pair<int, int>> _idTable;
 };
 
 #endif
