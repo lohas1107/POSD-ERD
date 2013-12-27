@@ -764,3 +764,64 @@ void ERModel::copy()
 		_clipboard.push_back(getComponent(idList[i])->clone());
 	}
 }
+
+void ERModel::paste(vector<pair<int, int>> &idTable)
+{
+	idTable.clear();
+	for (unsigned i = 0; i < _clipboard.size(); i++)
+	{
+		if (!_clipboard[i]->isType(connection))
+		{
+			ERComponent* copyClone = _clipboard[i]->clone();
+			int oldID = copyClone->getID();
+			int newID = _componentID++;
+			idTable.push_back(make_pair(oldID, newID));
+			copyClone->setID(newID);
+			copyClone->setPosition(copyClone->getPosition() + QPointF(5, 5));
+			insertComponent(_components.size(), copyClone);
+		}
+	}
+
+	pasteConnection(idTable);
+}
+
+void ERModel::pasteConnection(vector<pair<int, int>> idTable)
+{
+	for (unsigned i = 0; i < _clipboard.size(); i++)
+	{
+		if (_clipboard[i]->isType(connection))
+		{
+			pair<int, int> idPair = ((Connector*)_clipboard[i])->getConnectionPair();
+			pair<int, int> pastedID = getPastedID(idTable, idPair);
+
+			if (pastedID.first != INT_MIN && pastedID.second != INT_MIN)
+			{
+				int newID = _componentID++;
+				_clipboard[i]->setID(newID);
+				insertComponent(_components.size(), _clipboard[i]);
+				getComponent(_clipboard[i]->getID())->disconnectTo(idPair.first);
+				getComponent(_clipboard[i]->getID())->disconnectTo(idPair.second);
+				insertConnection(_clipboard[i]->getID(), pastedID.first, pastedID.second);
+			}
+		}
+	}
+}
+
+pair<int, int> ERModel::getPastedID(vector<pair<int, int>> idTable, pair<int, int> idPair)
+{
+	pair<int, int> pastedID = make_pair(INT_MIN, INT_MIN);
+
+	for (unsigned i = 0; i < idTable.size(); i++)
+	{
+		if (idTable[i].first == idPair.first)
+		{
+			pastedID.first = idTable[i].second;
+		}
+		else if (idTable[i].first == idPair.second)
+		{
+			pastedID.second = idTable[i].second;
+		}
+	}
+
+	return pastedID;
+}

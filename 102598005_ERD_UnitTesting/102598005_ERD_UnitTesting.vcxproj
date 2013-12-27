@@ -36,6 +36,7 @@
     <ClCompile Include="..\102598005_ERD\Node.cpp" />
     <ClCompile Include="..\102598005_ERD\Observer.cpp" />
     <ClCompile Include="..\102598005_ERD\Parser.cpp" />
+    <ClCompile Include="..\102598005_ERD\PasteCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\PointerState.cpp" />
     <ClCompile Include="..\102598005_ERD\PresentationModel.cpp" />
     <ClCompile Include="..\102598005_ERD\RelationNode.cpp" />

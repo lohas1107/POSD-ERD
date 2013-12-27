@@ -162,5 +162,8 @@
     <ClCompile Include="..\102598005_ERD\DeleteMultipleCommand.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\102598005_ERD\PasteCommand.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

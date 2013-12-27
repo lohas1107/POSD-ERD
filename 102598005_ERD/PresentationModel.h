@@ -64,6 +64,7 @@ public:
 	void cut();
 	void deleteMultipleCommand();
 	void copy();
+	void paste();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;
