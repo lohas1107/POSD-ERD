@@ -13,6 +13,7 @@
 #include "SaveXmlComponentVisitor.h"
 #include "DeleteMultipleCommand.h"
 #include "PasteCommand.h"
+#include "MoveCommand.h"
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
@@ -427,4 +428,9 @@ void PresentationModel::copy()
 void PresentationModel::paste()
 {
 	_commandManager.execute(new PasteCommand(_erModel));
+}
+
+void PresentationModel::moveCommand(int pointID, QPointF moveFrom, QPointF moveTo)
+{
+	_commandManager.execute(new MoveCommand(_erModel, pointID, moveFrom, moveTo));
 }

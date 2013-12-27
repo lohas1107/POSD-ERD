@@ -211,6 +211,9 @@
     <ClCompile Include="PasteCommand.cpp">
       <Filter>Source Files\Command</Filter>
     </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parser.h">
@@ -310,6 +313,9 @@
       <Filter>Header Files\Command</Filter>
     </ClInclude>
     <ClInclude Include="PasteCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
       <Filter>Header Files\Command</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,6 +33,7 @@
     <ClCompile Include="..\102598005_ERD\GraphicsItem.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsRelation.cpp" />
     <ClCompile Include="..\102598005_ERD\GraphicsScene.cpp" />
+    <ClCompile Include="..\102598005_ERD\MoveCommand.cpp" />
     <ClCompile Include="..\102598005_ERD\Node.cpp" />
     <ClCompile Include="..\102598005_ERD\Observer.cpp" />
     <ClCompile Include="..\102598005_ERD\Parser.cpp" />

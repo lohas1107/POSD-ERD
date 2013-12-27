@@ -65,6 +65,7 @@ public:
 	void deleteMultipleCommand();
 	void copy();
 	void paste();
+	void moveCommand(int pointID, QPointF moveFrom, QPointF moveTo);
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

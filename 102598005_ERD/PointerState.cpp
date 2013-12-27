@@ -14,6 +14,7 @@ PointerState::~PointerState()
 // 按下滑鼠事件
 void PointerState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+	_moveFrom = mouseEvent->scenePos();
 	getItemID(mouseEvent->scenePos());
 }
 
@@ -30,5 +31,13 @@ void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 // 放開滑鼠事件
 void PointerState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+	QPointF moveTo = mouseEvent->scenePos();
+
+	if (_presentationModel->isIDExsit(_pointID) && _moveFrom != moveTo)
+	{
+		_presentationModel->moveCommand(_pointID, _moveFrom, moveTo);
+		_presentationModel->notify();
+	}
+
 	initialize();
 }

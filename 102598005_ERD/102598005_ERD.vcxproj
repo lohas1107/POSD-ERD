@@ -53,6 +53,7 @@
     <ClCompile Include="GraphicsRelation.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="EntityNode.h" />
     <ClInclude Include="ERComponent.h" />
     <ClInclude Include="ERModel.h" />
+    <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PasteCommand.h" />
     <ClInclude Include="PointerState.h" />
