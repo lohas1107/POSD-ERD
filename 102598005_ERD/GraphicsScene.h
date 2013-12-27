@@ -25,15 +25,17 @@ public:
 	void clickEntityEvent();
 	void clickRelationEvent();
 	void clickPrimaryKeyEvent();
-	void clickDeleteEvent();
-	void clickUndoEvent();
-	void clickRedoEvent();
-	void clickAboutEvent();
-	void clickCutEvent();
+	//void clickDeleteEvent();
+	//void clickUndoEvent();
+	//void clickRedoEvent();
+	//void clickAboutEvent();
+	//void clickCutEvent();
+	//void clickCopyEvent();
+	//void clickPasteEvent();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void clickCopyEvent();
+
 private:
 	vector<GraphicsItem*> _graphicsItems;
 	PresentationModel* _presentationModel;

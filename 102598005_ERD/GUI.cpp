@@ -11,6 +11,8 @@
 const int WIDTH = 1024;
 const int HEIGHT = 768;
 const int TABLE_VIEW_WIDTH = 220;
+const string ABOUT_TITLE = "About Entity Relation Diagramming Tool";
+const string ABOUT_CONTENT = "Entity Relation Diagramming Tool<br>Version: 1.0<br>Author: 102598005@ntut";
 
 GUI::GUI(PresentationModel* presentationModel)
 {
@@ -282,48 +284,60 @@ void GUI::clickRelationEvent()
 	_scene->clickRelationEvent();
 }
 
-// 點擊 undo 事件
-void GUI::clickUndoEvent()
-{
-	_scene->clickUndoEvent();
-}
-
-// 點擊 redo 事件
-void GUI::clickRedoEvent()
-{
-	_scene->clickRedoEvent();
-}
-
 // 點擊 primary key 事件
 void GUI::clickPrimaryKeyEvent()
 {
 	_scene->clickPrimaryKeyEvent();
 }
 
+// 點擊 undo 事件
+void GUI::clickUndoEvent()
+{
+	_presentationModel->undo();
+	update();
+	//_scene->clickUndoEvent();
+}
+
+// 點擊 redo 事件
+void GUI::clickRedoEvent()
+{
+	_presentationModel->redo();
+	update();
+	//_scene->clickRedoEvent();
+}
+
 // 點擊刪除事件
 void GUI::clickDeleteEvent()
 {
-	_scene->clickDeleteEvent();
+	_presentationModel->deleteMultipleCommand();
+	update();
+	//_scene->clickDeleteEvent();
 }
 
 void GUI::clickCutEvent()
 {
-	_scene->clickCutEvent();
+	_presentationModel->cut();
+	update();
+	//_scene->clickCutEvent();
 }
 
 void GUI::clickCopyEvent()
 {
-	_scene->clickCopyEvent();
+	_presentationModel->copy();
+	//_scene->clickCopyEvent();
 }
 
 void GUI::clickPasteEvent()
 {
-
+	_presentationModel->paste();
+	update();
+	//_scene->clickPasteEvent();
 }
 
 void GUI::clickAboutEvent()
 {
-	_scene->clickAboutEvent();
+	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
+	//_scene->clickAboutEvent();
 }
 
 // 更新畫面

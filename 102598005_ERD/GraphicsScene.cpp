@@ -15,8 +15,8 @@
 const string INPUT_E = "E";
 const string INPUT_A = "A";
 const string INPUT_R = "R";
-const string ABOUT_TITLE = "About Entity Relation Diagramming Tool";
-const string ABOUT_CONTENT = "Entity Relation Diagramming Tool<br>Version: 1.0<br>Author: 102598005@ntut";
+//const string ABOUT_TITLE = "About Entity Relation Diagramming Tool";
+//const string ABOUT_CONTENT = "Entity Relation Diagramming Tool<br>Version: 1.0<br>Author: 102598005@ntut";
 
 GraphicsScene::GraphicsScene(PresentationModel* presentationModel)
 {
@@ -178,43 +178,49 @@ void GraphicsScene::clickPrimaryKeyEvent()
 }
 
 // 헕을쬟간㉵τ
-void GraphicsScene::clickDeleteEvent()
-{
-	//vector<int> idList = _presentationModel->getSelectedID();
-	//if (!idList.empty()/*_presentationModel->isIDExsit(id)*/)
-	//{
-	//	_presentationModel->deleteComponentCommand(idList);
-		_presentationModel->deleteMultipleCommand();
-		_presentationModel->notify();
-	//}
-}
+//void GraphicsScene::clickDeleteEvent()
+//{
+//	//vector<int> idList = _presentationModel->getSelectedID();
+//	//if (!idList.empty()/*_presentationModel->isIDExsit(id)*/)
+//	//{
+//	//	_presentationModel->deleteComponentCommand(idList);
+//		_presentationModel->deleteMultipleCommand();
+//		_presentationModel->notify();
+//	//}
+//}
 
 // 헕을 undo ㉵τ
-void GraphicsScene::clickUndoEvent()
-{
-	_presentationModel->undo();
-	_presentationModel->notify();
-}
+//void GraphicsScene::clickUndoEvent()
+//{
+//	_presentationModel->undo();
+//	_presentationModel->notify();
+//}
 
 // 헕을 redo ㉵τ
-void GraphicsScene::clickRedoEvent()
-{
-	_presentationModel->redo();
-	_presentationModel->notify();
-}
-
-void GraphicsScene::clickAboutEvent()
-{
-	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
-}
-
-void GraphicsScene::clickCutEvent()
-{
-	_presentationModel->cut();
-	_presentationModel->notify();
-}
-
-void GraphicsScene::clickCopyEvent()
-{
-	_presentationModel->copy();
-}
+//void GraphicsScene::clickRedoEvent()
+//{
+//	_presentationModel->redo();
+//	_presentationModel->notify();
+//}
+//
+//void GraphicsScene::clickAboutEvent()
+//{
+//	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
+//}
+//
+//void GraphicsScene::clickCutEvent()
+//{
+//	_presentationModel->cut();
+//	_presentationModel->notify();
+//}
+//
+//void GraphicsScene::clickCopyEvent()
+//{
+//	_presentationModel->copy();
+//}
+//
+//void GraphicsScene::clickPasteEvent()
+//{
+//	_presentationModel->paste();
+//	_presentationModel->notify();
+//}
