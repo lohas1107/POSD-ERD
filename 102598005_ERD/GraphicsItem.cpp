@@ -63,7 +63,7 @@ QVariant GraphicsItem::itemChange(GraphicsItemChange change, const QVariant &val
 	{
 		if (value == true)
 		{
-			if (!_isSelected)
+			if (!_isSelected && _presentationModel->isIDExsit(data(idData).toInt()))
 			{
 				_isSelected = true;
 				_presentationModel->setNodeSelected(data(idData).toInt(), true);
