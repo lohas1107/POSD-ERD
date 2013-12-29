@@ -9,18 +9,18 @@ SetPrimaryKeyState::~SetPrimaryKeyState()
 }
 
 // 按下滑鼠事件
-void SetPrimaryKeyState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void SetPrimaryKeyState::mousePressEvent(QPointF mousePosition)
 {
-	getItemID(mouseEvent->scenePos());
+	getItemID(mousePosition);
 }
 
 // 移動滑鼠事件
-void SetPrimaryKeyState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void SetPrimaryKeyState::mouseMoveEvent(QPointF mousePosition)
 {
 }
 
 // 放開滑鼠事件
-void SetPrimaryKeyState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void SetPrimaryKeyState::mouseReleaseEvent(QPointF mousePosition)
 {
 	if (_presentationModel->isIDExsit(_pointID) && _presentationModel->canSetPrimaryKey(_pointID))
 	{

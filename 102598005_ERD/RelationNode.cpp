@@ -41,6 +41,7 @@ vector<pair<int, int>> RelationNode::getRelationPair()
 	return relationPair;
 }
 
+// ±µ¨ü«ô³X
 void RelationNode::accept(ComponentVisitor* visitor)
 {
 	visitor->visit(this);

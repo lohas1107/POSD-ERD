@@ -16,9 +16,7 @@ public:
 	string getConnection();
 	pair<int, int> getConnectionPair();
 	ERComponent* clone();
-
-	virtual void accept(ComponentVisitor* visitor);
-
+	void accept(ComponentVisitor* visitor);
 };
 
 #endif

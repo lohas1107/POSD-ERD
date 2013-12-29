@@ -9,9 +9,9 @@ class ConnectState : public State
 public:
 	ConnectState(GraphicsScene* scene);
 	~ConnectState();
-	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mousePressEvent(QPointF mousePosition);
+	void mouseMoveEvent(QPointF mousePosition);
+	void mouseReleaseEvent(QPointF mousePosition);
 	bool isValidConnection(int firstID, int secondID);
 	string getCardinality(int firstID, int secondID);
 

@@ -31,9 +31,6 @@ class ERModel : public Subject
 	FRIEND_TEST(ERModelTest, loadComponent);
 	FRIEND_TEST(ERModelTest, loadConnection);
 	FRIEND_TEST(ERModelTest, loadPrimaryKey);
-	FRIEND_TEST(ERModelTest, saveComponent);
-	FRIEND_TEST(ERModelTest, saveConnection);
-	FRIEND_TEST(ERModelTest, savePrimaryKey);
 	friend class PresentationModelTest;
 	FRIEND_TEST(PresentationModelTest, deleteComponentCommand);
 	FRIEND_TEST(PresentationModelTest, setPrimaryKey);;
@@ -85,15 +82,10 @@ public:
 	void loadComponent(vector<string> content);
 	void loadConnection(vector<string> content);
 	void loadPrimaryKey(vector<string> content);
-	//string saveComponent();
-	//string saveConnection();
-	//string savePrimaryKey();
 	string saveFile(ComponentVisitor* visitor);
 	void composePosition();
-
 	vector<QPointF> getFilePosition(ifstream &file);
 	void loadPosition(vector<QPointF> positionList);
-
 	void setNodePosition(int id, QPointF position);
 	bool canSetPrimaryKey(int id);
 	void setNodeSelected(int id, bool isSelected);
@@ -113,6 +105,7 @@ public:
 	string getGUIForeignKey(int id);
 	int getTableLine(int id, vector<pair<int, string>> tableLine);
 	bool canPaste();
+
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

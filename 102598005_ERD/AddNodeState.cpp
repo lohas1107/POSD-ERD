@@ -19,25 +19,25 @@ AddNodeState::~AddNodeState()
 }
 
 // 按下滑鼠事件
-void AddNodeState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void AddNodeState::mousePressEvent(QPointF mousePosition)
 {
 	_scene->removeItem(_item);
 }
 
 // 移動滑鼠事件
-void AddNodeState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void AddNodeState::mouseMoveEvent(QPointF mousePosition)
 {
-	_item->setPos(mouseEvent->scenePos());
+	_item->setPos(mousePosition);
 }
 
 // 放開滑鼠事件
-void AddNodeState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void AddNodeState::mouseReleaseEvent(QPointF mousePosition)
 {
 	QString text = QInputDialog::getText(NULL, TITLE.c_str(), LABEL.c_str(), QLineEdit::Normal, TEXT.c_str(), &_isOK);
 
 	if (_isOK && !text.isEmpty())
 	{
-		_presentationModel->addNodeCommand(_type.second, text.toStdString(), mouseEvent->scenePos());
+		_presentationModel->addNodeCommand(_type.second, text.toStdString(), mousePosition);
 		_presentationModel->notify();
 		_scene->clickPointerEvent();
 	}

@@ -3,7 +3,6 @@
 
 #include "PresentationModel.h"
 #include "GraphicsScene.h"
-#include <QGraphicsSceneMouseEvent>
 
 class GraphicsScene;
 class State
@@ -11,9 +10,9 @@ class State
 public:
 	State(GraphicsScene* scene);
 	virtual ~State();
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
-	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent) = 0;
+	virtual void mousePressEvent(QPointF mousePosition) = 0;
+	virtual void mouseMoveEvent(QPointF mousePosition) = 0;
+	virtual void mouseReleaseEvent(QPointF mousePosition) = 0;
 	void initialize();
 	int getItemID(QPointF position);
 

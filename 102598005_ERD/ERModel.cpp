@@ -3,7 +3,6 @@
 #include <fstream>
 #include "SaveComponentVisitor.h"
 #include "SaveXmlComponentVisitor.h"
-#include <QDebug>
 
 const string STRING_EMPTY = "";
 const string COMMA = ",";
@@ -21,6 +20,14 @@ const float ENTITY_OFFSET = 100;
 const float RELATION_X = 700;
 const float ERELATION_Y = 50;
 const float RELATION_OFFSET = 100;
+const string ERD_FILE = ".erd";
+const string POS_FILE = ".pos";
+const char CHAR_SPACE = ' ';
+const QPointF OFFSET = QPointF(5, 5);
+const string DB_TABLE_HEADER ="<table border=\"1\"><tr>" ;
+const string DB_TABLE_FOOTER = "</tr></table><br><br>";
+const string KEY_TABLE_HEADER = "<td>";
+const string KEY_TABLE_FOOTER = "</td>";
 const string PRIMARY_KEY_IMAGE = "<img src=\"Resources/primary_key.png\" width=\"20\" height=\"20\">";
 const string FOREIGN_KEY_IMAGE = "<img src=\"Resources/foreign_key.png\" width=\"20\" height=\"20\">";
 
@@ -170,18 +177,10 @@ void ERModel::revertComponent(vector<pair<int, ERComponent*>> deleteList)
 		{
 			insertComponent(deleteList[i].first, deleteList[i].second);
 		}
-
-
-		//if (deleteList[i].second->isType(connection))
-		//{
-		//	pair<int, int> idPair = ((Connector*)deleteList[i].second)->getConnectionPair();
-		//	getComponent(deleteList[i].second->getID())->disconnectTo(idPair.first);
-		//	getComponent(deleteList[i].second->getID())->disconnectTo(idPair.second);
-		//	insertConnection(deleteList[i].second->getID(), idPair.first, idPair.second);
-		//}
 	}
 }
 
+// 復原連結
 void ERModel::revertConnector()
 {
 	for (unsigned i = 0; i < _buffer.size(); i++)
@@ -370,20 +369,6 @@ vector<int> ERModel::getPrimaryKey(int entityID)
 // 取得 primary key id 字串
 string ERModel::getPrimaryKeyString(int entityID)
 {
-	//vector<int> primaryKey = getPrimaryKey(entityID);
-	//string primaryKeyString;
-
-	//for (unsigned i = 0; i < primaryKey.size(); i++)
-	//{
-	//	primaryKeyString += COMMA + to_string((long long)primaryKey[i]);
-	//}
-
-	//if (primaryKey.size() > 0)
-	//{
-	//	primaryKeyString = primaryKeyString.substr(1);
-	//}
-
-	//return primaryKeyString;
 	return ((EntityNode*)getComponent(entityID))->getPrimaryKeyString();
 }
 
@@ -482,7 +467,7 @@ bool ERModel::loadFile(string filePath)
 	loadConnection(content[1]);
 	loadPrimaryKey(content[PAIR_AMOUNT]);
 
-	ifstream positionFile(filePath.substr(0, filePath.find(".erd")) + ".pos");
+	ifstream positionFile(filePath.substr(0, filePath.find(ERD_FILE)) + POS_FILE);
 	if (!positionFile.is_open())
 	{
 		composePosition();
@@ -495,6 +480,7 @@ bool ERModel::loadFile(string filePath)
 	return true;
 }
 
+// 取得位置資料
 vector<QPointF> ERModel::getFilePosition(ifstream &file)
 {
 	string line;
@@ -505,7 +491,7 @@ vector<QPointF> ERModel::getFilePosition(ifstream &file)
 	{
 		if (line != STRING_EMPTY)
 		{
-			vector<int> position = parser.changeToVectorInt(parser.split(line, ' '));
+			vector<int> position = parser.changeToVectorInt(parser.split(line, CHAR_SPACE));
 			QPointF point = QPointF(position[0], position[1]);
 			positionList.push_back(point);
 		}
@@ -515,6 +501,7 @@ vector<QPointF> ERModel::getFilePosition(ifstream &file)
 	return positionList;
 }
 
+// 讀取位置檔案
 void ERModel::loadPosition(vector<QPointF> positionList)
 {
 	int j = 0;
@@ -597,47 +584,6 @@ void ERModel::loadPrimaryKey(vector<string> content)
 
 }
 
-// 儲存元件
-//string ERModel::saveComponent()
-//{
-//	string component;
-//	for (unsigned i = 0; i < _components.size(); i++)
-//	{
-//		component += _components[i]->getType().second[0] + COMMA_SPACE + _components[i]->getText() + NEXT_LINE;
-//	}
-//	component += NEXT_LINE;
-//	return component;
-//}
-//
-//// 儲存連結
-//string ERModel::saveConnection()
-//{
-//	string connections;
-//	for (unsigned i = 0; i < _components.size(); i++)
-//	{
-//		if (_components[i]->isType(connection))
-//		{
-//			connections += to_string((long long)_components[i]->getID()) + STRING_SPACE + ((Connector*)_components[i])->getConnection() + NEXT_LINE;
-//		}
-//	}
-//	connections += NEXT_LINE;
-//	return connections;
-//}
-//
-//// 儲存 primary key
-//string ERModel::savePrimaryKey()
-//{
-//	string primaryKey;
-//	for (unsigned i = 0; i < _components.size(); i++)
-//	{
-//		if (_components[i]->isType(entity) && hasAttribute(_components[i]->getID()))
-//		{
-//			primaryKey += to_string((long long)_components[i]->getID()) + STRING_SPACE + getPrimaryKeyString(_components[i]->getID()) + NEXT_LINE;
-//		}
-//	}
-//	return primaryKey;
-//}
-
 // 儲存檔案
 string ERModel::saveFile(ComponentVisitor* visitor)
 {
@@ -705,14 +651,11 @@ vector<int> ERModel::getSelectedID()
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (_components[i]->isSelected())
-		//{
-		//	return _components[i]->getID();
-		//}
 		{
 			idList.push_back(_components[i]->getID());
 		}
 	}
-	//return INT_MIN;
+
 	return idList;
 }
 
@@ -747,6 +690,7 @@ void ERModel::setNodePrimaryKey(int id, bool isPrimaryKey)
 	((AttributeNode*)getComponent(id))->setPrimaryKey(isPrimaryKey);
 }
 
+// 刪除多重元件
 void ERModel::deleteMultiple(vector<int> deleteList)
 {
 	for (unsigned i = 0; i < deleteList.size(); i++)
@@ -755,6 +699,7 @@ void ERModel::deleteMultiple(vector<int> deleteList)
 	}
 }
 
+// 複製
 void ERModel::copy()
 {
 	vector<int> idList = getSelectedID();
@@ -768,6 +713,7 @@ void ERModel::copy()
 	clearSelected();
 }
 
+// 貼上
 void ERModel::paste()
 {
 	vector<pair<int, int>> idTable;
@@ -782,7 +728,7 @@ void ERModel::paste()
 			int newID = _componentID++;
 			idTable.push_back(make_pair(oldID, newID));
 			copyClone->setID(newID);
-			copyClone->setPosition(copyClone->getPosition() + QPointF(5, 5));
+			copyClone->setPosition(copyClone->getPosition() + OFFSET);
 			insertComponent(_components.size(), copyClone);
 			_copyCount++;
 		}
@@ -791,6 +737,7 @@ void ERModel::paste()
 	pasteConnection(idTable);
 }
 
+// 貼上連結
 void ERModel::pasteConnection(vector<pair<int, int>> idTable)
 {
 	for (unsigned i = 0; i < _clipboard.size(); i++)
@@ -814,6 +761,7 @@ void ERModel::pasteConnection(vector<pair<int, int>> idTable)
 	}
 }
 
+// 取得複製元件的id
 pair<int, int> ERModel::getPastedID(vector<pair<int, int>> idTable, pair<int, int> idPair)
 {
 	pair<int, int> pastedID = make_pair(INT_MIN, INT_MIN);
@@ -833,6 +781,7 @@ pair<int, int> ERModel::getPastedID(vector<pair<int, int>> idTable, pair<int, in
 	return pastedID;
 }
 
+// 復原複製
 void ERModel::unPaste()
 {
 	for (unsigned i = 0; i < _copyCount; i++)
@@ -841,6 +790,7 @@ void ERModel::unPaste()
 	}
 }
 
+// 取得DB表格
 string ERModel::getGUITable()
 {
 	string table = STRING_EMPTY;
@@ -863,11 +813,12 @@ string ERModel::getGUITable()
 	}
 	for (unsigned i = 0; i < tableLine.size(); i++)
 	{
-		table += ((EntityNode*)getComponent(tableLine[i].first))->getText() + "<table border=\"1\"><tr>" + tableLine[i].second + "</tr></table><br><br>";
+		table += ((EntityNode*)getComponent(tableLine[i].first))->getText() + DB_TABLE_HEADER + tableLine[i].second + DB_TABLE_FOOTER;
 	}
 	return table;
 }
 
+// 取得DB表格index
 int ERModel::getTableLine(int id, vector<pair<int, string>> tableLine)
 {
 	for (unsigned i = 0; i < tableLine.size(); i++)
@@ -880,6 +831,7 @@ int ERModel::getTableLine(int id, vector<pair<int, string>> tableLine)
 	return INT_MIN;
 }
 
+// 取得 primary key 表格
 std::string ERModel::getGUIPrimaryKey(int id)
 {
 	string primaryKey = STRING_EMPTY;
@@ -889,16 +841,17 @@ std::string ERModel::getGUIPrimaryKey(int id)
 	{
 		if (((AttributeNode*)attributes[i])->isPrimaryKey())
 		{
-			primaryKey += "<td>" + PRIMARY_KEY_IMAGE + attributes[i]->getText() + "</td>";
+			primaryKey += KEY_TABLE_HEADER + PRIMARY_KEY_IMAGE + attributes[i]->getText() + KEY_TABLE_FOOTER;
 		}
 		else
 		{
-			primaryKey += "<td>" + attributes[i]->getText() + "</td>";
+			primaryKey += KEY_TABLE_HEADER + attributes[i]->getText() + KEY_TABLE_FOOTER;
 		}
 	}
 	return primaryKey;
 }
 
+// 取得foreign key 表格
 std::string ERModel::getGUIForeignKey(int id)
 {
 	string foreignKey = STRING_EMPTY;
@@ -908,13 +861,14 @@ std::string ERModel::getGUIForeignKey(int id)
 	{
 		if (((AttributeNode*)attributes[i])->isPrimaryKey())
 		{
-			foreignKey += "<td>" + FOREIGN_KEY_IMAGE + attributes[i]->getText() + "</td>";
+			foreignKey += KEY_TABLE_HEADER + FOREIGN_KEY_IMAGE + attributes[i]->getText() + KEY_TABLE_FOOTER;
 		}
 	}
 
 	return foreignKey;
 }
 
+// 是否可以複製
 bool ERModel::canPaste()
 {
 	return !_clipboard.empty();

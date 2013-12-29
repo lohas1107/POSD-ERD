@@ -14,7 +14,6 @@ class GraphicsScene : public QGraphicsScene
 public:
 	GraphicsScene(PresentationModel* presentationModel);
 	~GraphicsScene();
-	void clearItem();
 	void draw();
 	PresentationModel* getPresentationModel();
 	GraphicsItem* createGraphicsItem(Type type);
@@ -25,19 +24,11 @@ public:
 	void clickEntityEvent();
 	void clickRelationEvent();
 	void clickPrimaryKeyEvent();
-	//void clickDeleteEvent();
-	//void clickUndoEvent();
-	//void clickRedoEvent();
-	//void clickAboutEvent();
-	//void clickCutEvent();
-	//void clickCopyEvent();
-	//void clickPasteEvent();
 	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 
 private:
-	vector<GraphicsItem*> _graphicsItems;
 	PresentationModel* _presentationModel;
 	State* _currentState;
 };

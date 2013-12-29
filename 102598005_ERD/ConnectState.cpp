@@ -21,9 +21,9 @@ ConnectState::~ConnectState()
 }
 
 // 按下滑鼠事件
-void ConnectState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void ConnectState::mousePressEvent(QPointF mousePosition)
 {
-	QPointF position = mouseEvent->scenePos();
+	QPointF position = mousePosition;
 	_line = _scene->createGraphicsItem(connection);
 	_scene->addItem(_line);
 	_linePosition = QLineF(position.x(), position.y(), position.x(), position.y());
@@ -34,18 +34,18 @@ void ConnectState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 }
 
 // 移動滑鼠事件
-void ConnectState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void ConnectState::mouseMoveEvent(QPointF mousePosition)
 {
-	_linePosition.setP2(mouseEvent->scenePos());
+	_linePosition.setP2(mousePosition);
 	((GraphicsConnector*)_line)->setLine(_linePosition);
 	_scene->update(0, 0, _scene->width(), _scene->height());
 }
 
 // 放開滑鼠事件
-void ConnectState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void ConnectState::mouseReleaseEvent(QPointF mousePosition)
 {
 	_scene->removeItem(_line);
-	_secondID = getItemID(mouseEvent->scenePos());
+	_secondID = getItemID(mousePosition);
 	initialize();
 	if (isValidConnection(_firstID, _secondID))
 	{

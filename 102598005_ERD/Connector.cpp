@@ -25,6 +25,7 @@ Connector::~Connector()
 {
 }
 
+// 設定 cardinality
 void Connector::setText(string text)
 {
 	if (text == CARDINALITY_ONE || text == CARDINALITY_N)
@@ -122,6 +123,7 @@ ERComponent* Connector::clone()
 	return component;
 }
 
+// 接受拜訪
 void Connector::accept(ComponentVisitor* visitor)
 {
 	visitor->visit(this);

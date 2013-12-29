@@ -8,9 +8,9 @@ class PointerState : public State
 public:
 	PointerState(GraphicsScene* scene);
 	~PointerState();
-	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mousePressEvent(QPointF mousePosition);
+	void mouseMoveEvent(QPointF mousePosition);
+	void mouseReleaseEvent(QPointF mousePosition);
 
 private:
 	QPointF _moveFrom;

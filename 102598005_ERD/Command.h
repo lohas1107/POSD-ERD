@@ -1,5 +1,6 @@
 #ifndef _COMMAND_H_
 #define _COMMAND_H_
+
 #include "ERModel.h"
 
 class Command

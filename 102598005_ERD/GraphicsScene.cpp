@@ -11,12 +11,11 @@
 #include "ConnectState.h"
 #include "SetPrimaryKeyState.h"
 #include <QMessageBox>
+#include <QGraphicsSceneMouseEvent>
 
 const string INPUT_E = "E";
 const string INPUT_A = "A";
 const string INPUT_R = "R";
-//const string ABOUT_TITLE = "About Entity Relation Diagramming Tool";
-//const string ABOUT_CONTENT = "Entity Relation Diagramming Tool<br>Version: 1.0<br>Author: 102598005@ntut";
 
 GraphicsScene::GraphicsScene(PresentationModel* presentationModel)
 {
@@ -26,19 +25,7 @@ GraphicsScene::GraphicsScene(PresentationModel* presentationModel)
 
 GraphicsScene::~GraphicsScene()
 {
-	clearItem();
 	delete _currentState;
-}
-
-// 清除圖形
-void GraphicsScene::clearItem()
-{
-	while(!_graphicsItems.empty())
-	{
-		QGraphicsItem* item = _graphicsItems.back();
-		_graphicsItems.pop_back();
-		delete item;
-	}	
 }
 
 // 產生圖形
@@ -105,14 +92,14 @@ void GraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	{
 		return;
 	}
-	_currentState->mousePressEvent(mouseEvent);
+	_currentState->mousePressEvent(mouseEvent->scenePos());
 	QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
 // 移動滑鼠事件
 void GraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-	_currentState->mouseMoveEvent(mouseEvent);
+	_currentState->mouseMoveEvent(mouseEvent->scenePos());
 	QGraphicsScene::mouseMoveEvent(mouseEvent);
 }
 
@@ -123,7 +110,7 @@ void GraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 	{
 		return;
 	}
-	_currentState->mouseReleaseEvent(mouseEvent);
+	_currentState->mouseReleaseEvent(mouseEvent->scenePos());
 	QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }
 
@@ -176,51 +163,3 @@ void GraphicsScene::clickPrimaryKeyEvent()
 	changeState(new SetPrimaryKeyState(this));
 	((QGraphicsView*)parent())->setMouseTracking(false);
 }
-
-// 點擊刪除事件
-//void GraphicsScene::clickDeleteEvent()
-//{
-//	//vector<int> idList = _presentationModel->getSelectedID();
-//	//if (!idList.empty()/*_presentationModel->isIDExsit(id)*/)
-//	//{
-//	//	_presentationModel->deleteComponentCommand(idList);
-//		_presentationModel->deleteMultipleCommand();
-//		_presentationModel->notify();
-//	//}
-//}
-
-// 點擊 undo 事件
-//void GraphicsScene::clickUndoEvent()
-//{
-//	_presentationModel->undo();
-//	_presentationModel->notify();
-//}
-
-// 點擊 redo 事件
-//void GraphicsScene::clickRedoEvent()
-//{
-//	_presentationModel->redo();
-//	_presentationModel->notify();
-//}
-//
-//void GraphicsScene::clickAboutEvent()
-//{
-//	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
-//}
-//
-//void GraphicsScene::clickCutEvent()
-//{
-//	_presentationModel->cut();
-//	_presentationModel->notify();
-//}
-//
-//void GraphicsScene::clickCopyEvent()
-//{
-//	_presentationModel->copy();
-//}
-//
-//void GraphicsScene::clickPasteEvent()
-//{
-//	_presentationModel->paste();
-//	_presentationModel->notify();
-//}

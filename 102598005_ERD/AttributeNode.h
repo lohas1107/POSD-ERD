@@ -13,8 +13,7 @@ public:
 	bool isPrimaryKey();	
 	bool canConnectTo(ERComponent* component);
 	ERComponent* clone();
-
-	virtual void accept(ComponentVisitor* visitor);
+	void accept(ComponentVisitor* visitor);
 
 private:
 	bool _isPrimaryKey;

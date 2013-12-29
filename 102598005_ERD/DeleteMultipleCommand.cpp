@@ -15,6 +15,7 @@ DeleteMultipleCommand::~DeleteMultipleCommand()
 	}
 }
 
+// 執行多重刪除
 void DeleteMultipleCommand::execute()
 {
 	for (unsigned i = 0; i < _commandList.size(); i++)
@@ -23,6 +24,7 @@ void DeleteMultipleCommand::execute()
 	}
 }
 
+// 反向執行多重刪除
 void DeleteMultipleCommand::unexecute()
 {
 	for (unsigned i = _commandList.size(); i > 0; i--)

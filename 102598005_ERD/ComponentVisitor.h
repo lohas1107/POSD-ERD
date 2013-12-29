@@ -6,10 +6,6 @@
 #include "RelationNode.h"
 #include "Connector.h"
 
-//class EntityNode;
-//class AttributeNode;
-//class RelationNode;
-//class Connector;
 class ComponentVisitor
 {
 public:

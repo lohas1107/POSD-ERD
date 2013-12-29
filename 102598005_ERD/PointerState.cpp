@@ -12,26 +12,26 @@ PointerState::~PointerState()
 }
 
 // 按下滑鼠事件
-void PointerState::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void PointerState::mousePressEvent(QPointF mousePosition)
 {
-	_moveFrom = mouseEvent->scenePos();
-	getItemID(mouseEvent->scenePos());
+	_moveFrom = mousePosition;
+	getItemID(mousePosition);
 }
 
 // 移動滑鼠事件
-void PointerState::mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void PointerState::mouseMoveEvent(QPointF mousePosition)
 {
 	if (_presentationModel->isIDExsit(_pointID))
 	{
-		_presentationModel->setNodePosition(_pointID, mouseEvent->scenePos());
+		_presentationModel->setNodePosition(_pointID, mousePosition);
 	}
 	_scene->draw();
 }
 
 // 放開滑鼠事件
-void PointerState::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void PointerState::mouseReleaseEvent(QPointF mousePosition)
 {
-	QPointF moveTo = mouseEvent->scenePos();
+	QPointF moveTo = mousePosition;
 
 	if (_presentationModel->isIDExsit(_pointID) && _moveFrom != moveTo)
 	{

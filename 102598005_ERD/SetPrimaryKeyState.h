@@ -8,9 +8,9 @@ class SetPrimaryKeyState : public State
 public:
 	SetPrimaryKeyState(GraphicsScene* scene);
 	~SetPrimaryKeyState();
-	void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+	void mousePressEvent(QPointF mousePosition);
+	void mouseMoveEvent(QPointF mousePosition);
+	void mouseReleaseEvent(QPointF mousePosition);
 };
 
 #endif

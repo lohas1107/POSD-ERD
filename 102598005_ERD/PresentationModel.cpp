@@ -8,7 +8,6 @@
 #include <direct.h>
 #include "EditTextCommand.h"
 #include "SetPrimaryKeyCommand.h"
-#include <QDebug>
 #include "SaveComponentVisitor.h"
 #include "SaveXmlComponentVisitor.h"
 #include "DeleteMultipleCommand.h"
@@ -23,6 +22,10 @@ const string CARDINALITY_N = "N";
 const string STRING_EMPTY = "";
 const char SLASH_CHAR = '\\';
 const string SLASH = "\\";
+const string XML_FILE = ".xml";
+const string ERD_FILE = ".erd";
+const string POS_FILE = ".pos";
+const string NO_TABLE_WARNING = "It has no table to display.";
 
 using namespace std;
 
@@ -229,7 +232,7 @@ bool PresentationModel::saveFile(string filePath)
 	{
 		return false;
 	}
-	else if (filePath.find(".xml") == ULONG_MAX)
+	else if (filePath.find(XML_FILE) == ULONG_MAX)
 	{
 		visitor = new SaveComponentVisitor();
 		file << _erModel->saveFile(visitor);
@@ -246,9 +249,10 @@ bool PresentationModel::saveFile(string filePath)
 	return true;
 }
 
+// 儲存位置
 void PresentationModel::savePosition(string filePath, ComponentVisitor* visitor)
 {
-	ofstream position(filePath.substr(0, filePath.find(".erd")) + ".pos");
+	ofstream position(filePath.substr(0, filePath.find(ERD_FILE)) + POS_FILE);
 
 	if (position.is_open())
 	{
@@ -397,12 +401,13 @@ void PresentationModel::editText(int index, string text)
 	_commandManager.execute(new EditTextCommand(_erModel, index, previousText, text));
 }
 
-// 設定節點為primary key'
+// 設定節點為primary key
 void PresentationModel::setNodePrimaryKey(int pointID)
 {
 	_commandManager.execute(new SetPrimaryKeyCommand(_erModel, pointID));
 }
 
+// 多重刪除命令
 void PresentationModel::deleteMultipleCommand()
 {
 	vector<int> idList = _erModel->getSelectedID();
@@ -415,32 +420,37 @@ void PresentationModel::deleteMultipleCommand()
 	_commandManager.execute(new DeleteMultipleCommand(_erModel, commandList));
 }
 
+// 剪下
 void PresentationModel::cut()
 {
 	_erModel->copy();
 	deleteMultipleCommand();
 }
 
+// 複製
 void PresentationModel::copy()
 {
 	_erModel->copy();
 }
 
+// 貼上
 void PresentationModel::paste()
 {
 	_commandManager.execute(new PasteCommand(_erModel));
 }
 
+// 移動元件命令
 void PresentationModel::moveCommand(int pointID, QPointF moveFrom, QPointF moveTo)
 {
 	_commandManager.execute(new MoveCommand(_erModel, pointID, moveFrom, moveTo));
 }
 
+// 取得DB表格
 string PresentationModel::getGUITable()
 {
 	if (!isOneToOneExist())
 	{
-		return "It has no table to display.";
+		return NO_TABLE_WARNING;
 	}
 	else
 	{
@@ -448,6 +458,7 @@ string PresentationModel::getGUITable()
 	}
 }
 
+// 是否可以貼上
 bool PresentationModel::canPaste()
 {
 	return _erModel->canPaste();

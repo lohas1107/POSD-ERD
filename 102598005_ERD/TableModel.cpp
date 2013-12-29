@@ -1,6 +1,9 @@
 #include "TableModel.h"
 #include "ERComponent.h"
 
+const string TABLE_TYPE = "Type";
+const string TABLE_TEXT = "Text";
+
 TableModel::TableModel(PresentationModel* presentationModel)
 {
 	_presentationModel = presentationModel;
@@ -30,7 +33,7 @@ void TableModel::setTableData()
 	vector<ERComponent*> components = _presentationModel->getComponents();
 
 	QStringList labels;
-	labels << "Type" << "Text";
+	labels << TABLE_TYPE.c_str() << TABLE_TEXT.c_str();
 	setHorizontalHeaderLabels(labels);
 
 	for (unsigned i = 0; i < components.size(); i++)

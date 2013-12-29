@@ -110,6 +110,7 @@ vector<int> EntityNode::getPrimaryKey()
 	return primaryKey;
 }
 
+// 取得 primary key 字串
 std::string EntityNode::getPrimaryKeyString()
 {
 	vector<int> primaryKey = getPrimaryKey();
@@ -176,6 +177,7 @@ string EntityNode::getTable()
 	return table;
 }
 
+// 接受拜訪
 void EntityNode::accept(ComponentVisitor* visitor)
 {
 	visitor->visit(this);

@@ -20,8 +20,7 @@ public:
 	void setAttributeString(string &primaryKey, string &attributeString);
 	void setForeignKey(string foreignKey);
 	string getTable();
-
-	virtual void accept(ComponentVisitor* visitor);
+	void accept(ComponentVisitor* visitor);
 
 private:
 	string _foreignKey;

@@ -5,7 +5,6 @@
 #include "GraphicsEntity.h"
 #include <QGraphicsScene>
 #include <QLabel>
-#include <QDebug>
 #include <QMessageBox>
 
 const int WIDTH = 1024;
@@ -100,6 +99,7 @@ void GUI::createActions()
 	_dbTableAction = new QAction(QIcon("Resources/db.png"), "DB Table", this);
 }
 
+// 連結事件
 void GUI::connectActions()
 {	
 	connect(_loadFileAction, SIGNAL(triggered()), this, SLOT(openFile()));
@@ -236,6 +236,7 @@ void GUI::setTableModel()
 	connect(_tableView, SIGNAL(editChanged(const QModelIndex*)), _tableModel, SLOT(editChanged(const QModelIndex*)));
 }
 
+// 關閉程式
 void GUI::close()
 {
 	QMessageBox messageBox;
@@ -253,16 +254,17 @@ void GUI::openFile()
 	clickPointerEvent();
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
-	//_presentationModel->composePosition();
 	update();
 }
 
+// 儲存檔案
 void GUI::saveFile()
 {
 	QString fileName = QFileDialog::getSaveFileName(this, "Save ERD files", "C:\\", "ERD Files (*.erd);;XML files (*.xml)");
 	_presentationModel->saveFile(fileName.toStdString());
 }
 
+// 儲存檔案XML
 void GUI::saveXmlFile()
 {
 	QString fileName = QFileDialog::getSaveFileName(this, "Save XML files", "C:\\", "XML files (*.xml)");
@@ -310,7 +312,6 @@ void GUI::clickUndoEvent()
 {
 	_presentationModel->undo();
 	update();
-	//_scene->clickUndoEvent();
 }
 
 // 點擊 redo 事件
@@ -318,7 +319,6 @@ void GUI::clickRedoEvent()
 {
 	_presentationModel->redo();
 	update();
-	//_scene->clickRedoEvent();
 }
 
 // 點擊刪除事件
@@ -326,36 +326,36 @@ void GUI::clickDeleteEvent()
 {
 	_presentationModel->deleteMultipleCommand();
 	update();
-	//_scene->clickDeleteEvent();
 }
 
+// 點擊剪下事件
 void GUI::clickCutEvent()
 {
 	_presentationModel->cut();
 	update();
-	//_scene->clickCutEvent();
 }
 
+// 點擊複製事件
 void GUI::clickCopyEvent()
 {
 	_presentationModel->copy();
 	updateButtonEnabled();
-	//_scene->clickCopyEvent();
 }
 
+// 點擊貼上事件
 void GUI::clickPasteEvent()
 {
 	_presentationModel->paste();
 	update();
-	//_scene->clickPasteEvent();
 }
 
+// 點擊 About 事件
 void GUI::clickAboutEvent()
 {
 	QMessageBox::about(NULL, ABOUT_TITLE.c_str(), ABOUT_CONTENT.c_str());
-	//_scene->clickAboutEvent();
 }
 
+// 點擊資料庫列表事件
 void GUI::clickDBTableEvent()
 {
 	_textEdit->setHidden(!_textEdit->isHidden());

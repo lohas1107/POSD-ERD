@@ -52,6 +52,7 @@ ERComponent* AttributeNode::clone()
 	return component;
 }
 
+// ±µ¨ü«ô³X
 void AttributeNode::accept(ComponentVisitor* visitor)
 {
 	visitor->visit(this);
