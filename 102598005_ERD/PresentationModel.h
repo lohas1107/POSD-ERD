@@ -66,6 +66,7 @@ public:
 	void copy();
 	void paste();
 	void moveCommand(int pointID, QPointF moveFrom, QPointF moveTo);
+	string getGUITable();
 private:
 	ERModel* _erModel;
 	CommandManager _commandManager;

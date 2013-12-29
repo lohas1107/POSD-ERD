@@ -21,7 +21,8 @@ const float ENTITY_OFFSET = 100;
 const float RELATION_X = 700;
 const float ERELATION_Y = 50;
 const float RELATION_OFFSET = 100;
-
+const string PRIMARY_KEY_IMAGE = "<img src=\"Resources/primary_key.png\" width=\"20\" height=\"20\">";
+const string FOREIGN_KEY_IMAGE = "<img src=\"Resources/foreign_key.png\" width=\"20\" height=\"20\">";
 
 ERModel::ERModel()
 {
@@ -836,4 +837,78 @@ void ERModel::unPaste()
 	{
 		deleteLastComponent();
 	}
+}
+
+string ERModel::getGUITable()
+{
+	string table = STRING_EMPTY;
+	vector<pair<int, int>> oneToOne = getOneToOne();
+	vector<pair<int, string>> tableLine;
+	for (unsigned i = 0; i < oneToOne.size(); i++)
+	{
+		if (getTableLine(oneToOne[i].first, tableLine) == INT_MIN)
+		{
+			tableLine.push_back(make_pair(oneToOne[i].first, getGUIPrimaryKey(oneToOne[i].first)));
+		}
+		if (getTableLine(oneToOne[i].second, tableLine) == INT_MIN)
+		{
+			tableLine.push_back(make_pair(oneToOne[i].second, getGUIPrimaryKey(oneToOne[i].second) + getGUIForeignKey(oneToOne[i].first)));
+		}
+		else
+		{
+			tableLine[getTableLine(oneToOne[i].second, tableLine)].second += getGUIForeignKey(oneToOne[i].first);
+		}
+	}
+	for (unsigned i = 0; i < tableLine.size(); i++)
+	{
+		table += ((EntityNode*)getComponent(tableLine[i].first))->getText() + "<table border=\"1\"><tr>" + tableLine[i].second + "</tr></table><br><br>";
+	}
+	return table;
+}
+
+int ERModel::getTableLine(int id, vector<pair<int, string>> tableLine)
+{
+	for (unsigned i = 0; i < tableLine.size(); i++)
+	{
+		if (tableLine[i].first == id)
+		{
+			return i;
+		}
+	}
+	return INT_MIN;
+}
+
+std::string ERModel::getGUIPrimaryKey(int id)
+{
+	string primaryKey = STRING_EMPTY;
+	vector<ERComponent*> attributes = ((EntityNode*)getComponent(id))->getAttributes();
+
+	for (unsigned i = 0; i < attributes.size(); i++)
+	{
+		if (((AttributeNode*)attributes[i])->isPrimaryKey())
+		{
+			primaryKey += "<td>" + PRIMARY_KEY_IMAGE + attributes[i]->getText() + "</td>";
+		}
+		else
+		{
+			primaryKey += "<td>" + attributes[i]->getText() + "</td>";
+		}
+	}
+	return primaryKey;
+}
+
+std::string ERModel::getGUIForeignKey(int id)
+{
+	string foreignKey = STRING_EMPTY;
+	vector<ERComponent*> attributes = ((EntityNode*)getComponent(id))->getAttributes();
+
+	for (unsigned i = 0; i < attributes.size(); i++)
+	{
+		if (((AttributeNode*)attributes[i])->isPrimaryKey())
+		{
+			foreignKey += "<td>" + FOREIGN_KEY_IMAGE + attributes[i]->getText() + "</td>";
+		}
+	}
+
+	return foreignKey;
 }

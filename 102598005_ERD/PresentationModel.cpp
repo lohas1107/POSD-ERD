@@ -242,6 +242,7 @@ bool PresentationModel::saveFile(string filePath)
 	}
 
 	file.close();
+	delete visitor;
 	return true;
 }
 
@@ -433,4 +434,16 @@ void PresentationModel::paste()
 void PresentationModel::moveCommand(int pointID, QPointF moveFrom, QPointF moveTo)
 {
 	_commandManager.execute(new MoveCommand(_erModel, pointID, moveFrom, moveTo));
+}
+
+string PresentationModel::getGUITable()
+{
+	if (!isOneToOneExist())
+	{
+		return "It has no table to display.";
+	}
+	else
+	{
+		return _erModel->getGUITable();
+	}
 }

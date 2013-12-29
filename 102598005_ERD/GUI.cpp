@@ -49,7 +49,7 @@ GUI::~GUI()
 	delete _copyAction;
 	delete _pasteAction;
 	delete _aboutAction;
-	//delete _dbTableAction;
+	delete _dbTableAction;
 	delete _fileMenu;
 	delete _addMenu;
 	delete _editMenu;
@@ -58,10 +58,12 @@ GUI::~GUI()
 	delete _editToolBar;
 	delete _scene;
 	delete _view;
-	delete _vLayout;
+	delete _guiLayout;
+	delete _tableLayout;
 	delete _hLayout;
 	delete _tableView;
 	delete _tableModel;
+	delete _textEdit;
 	delete _widget;
 	delete _presentationModel;
 }
@@ -95,6 +97,7 @@ void GUI::createActions()
 	_relationAction = new QAction(QIcon("Resources/rhombus.png"), "Relation", this);
 	_keyAction = new QAction(QIcon("Resources/key.png"), "Primary key", this);
 	_aboutAction = new QAction(QIcon("Resources/about.png"), "About", this);
+	_dbTableAction = new QAction(QIcon("Resources/db.png"), "DB Table", this);
 }
 
 void GUI::connectActions()
@@ -116,6 +119,7 @@ void GUI::connectActions()
 	connect(_relationAction, SIGNAL(triggered()), this, SLOT(clickRelationEvent()));
 	connect(_keyAction, SIGNAL(triggered()), this, SLOT(clickPrimaryKeyEvent()));
 	connect(_aboutAction, SIGNAL(triggered()), this, SLOT(clickAboutEvent()));
+	connect(_dbTableAction, SIGNAL(triggered()), this, SLOT(clickDBTableEvent()));
 }
 
 // 產生 ActionGroup
@@ -135,6 +139,7 @@ void GUI::createActionGroup()
 	_actionGroup->addAction(_relationAction);
 	_keyAction->setCheckable(true);
 	_actionGroup->addAction(_keyAction);
+	_dbTableAction->setCheckable(true);
 }
 
 // 更新按鈕狀態
@@ -190,6 +195,7 @@ void GUI::createToolBars()
 	_editToolBar->addAction(_entityAction);
 	_editToolBar->addAction(_relationAction);
 	_editToolBar->addAction(_keyAction);
+	_editToolBar->addAction(_dbTableAction);
 }
 
 // 產生畫布
@@ -199,14 +205,20 @@ void GUI::createCanvas()
 	_scene->setSceneRect(QRectF(0, 0, WIDTH, HEIGHT));
 	_view = new QGraphicsView(_scene);
 	_scene->setParent(_view);
-	_vLayout = new QVBoxLayout();
-	_vLayout->addWidget(new QLabel("Components"), 0, Qt::AlignCenter);
+	_textEdit = new QTextEdit();
+	_textEdit->setReadOnly(true);
+	_textEdit->setHidden(true);
+	_guiLayout = new QVBoxLayout();
+	_guiLayout->addWidget(_view);
+	_guiLayout->addWidget(_textEdit);
+	_tableLayout = new QVBoxLayout();
+	_tableLayout->addWidget(new QLabel("Components"), 0, Qt::AlignCenter);
 	_tableView = new TableView();
 	_tableView->setMinimumWidth(TABLE_VIEW_WIDTH);
-	_vLayout->addWidget(_tableView);
+	_tableLayout->addWidget(_tableView);
 	_hLayout = new QHBoxLayout();
-	_hLayout->addWidget(_view);
-	_hLayout->addLayout(_vLayout);
+	_hLayout->addLayout(_guiLayout);
+	_hLayout->addLayout(_tableLayout);
 	_widget = new QWidget();
 	_widget->setLayout(_hLayout);
 	setCentralWidget(_widget);
@@ -340,10 +352,17 @@ void GUI::clickAboutEvent()
 	//_scene->clickAboutEvent();
 }
 
+void GUI::clickDBTableEvent()
+{
+	_textEdit->setHidden(!_textEdit->isHidden());
+	update();
+}
+
 // 更新畫面
 void GUI::update()
 {
 	updateButtonEnabled();
 	_tableModel->setTableData();
 	_scene->draw();
+	_textEdit->setText(QString::fromStdString(_presentationModel->getGUITable()));
 }

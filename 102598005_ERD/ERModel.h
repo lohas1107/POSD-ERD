@@ -108,6 +108,10 @@ public:
 	void unPaste();
 	void pasteConnection(vector<pair<int, int>> idTable);
 	pair<int, int> getPastedID(vector<pair<int, int>> idTable, pair<int, int> idPair);
+	string getGUITable();
+	string getGUIPrimaryKey(int id);
+	string getGUIForeignKey(int id);
+	int getTableLine(int id, vector<pair<int, string>> tableLine);
 
 private:
 	vector<ERComponent*> _components;

@@ -13,6 +13,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QTextEdit>
 #include "GraphicsScene.h"
 #include "Observer.h"
 #include "TableModel.h"
@@ -45,6 +46,7 @@ private slots:
 	void clickCopyEvent();
 	void clickPasteEvent();
 	void clickAboutEvent();
+	void clickDBTableEvent();
 	void updateButtonEnabled();
 
 private:
@@ -74,7 +76,7 @@ private:
 	QAction* _copyAction;
 	QAction* _pasteAction;
 	QAction* _aboutAction;
-	//QAction* _dbTableAction;
+	QAction* _dbTableAction;
 	QMenu* _fileMenu;
 	QMenu* _addMenu;
 	QMenu* _editMenu;
@@ -84,9 +86,11 @@ private:
 	GraphicsScene* _scene;
 	QGraphicsView* _view;
 	QHBoxLayout* _hLayout;
-	QVBoxLayout* _vLayout;
+	QVBoxLayout* _guiLayout;
+	QVBoxLayout* _tableLayout;
 	TableView* _tableView;
 	TableModel* _tableModel;
+	QTextEdit* _textEdit;
 	QWidget* _widget;
 };
 
