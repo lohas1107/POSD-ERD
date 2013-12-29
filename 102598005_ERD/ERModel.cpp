@@ -912,3 +912,8 @@ std::string ERModel::getGUIForeignKey(int id)
 
 	return foreignKey;
 }
+
+bool ERModel::canPaste()
+{
+	return !_clipboard.empty();
+}

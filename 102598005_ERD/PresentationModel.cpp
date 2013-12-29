@@ -447,3 +447,8 @@ string PresentationModel::getGUITable()
 		return _erModel->getGUITable();
 	}
 }
+
+bool PresentationModel::canPaste()
+{
+	return _erModel->canPaste();
+}

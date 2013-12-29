@@ -112,7 +112,7 @@ public:
 	string getGUIPrimaryKey(int id);
 	string getGUIForeignKey(int id);
 	int getTableLine(int id, vector<pair<int, string>> tableLine);
-
+	bool canPaste();
 private:
 	vector<ERComponent*> _components;
 	ERComponent* _currentComponent;

@@ -149,6 +149,9 @@ void GUI::updateButtonEnabled()
 	_redoAction->setEnabled(_presentationModel->canRedo());
 	_pointerAction->setChecked(_presentationModel->getPointerButtonChecked());
 	_deleteAction->setEnabled(_presentationModel->isDeleteEnabled());
+	_cutAction->setEnabled(_presentationModel->isDeleteEnabled());
+	_copyAction->setEnabled(_presentationModel->isDeleteEnabled());
+	_pasteAction->setEnabled(_presentationModel->canPaste());
 }
 
 // 產生選單
@@ -336,6 +339,7 @@ void GUI::clickCutEvent()
 void GUI::clickCopyEvent()
 {
 	_presentationModel->copy();
+	updateButtonEnabled();
 	//_scene->clickCopyEvent();
 }
 
