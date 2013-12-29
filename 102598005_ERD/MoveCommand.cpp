@@ -14,6 +14,7 @@ MoveCommand::~MoveCommand()
 void MoveCommand::execute()
 {
 	_model->setNodePosition(_id, _moveTo);
+	_model->clearSelected();
 }
 
 void MoveCommand::unexecute()

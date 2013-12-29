@@ -764,6 +764,8 @@ void ERModel::copy()
 	{
 		_clipboard.push_back(getComponent(idList[i])->clone());
 	}
+
+	clearSelected();
 }
 
 void ERModel::paste()
