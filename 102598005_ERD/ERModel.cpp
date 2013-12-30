@@ -146,7 +146,11 @@ vector<ERComponent*> ERModel::getDeleteList(int id)
 // §R°£¤¸¥ó
 void ERModel::deleteComponent(int id)
 {
-	if (isIDExsit(id) && isType(id, connection))
+	if (!isIDExsit(id))
+	{
+		return;
+	}
+	if (isType(id, connection))
 	{
 		deleteConnection(id);
 	}
