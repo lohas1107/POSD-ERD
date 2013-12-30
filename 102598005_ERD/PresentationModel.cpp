@@ -463,3 +463,9 @@ bool PresentationModel::canPaste()
 {
 	return _erModel->canPaste();
 }
+
+// 清除所有命令
+void PresentationModel::clearAllCommand()
+{
+	_commandManager.clearAllCommand();
+}

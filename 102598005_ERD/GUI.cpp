@@ -254,6 +254,7 @@ void GUI::openFile()
 	clickPointerEvent();
 	QString fileName = QFileDialog::getOpenFileName(this, "Open ERD files", "C:\\", "ERD Files (*.erd)");
 	_presentationModel->loadFile(fileName.toStdString());
+	_presentationModel->clearAllCommand();
 	update();
 }
 

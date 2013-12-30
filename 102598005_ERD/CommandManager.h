@@ -28,6 +28,7 @@ public:
 	void execute(Command* command);
 	void undo();
 	void redo();
+	void clearAllCommand();
 
 private:
 	stack<Command*> _undoCommands;

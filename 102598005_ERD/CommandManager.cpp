@@ -6,8 +6,14 @@ CommandManager::CommandManager()
 
 CommandManager::~CommandManager() 
 {
+	clearAllCommand();
+}
+
+// 清除所有命令
+void CommandManager::clearAllCommand()
+{
 	clearCommandStack(_undoCommands);
-	clearCommandStack(_redoCommands);
+	clearCommandStack(_redoCommands);	
 }
 
 // 清除命令堆疊
