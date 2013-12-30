@@ -431,6 +431,7 @@ void PresentationModel::cut()
 void PresentationModel::copy()
 {
 	_erModel->copy();
+	clearSelected();
 }
 
 // ¶K¤W
