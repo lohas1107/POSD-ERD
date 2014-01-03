@@ -55,13 +55,18 @@
     <ClCompile Include="ConnectComponentCommandTest.cpp" />
     <ClCompile Include="ConnectorTest.cpp" />
     <ClCompile Include="DeleteComponentCommandTest.cpp" />
+    <ClCompile Include="DeleteMultipleCommandTest.cpp" />
+    <ClCompile Include="EditTextCommandTest.cpp" />
     <ClCompile Include="EntityNodeTest.cpp" />
     <ClCompile Include="ERModelTest.cpp" />
     <ClCompile Include="IntegrationTest.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveCommandTest.cpp" />
     <ClCompile Include="ParserTest.cpp" />
+    <ClCompile Include="PasteCommandTest.cpp" />
     <ClCompile Include="PresentationModelTest.cpp" />
     <ClCompile Include="RelationNodeTest.cpp" />
+    <ClCompile Include="SetPrimaryKeyCommandTest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B17F2B04-1D4E-447C-A90B-FDC5CCDDC777}</ProjectGuid>

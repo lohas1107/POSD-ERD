@@ -37,6 +37,11 @@ class ERModel : public Subject
 	friend class IntegrationTest;
 	FRIEND_TEST(IntegrationTest, testRedoConnectComponent);
 	FRIEND_TEST(IntegrationTest, testCommonUsage);
+	friend class SetPrimaryKeyCommandTest;
+	friend class PasteCommandTest;
+	friend class MoveCommandTest;
+	friend class EditTextCommandTest;
+	friend class DeleteMultipleCommandTest;
 
 public:
 	ERModel();
