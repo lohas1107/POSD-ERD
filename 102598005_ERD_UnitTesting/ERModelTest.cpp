@@ -468,3 +468,68 @@ TEST_F(ERModelTest, canSetPrimaryKey)
 	loadConnection();
 	EXPECT_TRUE(_model.canSetPrimaryKey(1));
 }
+
+TEST_F(ERModelTest, setNodeSelected)
+{
+	EXPECT_FALSE(_model.getComponent(0)->isSelected());
+	_model.setNodeSelected(0, true);
+	EXPECT_TRUE(_model.getComponent(0)->isSelected());
+	_model.setNodeSelected(0, false);
+	EXPECT_FALSE(_model.getComponent(0)->isSelected());
+}
+
+TEST_F(ERModelTest, getSelectedID)
+{
+	EXPECT_EQ(0, _model.getSelectedID().size());
+	_model.getComponent(0)->setSelected(true);
+	EXPECT_EQ(1, _model.getSelectedID().size());
+	EXPECT_EQ(0, _model.getSelectedID()[0]);
+	_model.getComponent(1)->setSelected(true);
+	EXPECT_EQ(2, _model.getSelectedID().size());
+	EXPECT_EQ(1, _model.getSelectedID()[1]);
+}
+
+TEST_F(ERModelTest, isDeleteEnabled)
+{
+	EXPECT_FALSE(_model.isDeleteEnabled());
+	_model.getComponent(0)->setSelected(true);
+	EXPECT_TRUE(_model.isDeleteEnabled());
+}
+
+TEST_F(ERModelTest, deleteMultiple)
+{
+	loadConnection();
+	vector<int> deleteList;
+	deleteList.push_back(0);
+	deleteList.push_back(4);
+	EXPECT_EQ(5, _model.getComponentSize());
+	_model.deleteMultiple(deleteList);
+	EXPECT_EQ(2, _model.getComponentSize());
+	EXPECT_FALSE(_model.isIDExsit(0));
+	EXPECT_FALSE(_model.isIDExsit(3));
+	EXPECT_FALSE(_model.isIDExsit(4));
+}
+
+TEST_F(ERModelTest, copy)
+{
+	_model.getComponent(0)->setSelected(true);
+	_model.getComponent(3)->setSelected(true);
+	_model.copy();
+	EXPECT_EQ(2, _model._clipboard.size());
+	EXPECT_EQ(0, _model._clipboard[0]->getID());
+	EXPECT_EQ(3, _model._clipboard[1]->getID());
+}
+
+TEST_F(ERModelTest, getGUITable)
+{
+	EXPECT_EQ("", _model.getGUITable());
+	loadConnection();
+	addOneToOne();
+}
+
+TEST_F(ERModelTest, getGUIPrimaryKey)
+{
+	loadConnection();
+	addOneToOne();
+	EXPECT_EQ("<td><img src=\"Resources/primary_key.png\" width=\"20\" height=\"20\">Name</td>", _model.getGUIPrimaryKey(0));
+}

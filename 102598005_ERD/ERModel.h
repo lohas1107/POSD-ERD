@@ -31,6 +31,7 @@ class ERModel : public Subject
 	FRIEND_TEST(ERModelTest, loadComponent);
 	FRIEND_TEST(ERModelTest, loadConnection);
 	FRIEND_TEST(ERModelTest, loadPrimaryKey);
+	FRIEND_TEST(ERModelTest, copy);
 	friend class PresentationModelTest;
 	FRIEND_TEST(PresentationModelTest, deleteComponentCommand);
 	FRIEND_TEST(PresentationModelTest, setPrimaryKey);;
