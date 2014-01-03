@@ -508,13 +508,13 @@ vector<QPointF> ERModel::getFilePosition(ifstream &file)
 // Åª¨ú¦ì¸mÀÉ®×
 void ERModel::loadPosition(vector<QPointF> positionList)
 {
-	int j = 0;
+	int positionIndex = 0;
 	for (unsigned i = 0; i < _components.size(); i++)
 	{
 		if (!_components[i]->isType(connection))
 		{
-			_components[i]->setPosition(positionList[j]);	
-			j++;
+			_components[i]->setPosition(positionList[positionIndex]);	
+			positionIndex++;
 		}
 	}
 }
